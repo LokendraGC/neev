@@ -63,7 +63,7 @@ class Post extends Model
     {
         return $this->hasMany(PostMeta::class, 'post_id');
     }
-    
+
     // mutator
     // public function setPostTitleAttribute($value)
     // {
@@ -99,6 +99,15 @@ class Post extends Model
         return $query->whereHas('postMeta', function ($query) use ($key) {
             $query->where('meta_key', $key)->whereNotNull('meta_value');
         });
+    }
+
+
+    // Relationship to the user who last updated the post
+    public function lastUpdater()
+    {
+        return $this->hasOne(PostMeta::class, 'post_id')
+            ->where('meta_key', 'last_updated_by')
+            ->join('users', 'post_metas.meta_value', '=', 'users.id');
     }
 
 }

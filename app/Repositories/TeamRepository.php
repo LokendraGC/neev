@@ -13,7 +13,7 @@ class TeamRepository
 
         $data['featured_image'] = isset( $request->featured_image ) ? $request->featured_image : NULL;
         $data['designation'] = isset( $request->designation ) ? $request->designation : NULL;
-
+        $data['team_categories'] = isset( $request->team_categories ) ? serialize($request->team_categories) : NULL;
         // add more meta data
 
         return $data;

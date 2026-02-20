@@ -110,7 +110,7 @@
                                                     @if ($post->post_status == 'publish' && $siteURL)
                                                         <span class="view">
                                                             |
-                                                            <a href="{{ $siteURL . '/news/' . $post->slug }}"
+                                                            <a href="{{ $siteURL . '/' . $post->slug }}"
                                                                 target="_blank" class="text-primary">View</a>
                                                         </span>
                                                     @endif

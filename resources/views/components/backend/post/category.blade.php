@@ -4,7 +4,7 @@
             <h4 class="header-title">
                 {{ $title }}
                 @if ($required)
-                    <span class="text-danger">*</span>
+                <span class="text-danger">*</span>
                 @endif
             </h4>
         </div>
@@ -12,22 +12,34 @@
             <select class="select2 form-control {{ $type == 'single' ? 'single' : 'select2-multiple' }}"
                 data-toggle="select2" {{ $type == 'single' ? '' : 'multiple = "multiple"' }} name="{{ $name }}">
                 @if ($type == 'single')
-                    <option>None</option>
+                <option>None</option>
                 @endif
+
+
+
                 @foreach ($categories as $category)
-                    @if ($post)
-                        <option value="{{ $category->id }}" @if ($post->categories->contains('id', $category->id)) selected @endif>
-                            {{ $category->name }}
-                        </option>
-                    @else
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endif
+
+                @if ($post)
+                @php
+                $isSelected = false;
+                if (!empty($selected) && is_array($selected)) {
+                $isSelected = in_array($category->id, $selected);
+                } else {
+                $isSelected = $post->categories->contains('id', $category->id);
+                }
+                @endphp
+                <option value="{{ $category->id }}" @selected($isSelected)>
+                    {{ $category->name }}
+                </option>
+                @else
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endif
                 @endforeach
             </select>
             @error(preg_replace('/[\[\]]/', '', $name))
-                <div class="valid-feedback d-block text-danger">
-                    {{ $message }}
-                </div>
+            <div class="valid-feedback d-block text-danger">
+                {{ $message }}
+            </div>
             @enderror
         </div>
     </div>

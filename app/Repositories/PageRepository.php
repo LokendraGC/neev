@@ -6,6 +6,7 @@ use Log;
 use Illuminate\Support\Str;
 use App\Traits\ImageFieldTrait;
 use App\Repositories\HomeRepository;
+use App\Repositories\TeamRepository;
 use Illuminate\Support\Facades\View;
 
 class PageRepository
@@ -13,11 +14,12 @@ class PageRepository
     use ImageFieldTrait;
 
     // define template repository as per template name same as in TemplateType.php enums other wise not working
-    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository;
+    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository, $teamRepository;
 
-    public function __construct(HomeRepository $homeRepository)
+    public function __construct(HomeRepository $homeRepository, TeamRepository $teamRepository)
     {
         $this->homeRepository = $homeRepository;;
+        $this->teamRepository = $teamRepository;
     }
 
     // insert or update meta data

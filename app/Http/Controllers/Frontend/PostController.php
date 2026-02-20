@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use App\Repositories\PostRepository;
 
 class PostController extends Controller
@@ -18,27 +20,35 @@ class PostController extends Controller
 
     public function index($slug)
     {
-        $post = Post::where('slug',  $slug)->first();
+        return $this->handlePost($slug);
+    }
 
-        if ( $post ) {
+    public function getPayload($slug)
+    {
+        $post = Post::query()
+            ->whereSlug($slug)
+            ->where('post_status', 'publish')
+            ->first();
 
-            $metaDatas = $post->GetAllMetaData();
-
-            if ( $post->post_type === 'page' ) {
-
-                $pageTemplate = $metaDatas['page_template'];
-                $viewName = "frontend.pages.$pageTemplate";
-
-                return view($viewName, [
-                    'post' => $post,
-                    'metaData' => $metaDatas,
-                ]);
-
-            }
+        if (!$post) {
+            abort(403, 'Not Found');
         }
-        else {
-            abort(404, 'Not Found');
+
+        return $post;
+    }
+
+    public function getMetaData($post)
+    {
+        return $post->GetAllMetaData();
+    }
+
+    public function getViewName($post, $metaDatas)
+    {
+        if ($post->post_type === 'page') {
+            return "frontend.pages.{$metaDatas['page_template']}";
         }
+
+        return null;
     }
 
     public function newsIndex($year, $month, $id)
@@ -67,5 +77,51 @@ class PostController extends Controller
             }
         }
         abort(404, 'Post not found');
+    }
+
+    private function handlePost($slug)
+    {
+        $post = $this->getPayload($slug);
+        $metaDatas = $this->getMetaData($post);
+
+        $homePage = Post::where('slug', 'home')->where('post_status', 'publish')->first();
+        $homeMeta = $homePage ? $this->getMetaData($homePage) : [];
+
+        // $teams = Post::where('post_type', 'team')->get();
+        // $services = Post::query()
+        //     ->where('post_type', 'service')
+        //     ->where('post_status', 'publish')
+        //     ->orderBy('menu_order')
+        //     ->get();
+
+
+
+        // $team = Post::where('post_type', 'team')->first();
+        // $teamMeta = $team ? $this->getMetaData($team) : [];
+
+        if (request()->is('home')) {
+            return redirect('/');
+        }
+        if ($post->post_type === 'page') {
+
+            $viewName = $this->getViewName($post, $metaDatas);
+            if ($viewName) {
+                return view($viewName, [
+                    'post' => $post,
+                    'metaData' => $metaDatas,
+                    'homeMeta' => $homeMeta,
+                ]);
+            }
+        }
+
+
+        if ($post->post_type === 'post') {
+            return view('frontend.single-post', [
+                'post' => $post,
+                'postMeta' => $metaDatas,
+            ]);
+        }
+
+        abort(403, 'Not Found');
     }
 }

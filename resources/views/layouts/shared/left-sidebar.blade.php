@@ -165,27 +165,33 @@
                     </ul>
                 </div>
             </li>
-            
-            {{-- <li class="side-nav-item {{ request()->segment(2) === 'team' ? 'menuitem-active' : '' }}">
-                <a data-bs-toggle="collapse" href="#team" aria-expanded="false" aria-controls="team"
+
+            <li
+                class="side-nav-item {{ request()->is('backend/package/category/team_category*') ? 'menuitem-active' : '' }}">
+                <a data-bs-toggle="collapse" href="#team" aria-expanded="true" aria-controls="team"
                     class="side-nav-link">
                     <i class="ri-team-line"></i>
                     <span> Teams </span>
                     <span class="menu-arrow"></span>
                 </a>
-                <div class="collapse {{ request()->segment(2) === 'team' ? 'show' : '' }}" id="team">
+
+                <div class="collapse {{ request()->is('backend/package/category/team_category*') ? 'show' : '' }}"
+                    id="team">
                     <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('backend.team') }}">All Teams</a>
+                       
+                        <li> <a href="{{ route('backend.team') }}">All Teams</a> </li>
+                        <li> <a href="{{ route('backend.team.create') }}">Add New Team</a> </li>
+
+                        <li
+                            class="{{ request()->is('backend/package/category/team_category*') ? 'menuitem-active' : '' }}">
+                            <a href="{{ route('backend.category.team_category', ['cat' => 'team_category']) }}">
+                                Team Categories
+                            </a>
                         </li>
-                        @can('create_team')
-                            <li>
-                                <a href="{{ route('backend.team.create') }}">Add New Team</a>
-                            </li>
-                        @endcan
+
                     </ul>
                 </div>
-            </li> --}}
+            </li>
 
             <li
                 class="side-nav-item {{ request()->segment(3) === 'user' || request()->segment(2) === 'user' ? 'menuitem-active' : '' }}">

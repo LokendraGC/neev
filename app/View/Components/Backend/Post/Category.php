@@ -13,19 +13,21 @@ class Category extends Component
     public $type;
     public $categories;
     public $post;
+    public $selected;
     public $required;
     public $custom;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($title, $name, $type, $categories, $post = NULL, $required = null, $custom = '')
+    public function __construct($title, $name, $type, $categories, $post = NULL, $selected = [], $required = null, $custom = '')
     {
         $this->title = $title;
         $this->name = $name;
         $this->type = $type;
         $this->categories = $categories;
         $this->post = $post;
+        $this->selected = $selected;
         $this->required = $required;
         $this->custom = $custom;
     }

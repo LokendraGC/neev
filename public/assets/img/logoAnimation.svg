@@ -1,0 +1,70 @@
+<svg viewBox="0 0 417 260" preserveAspectRatio="xMaxYMin" xmlns="http://www.w3.org/2000/svg">
+<!--
+  Modified original svg logo
+  Copies CSS from logoAnimation-color
+ -->
+<style type="text/css">
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 100vw;
+    height: 80vh !important;
+    left: 0%;
+    /*     opacity: 0.3; */
+    /* bottom: 0; */
+    left: 50%;
+    right: 0;
+  }
+  .svg-logo-anm {
+    stroke-width: 0.1;
+    fill: transparent;
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+    /*   animation: dash 8s linear alternate; */
+    animation: dash 5s linear forwards infinite,
+      fadeInAndOut 5s linear forwards infinite;
+    animation-fill-mode: forwards;
+  }
+  @keyframes dash {
+    90% {
+      stroke-dashoffset: 0;
+      fill: transparent;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      fill: transparent;
+    }
+  }
+  @keyframes fadeInAndOut {
+    0%,
+    100% {
+      opacity: 0.25; /* Fade out at 25% and 75% */
+    }
+    25%,
+    75% {
+      opacity: 1; /* Start and end with full opacity */
+    }
+  }
+</style>
+  <defs></defs>
+  <path d="M 416.508 163.637 L 360.308 189.537 L 298.608 112.637 L 367.508 0.337 L 416.508 0.337 L 416.508 163.637 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path d="M 416.508 259.537 L 416.508 163.637 L 360.308 189.537 L 416.508 259.537 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path d="M 298.608 112.637 L 208.408 0.337 L 367.508 0.337 L 298.608 112.637 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 273.808 153.037 L 298.508 112.737 L 208.408 0.437 L 208.408 134.937 L 209.008 134.937 C 232.808 134.837 255.008 141.537 273.808 153.037" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 209.008 134.837 L 208.408 134.837 L 208.408 259.537 L 273.808 153.037 C 254.908 141.537 232.808 134.837 209.008 134.837" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 322.208 207.137 L 360.308 189.537 L 298.608 112.637 L 273.808 153.037 C 294.808 165.837 311.708 184.637 322.208 207.137" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 273.808 153.037 L 208.408 259.637 L 322.208 207.137 C 311.708 184.637 294.808 165.837 273.808 153.037" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 360.308 189.537 L 322.208 207.137 C 329.608 223.037 333.808 240.837 333.808 259.637 L 416.508 259.637 L 360.308 189.537" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 208.408 259.537 L 333.708 259.537 C 333.708 240.837 329.608 223.037 322.208 207.037 L 208.408 259.537" stroke="#fff" fill="none"></path>
+  <path d="M 0.408 163.637 L 56.608 189.537 L 118.308 112.637 L 49.408 0.337 L 0.408 0.337 L 0.408 163.637 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path d="M 0.408 259.537 L 0.408 163.637 L 56.608 189.537 L 0.408 259.537 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path d="M 118.308 112.637 L 208.408 0.337 L 49.408 0.337 L 118.308 112.637 Z" class="svg-logo-anm" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 143.008 153.037 L 118.308 112.737 L 208.408 0.437 L 208.408 134.937 L 207.808 134.937 C 184.108 134.837 161.908 141.537 143.008 153.037" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 207.808 134.837 L 208.408 134.837 L 208.408 259.537 L 143.108 153.037 C 161.908 141.537 184.108 134.837 207.808 134.837" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 94.708 207.137 L 56.608 189.537 L 118.308 112.637 L 143.008 152.937 C 122.008 165.837 105.108 184.637 94.708 207.137" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 143.008 153.037 L 208.408 259.637 L 94.708 207.137 C 105.108 184.637 122.008 165.837 143.008 153.037" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 56.608 189.537 L 94.708 207.137 C 87.308 223.037 83.108 240.837 83.108 259.637 L 0.408 259.637 L 56.608 189.537" stroke="#fff" fill="none"></path>
+  <path class="svg-logo-anm" d="M 208.408 259.537 L 83.108 259.537 C 83.108 240.837 87.208 223.037 94.708 207.037 L 208.408 259.537" stroke="#fff" fill="none"></path>
+</svg>

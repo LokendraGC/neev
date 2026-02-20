@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\UserProfileController;
 use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\AppearanceSettingController;
+use App\Http\Controllers\Backend\TeamCategoryController;
 
 Route::redirect('/backend', '/backend/dashboard')->middleware(['auth']);
 
@@ -107,6 +108,15 @@ Route::prefix('backend')->middleware(['auth', 'check.user.role'])->group(functio
     // soft deletes for categories
     Route::get('category/{id}/restore', [TrashController::class, 'restoreCategory'])->name('backend.category.restore');
     Route::get('category/{id}/delete-permanent', [TrashController::class, 'permanentlyDeleteCategory'])->name('backend.category.delete.permanant');
+
+
+    // team category routing
+    Route::get('package/category/team_category/', [TeamCategoryController::class, 'index'])->name('backend.category.team_category');
+    Route::post('package/category/team_category', [TeamCategoryController::class, 'store'])->name('backend.category.team_category.store');
+    Route::get('package/category/team_category/{id}/edit', [TeamCategoryController::class, 'edit'])->name('backend.category.team_category.edit');
+    Route::post('package/category/team_category/{id}/edit', [TeamCategoryController::class, 'update'])->name('backend.category.team_category.update');
+    Route::get('post/category/team_category/{id}/delete', [TeamCategoryController::class, 'destroy'])->name('backend.category.team_category.delete');
+
 
     // pages routing
     Route::get('page', [PageController::class, 'index'])->name('backend.page');

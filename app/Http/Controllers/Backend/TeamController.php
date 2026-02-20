@@ -20,6 +20,7 @@ class TeamController extends Controller
     private $postType;
     private $postRepository;
     private $teamRepository;
+    private $categoryType;
 
     public function __construct(PostRepository $postRepository, TeamRepository $teamRepository)
     {
@@ -31,6 +32,7 @@ class TeamController extends Controller
         $this->postType = 'team';
         $this->teamRepository = $teamRepository;
         $this->postRepository = $postRepository;
+        $this->categoryType = 'team_category';
     }
 
     public function index(Request $request)
@@ -42,7 +44,7 @@ class TeamController extends Controller
         switch ($status) {
             case 'publish':
                 $posts = $baseQuery->PostStatus('publish')->get();
-            break;
+                break;
             case 'trash':
                 $posts = $baseQuery->onlyTrashed()->get();
                 break;
@@ -71,14 +73,18 @@ class TeamController extends Controller
     {
         $type = $this->postRepository->encodeType($this->postType);
 
+        $categories = Category::where('type', $this->categoryType)->get();
+
+
         return view('backend.team.create-team', [
             'type' => $type,
+            'categories' => $categories,
         ]);
     }
 
     public function store(PostStoreRequest $request)
     {
-        $type = isset( $request->type ) ? $this->postRepository->decodeType($request->type) : 'NOT FOUND';
+        $type = isset($request->type) ? $this->postRepository->decodeType($request->type) : 'NOT FOUND';
 
         // check post type exists or not
         $this->postRepository->checkPostTypeExists($type);
@@ -90,7 +96,8 @@ class TeamController extends Controller
 
             $post = $this->postRepository->createPost($request, $this->postType);
 
-            $metaDatas =  $this->teamRepository->processMetaData($post, $request);
+            $metaDatas = $this->teamRepository->processMetaData($post, $request);
+
 
             foreach ($metaDatas as $key => $value) {
                 $this->postRepository->updateOrCreateMeta($post, $key, $value);
@@ -111,13 +118,21 @@ class TeamController extends Controller
 
     public function edit($id)
     {
-        $post = Post::where('post_type', $this->postType)->findOrFail($id);
+
+        $categories = Category::where('type', $this->categoryType)->get();
+
+        $post = Post::with(['categories', 'postMeta'])->where('post_type', 'team')->findOrFail($id);
 
         $metaDatas = $this->postRepository->getMetaDatas($post);
+
+        $teamCategories = Category::where('type', 'team_category')->orderBy('name', 'ASC')->get();
+
 
         return view('backend.team.edit-team', [
             'post' => $post,
             'metaDatas' => $metaDatas,
+            'categories' => $categories,
+            'teamCategories' => $teamCategories,
         ]);
     }
 
@@ -130,11 +145,13 @@ class TeamController extends Controller
 
             $data = $this->postRepository->updatePost($request, $id, $this->postType);
 
-            if ( $data['status'] && $data['post'] ) {
+
+            if ($data['status'] && $data['post']) {
 
                 $post = $data['post'];
 
-                $metaDatas =  $this->teamRepository->processMetaData($post, $request);
+                $metaDatas = $this->teamRepository->processMetaData($post, $request);
+
 
                 foreach ($metaDatas as $key => $value) {
                     $this->postRepository->updateOrCreateMeta($post, $key, $value);
@@ -144,10 +161,8 @@ class TeamController extends Controller
 
                 // return redirect()->route('backend.page.edit', $id);
                 return redirect()->back();
-
-            }
-            else {
-                session()->flash('error', 'Error While Updating: Unable to update the page.');
+            } else {
+                session()->flash('error', 'Error While Updating: Unable to update the team.');
             }
 
         } catch (\Exception $e) {

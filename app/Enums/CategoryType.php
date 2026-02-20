@@ -9,6 +9,8 @@ class CategoryType
     const TAG = 'tag';
     const NAV_MENU = 'nav_menu';
 
+    const TEAM_CATEGORY = 'team_category';
+
     public static function toArray()
     {
         return [
@@ -16,6 +18,7 @@ class CategoryType
             self::AUTHOR,
             self::TAG,
             self::NAV_MENU,
+            self::TEAM_CATEGORY,
         ];
     }
 }
