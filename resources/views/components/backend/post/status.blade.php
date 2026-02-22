@@ -66,10 +66,23 @@
                 @endif
 
                 @if ($status == 'publish' && $siteURL && $route)
-                    <div class="d-grid mt-2">
-                        <a target="_blank" href="{{ $siteURL . $route . $post->slug }}"
-                            class="btn btn-sm btn-dark">View</a>
-                    </div>
+                     @if ($post && $post->slug)
+                    @if (!empty($route) && $route !== '/')
+                        <div class="d-grid mt-2">
+                            <a class="btn btn-sm btn-dark" href="{{ isset($route) ? route($route, $post->slug) : '#' }}"
+                                target="_blank">
+                                View
+                            </a>
+                        </div>
+                    @else
+                        <div class="d-grid mt-2">
+                            <a class="btn btn-sm btn-dark" href="{{ $siteURL . ($route ?? '') . $post->slug }}"
+                                target="_blank">
+                                View
+                            </a>
+                        </div>
+                    @endif
+                @endif
                 @endif
 
             </div>

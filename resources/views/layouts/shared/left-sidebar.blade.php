@@ -167,7 +167,7 @@
             </li>
 
             <li
-                class="side-nav-item {{ request()->is('backend/package/category/team_category*') ? 'menuitem-active' : '' }}">
+                class="side-nav-item {{ request()->is('backend/team/category/team_category*') ? 'menuitem-active' : '' }}">
                 <a data-bs-toggle="collapse" href="#team" aria-expanded="true" aria-controls="team"
                     class="side-nav-link">
                     <i class="ri-team-line"></i>
@@ -175,17 +175,79 @@
                     <span class="menu-arrow"></span>
                 </a>
 
-                <div class="collapse {{ request()->is('backend/package/category/team_category*') ? 'show' : '' }}"
+                <div class="collapse {{ request()->is('backend/team/category/team_category*') ? 'show' : '' }}"
                     id="team">
                     <ul class="side-nav-second-level">
-                       
+
                         <li> <a href="{{ route('backend.team') }}">All Teams</a> </li>
                         <li> <a href="{{ route('backend.team.create') }}">Add New Team</a> </li>
 
                         <li
-                            class="{{ request()->is('backend/package/category/team_category*') ? 'menuitem-active' : '' }}">
+                            class="{{ request()->is('backend/team/category/team_category*') ? 'menuitem-active' : '' }}">
                             <a href="{{ route('backend.category.team_category', ['cat' => 'team_category']) }}">
                                 Team Categories
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+
+            <li class="side-nav-item {{ request()->is('backend/story*') ? 'menuitem-active' : '' }}">
+
+                <a data-bs-toggle="collapse" href="#story" aria-expanded="true" aria-controls="story"
+                    class="side-nav-link">
+
+                    <i class="ri-book-line"></i>
+                    <span> Stories </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div class="collapse {{ request()->is('backend/story*') ? 'show' : '' }}" id="story">
+
+                    <ul class="side-nav-second-level">
+
+                        <li>
+                            <a href="{{ route('backend.story') }}">All Stories</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('backend.story.create') }}">Add New Story</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+
+            <li
+                class="side-nav-item {{ request()->is('backend/company*') || request()->is('backend/company/category/sector*') ? 'menuitem-active' : '' }}">
+
+                <a data-bs-toggle="collapse" href="#company" aria-expanded="true" aria-controls="company"
+                    class="side-nav-link">
+
+                    <i class="ri-building-line"></i>
+                    <span> Companies </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div class="collapse {{ request()->is('backend/company*') || request()->is('backend/sector/category/sector*') ? 'show' : '' }}"
+                    id="company">
+
+                    <ul class="side-nav-second-level">
+
+                        <li>
+                            <a href="{{ route('backend.company') }}">All Companies</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('backend.company.create') }}">Add New Company</a>
+                        </li>
+
+                        <li class="{{ request()->is('backend/company/category/sector*') ? 'menuitem-active' : '' }}">
+                            <a href="{{ route('backend.category.sector', ['cat' => 'sector']) }}">
+                                Sectors
                             </a>
                         </li>
 

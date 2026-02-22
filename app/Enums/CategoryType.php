@@ -11,6 +11,8 @@ class CategoryType
 
     const TEAM_CATEGORY = 'team_category';
 
+    const SECTOR = 'sector';
+
     public static function toArray()
     {
         return [
@@ -19,6 +21,7 @@ class CategoryType
             self::TAG,
             self::NAV_MENU,
             self::TEAM_CATEGORY,
+            self::SECTOR,
         ];
     }
 }

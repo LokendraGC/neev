@@ -20,6 +20,9 @@ use App\Http\Controllers\Backend\UserProfileController;
 use App\Http\Controllers\Backend\GeneralSettingController;
 use App\Http\Controllers\Backend\AppearanceSettingController;
 use App\Http\Controllers\Backend\TeamCategoryController;
+use App\Http\Controllers\Backend\CompanyController;
+use App\Http\Controllers\Backend\SectorController;
+use App\Http\Controllers\Backend\StoryController;
 
 Route::redirect('/backend', '/backend/dashboard')->middleware(['auth']);
 
@@ -111,10 +114,10 @@ Route::prefix('backend')->middleware(['auth', 'check.user.role'])->group(functio
 
 
     // team category routing
-    Route::get('package/category/team_category/', [TeamCategoryController::class, 'index'])->name('backend.category.team_category');
-    Route::post('package/category/team_category', [TeamCategoryController::class, 'store'])->name('backend.category.team_category.store');
-    Route::get('package/category/team_category/{id}/edit', [TeamCategoryController::class, 'edit'])->name('backend.category.team_category.edit');
-    Route::post('package/category/team_category/{id}/edit', [TeamCategoryController::class, 'update'])->name('backend.category.team_category.update');
+    Route::get('team/category/team_category/', [TeamCategoryController::class, 'index'])->name('backend.category.team_category');
+    Route::post('team/category/team_category', [TeamCategoryController::class, 'store'])->name('backend.category.team_category.store');
+    Route::get('team/category/team_category/{id}/edit', [TeamCategoryController::class, 'edit'])->name('backend.category.team_category.edit');
+    Route::post('team/category/team_category/{id}/edit', [TeamCategoryController::class, 'update'])->name('backend.category.team_category.update');
     Route::get('post/category/team_category/{id}/delete', [TeamCategoryController::class, 'destroy'])->name('backend.category.team_category.delete');
 
 
@@ -147,6 +150,30 @@ Route::prefix('backend')->middleware(['auth', 'check.user.role'])->group(functio
     Route::get('team/{id}/edit', [TeamController::class, 'edit'])->name('backend.team.edit');
     Route::post('team/{id}/edit', [TeamController::class, 'update'])->name('backend.team.update');
 
+
+    // company routing
+    Route::get('company', [CompanyController::class, 'index'])->name('backend.company');
+    Route::get('company/create', [CompanyController::class, 'create'])->name('backend.company.create');
+    Route::post('company', [CompanyController::class, 'store'])->name('backend.store.company');
+    Route::get('company/{id}/edit', [CompanyController::class, 'edit'])->name('backend.company.edit');
+    Route::post('company/{id}/edit', [CompanyController::class, 'update'])->name('backend.company.update');
+
+    // story routing
+    Route::get('story', [StoryController::class, 'index'])->name('backend.story');
+    Route::get('story/create', [StoryController::class, 'create'])->name('backend.story.create');
+    Route::post('story', [StoryController::class, 'store'])->name('backend.store.story');
+    Route::get('story/{id}/edit', [StoryController::class, 'edit'])->name('backend.story.edit');
+    Route::post('story/{id}/edit', [StoryController::class, 'update'])->name('backend.story.update');
+
+    // sector routing
+    Route::get('company/category/sector/', [SectorController::class, 'index'])->name('backend.category.sector');
+    Route::post('company/category/sector', [SectorController::class, 'store'])->name('backend.category.sector.store');
+    Route::get('company/category/sector/{id}/edit', [SectorController::class, 'edit'])->name('backend.category.sector.edit');
+    Route::post('company/category/sector/{id}/edit', [SectorController::class, 'update'])->name('backend.category.sector.update');
+    Route::get('post/category/company/sector/{id}/delete', [SectorController::class, 'destroy'])->name('backend.category.sector.delete');
+
+
+
     // ajax
     Route::post('get-page-template', [PageController::class, 'getPageTemplate'])->name('backend.get.template');
     Route::post('get-edit-page-template', [PageController::class, 'getEditPageTemplate'])->name('backend.get.editTemplate');
@@ -161,11 +188,11 @@ Route::prefix('backend')->middleware(['auth', 'check.user.role'])->group(functio
 
     // Media Uploader
     Route::controller(MediaController::class)->group(function () {
-        Route::get('/images','index')->name('getAllMedia');
+        Route::get('/images', 'index')->name('getAllMedia');
         Route::post('get_file_by_ids', 'getPreviewFiles')->name('select.files');
     });
 
-    Route::post('/temp-images',[MediaController::class,'store'])->name('temp-images.create');
+    Route::post('/temp-images', [MediaController::class, 'store'])->name('temp-images.create');
     Route::get('/load-more-media', [MediaController::class, 'loadMoreMedia'])->name('loadMoreMedia');
 
     Route::post('/summernote-upload', [SummernoteController::class, 'upload'])->name('summernote.image.upload');

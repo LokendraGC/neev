@@ -12,6 +12,12 @@ class TemplateType
 
     const MEDIA = 'media';
 
+    const BUSINESS = 'business';
+
+    const STORIES = 'stories';  
+
+    const COMPANIES = 'companies';
+
     const DOWNLOAD = 'download';
 
     const INVESTORS = 'investors';
@@ -30,11 +36,14 @@ class TemplateType
             self::ABOUT,
             self::SERVICES,
             self::MEDIA,
+            self::BUSINESS,
             self::DOWNLOAD,
             self::INVESTORS,
             self::SUSTAINABILITY,
             self::NEWS,
             self::CONTACT,
+            self::STORIES,
+            self::COMPANIES,
         ];
     }
 
@@ -48,11 +57,14 @@ class TemplateType
         $keyValuePairs['About'] = self::ABOUT;
         $keyValuePairs['Services'] = self::SERVICES;
         $keyValuePairs['Media'] = self::MEDIA;
+        $keyValuePairs['Business'] = self::BUSINESS;
         $keyValuePairs['Download'] = self::DOWNLOAD;
         $keyValuePairs['Investors'] = self::INVESTORS;
         $keyValuePairs['Sustainability'] = self::SUSTAINABILITY;
         $keyValuePairs['News'] = self::NEWS;
         $keyValuePairs['Contact'] = self::CONTACT;
+        $keyValuePairs['Stories'] = self::STORIES;
+        $keyValuePairs['Companies'] = self::COMPANIES;
 
 
 
