@@ -58,4 +58,13 @@
         </div>
     </div>
 </div>
+
+
+<div class="row">
+        <div class="mb-3">
+            <label for="office_timing" class="form-label">Office Timing</label>
+            <input type="text" class="form-control" name="office_timing" id="office_timing" value="{{ isset($settings['office_timing']) ? $settings['office_timing'] : '' }}">
+        </div>
+</div>
+
 </div>

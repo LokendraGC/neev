@@ -71,6 +71,10 @@
             <span class="form-text text-muted">
                 <small><i>Recommended Image size: 1320 by 720 px</i></small>
             </span>
+        @elseif (in_array(request()->segment(3), ['3', '5', '9', '4', '8', '7']))
+            <span class="form-text text-muted">
+                <small><i>Recommended Image size: 1920 by 600 px</i></small>
+            </span>
         @elseif (request()->segment(3) == 2)
             <span class="form-text text-muted">
                 <small><i>Recommended Image size: 1320 by 720 px</i></small>

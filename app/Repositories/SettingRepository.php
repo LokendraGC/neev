@@ -25,6 +25,7 @@ class SettingRepository
         // header
         $metaDatas['header_logo'] = $request->header_logo ?? null;
         $metaDatas['map_url'] = $request->map_url ?? null;
+        $metaDatas['office_timing'] = $request->office_timing ?? null;
         // Info Section
         $metaDatas['first_email'] = $request->first_email ?? null;
         $metaDatas['second_email'] = $request->second_email ?? null;
@@ -35,7 +36,7 @@ class SettingRepository
         // Footer
         $metaDatas['footer_logo'] = $request->footer_logo ?? null;
         $metaDatas['copyright_text'] = $request->copyright_text ?? null;
-
+        $metaDatas['map_link'] = $request->map_link ?? null;
         // Social Medias
         $metaDatas['social_media'] = $request->social_media ? serialize($request->social_media) : null;
 

@@ -15,7 +15,7 @@
                     </div>
                     <div class="preview-closer">
                         @if (isset($settings['banner_background_image']) &&
-                                ($media = MediaHelper::getModel()->where('id', $settings['footer_logo'])->first()))
+                                ($media = MediaHelper::getModel()->where('id', $settings['banner_background_image'])->first()))
                             <input type="hidden" id="banner_background_image" name="banner_background_image" class="selected-files"
                                 value="{{ $settings['banner_background_image'] }}">
                             <div id="banner_background_image_select">

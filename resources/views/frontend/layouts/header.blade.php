@@ -44,84 +44,141 @@
        </button>
 
 
+       @php
+           $footer_logo = SettingHelper::get_field('footer_logo');
+           $media = $footer_logo ? MediaHelper::getImageById($footer_logo) : null;
+           $office_timing = SettingHelper::get_field('office_timing');
+           $websiteName = SettingHelper::get_field('site_title');
+
+           if ($media && isset($media->file_name)) {
+               $image_url = 'storage/' . $media->file_name;
+           } else {
+               $image_url = 'assets/img/logo/neev-logo.png';
+           }
+
+       @endphp
+
        <!-- Offcanvas Area Start -->
        <div class="fix-area">
            <div class="offcanvas__info">
                <div class="offcanvas__wrapper">
                    <div class="offcanvas__content">
                        <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
-                           <div class="offcanvas__logo">
-                               <a href="{{ url('/') }}">
-                                   <img src="{{ asset('assets/img/logo/neev-logo.png') }}" alt="logo-img">
-                               </a>
-                           </div>
+
+                           @if ($footer_logo)
+                               <div class="offcanvas__logo">
+                                   <a href="{{ url('/') }}">
+                                       <img src="{{ $image_url }}" alt="{{ $websiteName }}">
+                                   </a>
+                               </div>
+                           @endif
+
+
                            <div class="offcanvas__close">
                                <button>
                                    <i class="fas fa-times"></i>
                                </button>
                            </div>
                        </div>
+
+                       {{-- 
                        <p class="text d-none d-xl-block">
                            Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a
                            feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
                        </p>
+                     --}}
+
+
                        <div class="mobile-menu fix mb-3"></div>
                        <div class="offcanvas__contact">
+
+                           @php
+                               $first_email = SettingHelper::get_field('first_email');
+                               $second_email = SettingHelper::get_field('second_email');
+                               $first_phone = SettingHelper::get_field('first_phone');
+
+                               $contact_us = 9;
+                               $contact_us_page = !empty($contact_us)
+                                   ? PostHelper::getModel()->find($contact_us)
+                                   : null;
+                           @endphp
+
                            <h4>Contact Info</h4>
                            <ul>
-                               <!-- <li class="d-flex align-items-center">
-                                    <div class="offcanvas__contact-icon">
-                                        <i class="fal fa-map-marker-alt"></i>
-                                    </div>
-                                    <div class="offcanvas__contact-text">
-                                        <a target="_blank" href="#">Main Street, Melbourne, Australia</a>
-                                    </div>
-                                </li> -->
-                               <li class="d-flex align-items-center">
-                                   <div class="offcanvas__contact-icon mr-15">
-                                       <i class="fal fa-envelope"></i>
-                                   </div>
-                                   <div class="offcanvas__contact-text">
-                                       <a href="mailto:hello@neevcorporation.com.np"><span
-                                               class="mailto:hello@neevcorporation.com.np">hello@neevcorporation.com.np</span></a>
-                                   </div>
-                               </li>
-                               <li class="d-flex align-items-center">
-                                   <div class="offcanvas__contact-icon mr-15">
-                                       <i class="fal fa-clock"></i>
-                                   </div>
-                                   <div class="offcanvas__contact-text">
-                                       <a target="_blank" href="#">Mod-friday, 09am -05pm</a>
-                                   </div>
-                               </li>
-                               <li class="d-flex align-items-center">
-                                   <div class="offcanvas__contact-icon mr-15">
-                                       <i class="far fa-phone"></i>
-                                   </div>
-                                   <div class="offcanvas__contact-text">
-                                       <a href="tel:+977-9851336289">+977-9851336289</a>
-                                   </div>
-                               </li>
+
+
+                               @if (!empty($first_email))
+                                   <li class="d-flex align-items-center">
+                                       <div class="offcanvas__contact-icon mr-15">
+                                           <i class="fal fa-envelope"></i>
+                                       </div>
+                                       <div class="offcanvas__contact-text">
+                                           <a href="mailto:{{ $first_email }}"><span
+                                                   class="mailto:hello@neevcorporation.com.np">
+                                                   {{ $first_email }}
+                                               </span></a>
+                                       </div>
+                                   </li>
+                               @endif
+
+
+                               @if (!empty($office_timing))
+                                   <li class="d-flex align-items-center">
+                                       <div class="offcanvas__contact-icon mr-15">
+                                           <i class="fal fa-clock"></i>
+                                       </div>
+                                       <div class="offcanvas__contact-text">
+                                           <a target="_blank" href="javascript:void(0);">{{ $office_timing }}</a>
+                                       </div>
+                                   </li>
+                               @endif
+
+
+
+                               @if (!empty($first_phone))
+                                   <li class="d-flex align-items-center">
+                                       <div class="offcanvas__contact-icon mr-15">
+                                           <i class="far fa-phone"></i>
+                                       </div>
+                                       <div class="offcanvas__contact-text">
+                                           <a href="tel:{{ $first_phone }}">{{ $first_phone }}</a>
+                                       </div>
+                                   </li>
+                               @endif
+
+
+
                            </ul>
-                           <a href="#" class="theme-btn mt-4">
-                               <div class="btn_inner">
-                                   <div class="btn_icon">
-                                       <span>
-                                           <i class="fa-solid fa-arrow-up-right"></i>
-                                           <i class="fa-solid fa-arrow-up-right"></i>
-                                       </span>
-                                   </div>
-                                   <div class="btn_text">
-                                       <span>Contact us</span>
-                                   </div>
-                               </div>
-                           </a>
-                           <div class="social-icon d-flex align-items-center">
-                               <a href="#"><i class="fab fa-facebook-f"></i></a>
-                               <a href="#"><i class="fab fa-twitter"></i></a>
-                               <a href="#"><i class="fab fa-youtube"></i></a>
-                               <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+                           <div class="btn_text">
+                               <a href="{{ route('frontend.post.index', $contact_us_page->slug) }}"
+                                   class="gt-theme-btn-main style-5 mt-5">
+                                   <span class="gt-theme-btn">Contact us</span>
+                               </a>
                            </div>
+
+                           @php
+                               $medias = SettingHelper::get_field('social_media');
+                               $social_medias = unserialize($medias);
+                           @endphp
+
+                           @if (!empty($social_medias))
+                               <div class="social-icon d-flex align-items-center">
+
+                                   @foreach ($social_medias as $social_media)
+
+                                       <a href="{{ $social_media['link'] ? $social_media['link'] : 'javascript:void(0)' }}"
+                                           target="{{ $social_media['link'] ? '_blank' : '_self' }}" class="text-white">
+                                           <i class="fab {{ $social_media['media'] }}"></i>
+                                       </a>
+
+                                   @endforeach
+
+
+                               </div>
+                           @endif
+
+
                        </div>
                    </div>
                </div>
@@ -134,9 +191,24 @@
            <div class="container">
                <div class="mega-menu-wrapper">
                    <div class="header-main">
-                       <a href="{{ url('/') }}" class="logo">
-                           <img src="{{ asset('assets/img/logo/neev-bg.png') }}" alt="img">
-                       </a>
+
+                       @php
+                           $header_logo = SettingHelper::get_field('header_logo');
+
+                           $media = $header_logo ? MediaHelper::getImageById($header_logo) : null;
+                           if ($media && isset($media->file_name)) {
+                               $image_url = 'storage/' . $media->file_name;
+                           } else {
+                               $image_url = 'assets/img/logo/neev-bg.png';
+                           }
+                       @endphp
+
+                       @if ($header_logo)
+                           <a href="{{ url('/') }}" class="logo">
+                               <img src="{{ $image_url }}" alt="{{ $websiteName }}">
+                           </a>
+                       @endif
+
                        <div class="mean__menu-wrapper">
                            <div class="main-menu">
                                <nav id="mobile-menu">
@@ -189,19 +261,7 @@
                            <a href="#" class="main-header__search search-toggler d-xxl-none">
                                <i class="fa-regular fa-magnifying-glass"></i>
                            </a>
-                           <!-- <a href="tel:+86661233562" class="theme-btn d-none d-xxl-block">
-                                <div class="btn_inner">
-                                    <div class="btn_icon">
-                                        <span>
-                                            <img src="assets/img/call2.svg" alt="">
-                                            <img src="assets/img/call2.svg" alt="">
-                                        </span>
-                                    </div>
-                                    <div class="btn_text">
-                                        <span>+977-9851336289</span>
-                                    </div>
-                                </div>
-                            </a> -->
+
                            <div class="header__hamburger d-xl-none my-auto">
                                <div class="sidebar__toggle">
                                    <i class="fa-regular fa-bars"></i>
@@ -226,7 +286,6 @@
            </div>
        </div>
 
-       
-    <div id="smooth-wrapper">
-        <div id="smooth-content">
-        
+
+       <div id="smooth-wrapper">
+           <div id="smooth-content">

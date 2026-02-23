@@ -13,17 +13,28 @@ use App\Repositories\CompanyRepository;
 use App\Repositories\AboutRepository;
 use App\Repositories\DownloadRepository;
 use App\Repositories\InvestorsRepository;
+use App\Repositories\SustainabilityRepository;
 
 class PageRepository
 {
     use ImageFieldTrait;
 
     // define template repository as per template name same as in TemplateType.php enums other wise not working
-    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository, $teamRepository, $storyRepository, $companyRepository, $mediaRepository, $downloadRepository, $investorsRepository;
+    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository,
+    $teamRepository, $storyRepository, $companyRepository, $mediaRepository, $downloadRepository, $investorsRepository, $sustainabilityRepository;
 
-    public function __construct(HomeRepository $homeRepository, TeamRepository $teamRepository, StoryRepository
-     $storyRepository, CompanyRepository $companyRepository, AboutRepository $aboutRepository, MediaRepository $mediaRepository, DownloadRepository $downloadRepository, InvestorsRepository $investorsRepository)
-    {
+    public function __construct(
+        HomeRepository $homeRepository,
+        TeamRepository $teamRepository,
+        StoryRepository
+        $storyRepository,
+        CompanyRepository $companyRepository,
+        AboutRepository $aboutRepository,
+        MediaRepository $mediaRepository,
+        DownloadRepository $downloadRepository,
+        InvestorsRepository $investorsRepository,
+        SustainabilityRepository $sustainabilityRepository
+    ) {
         $this->homeRepository = $homeRepository;
         $this->teamRepository = $teamRepository;
         $this->storyRepository = $storyRepository;
@@ -32,17 +43,18 @@ class PageRepository
         $this->mediaRepository = $mediaRepository;
         $this->downloadRepository = $downloadRepository;
         $this->investorsRepository = $investorsRepository;
+        $this->sustainabilityRepository = $sustainabilityRepository;
     }
 
     // insert or update meta data
     public function processMetaData($payload, $request)
     {
         $metaDatas = [];
-        $metaDatas['seo_title'] = isset( $request->seo_title ) ? $request->seo_title : NULL;
-        $metaDatas['seo_description'] = isset( $request->seo_description ) ? $request->seo_description : NULL;
-        $metaDatas['excerpt'] = isset( $request->excerpt ) ? $request->excerpt : NULL;
-        $metaDatas['featured_image'] = isset( $request->featured_image ) ? $request->featured_image : NULL;
-        $metaDatas['common_single_banner_image'] = isset( $request->common_single_banner_image ) ? $request->common_single_banner_image : NULL;
+        $metaDatas['seo_title'] = isset($request->seo_title) ? $request->seo_title : NULL;
+        $metaDatas['seo_description'] = isset($request->seo_description) ? $request->seo_description : NULL;
+        $metaDatas['excerpt'] = isset($request->excerpt) ? $request->excerpt : NULL;
+        $metaDatas['featured_image'] = isset($request->featured_image) ? $request->featured_image : NULL;
+        $metaDatas['common_single_banner_image'] = isset($request->common_single_banner_image) ? $request->common_single_banner_image : NULL;
         // add meta data as per form data
 
         return $metaDatas;
@@ -84,8 +96,7 @@ class PageRepository
 
                 $view = View::make($viewName)->with('metaDatas', $metaDatas)->render();
                 return $view;
-            }
-            else {
+            } else {
                 return '';
             }
 
@@ -98,15 +109,14 @@ class PageRepository
     // check and call the template processing
     public function findTemplateMethod($payload, $request)
     {
-        $method = Str::camel( $request->page_template ); // output as CamelCase
+        $method = Str::camel($request->page_template); // output as CamelCase
 
         try {
 
-            if ( $this->{$method.'Repository'} !== null && method_exists( $this->{$method.'Repository' }, 'processMetaData') ) {
+            if ($this->{$method . 'Repository'} !== null && method_exists($this->{$method . 'Repository'}, 'processMetaData')) {
 
-                return $this->{$method.'Repository'}->processMetaData($payload, $request);
-            }
-            else {
+                return $this->{$method . 'Repository'}->processMetaData($payload, $request);
+            } else {
                 return [];
             }
 

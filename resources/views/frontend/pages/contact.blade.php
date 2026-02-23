@@ -1,9 +1,24 @@
 @extends('frontend.layouts.app', ['payload' => $post, 'payloadMeta' => $metaData, 'title' => $post->post_title])
 
 @section('main-section')
-    @include('frontend.partials.breadcrumb-section')
+    @include('frontend.partials.breadcrumb-section', [
+        'title' => $post->post_title,
+        'excerpt' => $post->post_excerpt,
+        'metaData' => $metaData['featured_image'] ? MediaHelper::getImageById($metaData['featured_image']) : null,
+    ])
 
 
+    @php
+        $map_url = SettingHelper::get_field('map_url');
+        $map_link = SettingHelper::get_field('map_link');
+        $address = SettingHelper::get_field('address');
+        $websiteName = SettingHelper::get_field('site_title');
+        $first_phone = SettingHelper::get_field('first_phone');
+        $second_phone = SettingHelper::get_field('second_phone');
+        $first_email = SettingHelper::get_field('first_email');
+        $second_email = SettingHelper::get_field('second_email');
+
+    @endphp
 
     <!-- Contact Info Section Start -->
     <section class="contact-info-section fix section-padding">
@@ -17,43 +32,74 @@
                 </h2>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                    <div class="contact-info-box">
-                        <div class="icon">
-                            <i class="fa-sharp fa-solid fa-location-dot"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Our address</h4>
-                            <p>Redcross Marg, Soalteemode, Kathmandu</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                    <div class="contact-info-box">
-                        <div class="icon">
-                            <i class="fa-solid fa-phone-xmark"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Contact number</h4>
-                            <p>
-                                <a class="d-block" href="tel:+977-9851336289">+977-9851336289</a>
-                            </p>
+
+                @if (!empty($map_link) || !empty($address))
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                        <div class="contact-info-box">
+                            <div class="icon">
+                                <i class="fa-sharp fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Our address</h4>
+                                <p>
+                                    @if (!empty($map_link))
+                                        <a href="{{ $map_link }}" target="_blank">{{ $address }}</a>
+                                    @else
+                                        {{ $address }}
+                                    @endif
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
-                    <div class="contact-info-box">
-                        <div class="icon">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Email</h4>
-                            <p>
-                                <a href="mailto:hello@neevcorporation.com.np">hello@neevcorporation.com.np</a>
-                            </p>
+                @endif
+
+
+                @if (!empty($first_phone) || !empty($second_phone))
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                        <div class="contact-info-box">
+                            <div class="icon">
+                                <i class="fa-solid fa-phone-xmark"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Contact number</h4>
+                                <p>
+                                    @if (!empty($first_phone))
+                                        <a class="d-block" href="tel:{{ $first_phone }}">{{ $first_phone }}</a>
+                                    @endif
+                                    @if (!empty($second_phone))
+                                        <span>|</span>
+                                        <a class="d-block" href="tel:{{ $second_phone }}">{{ $second_phone }}</a>
+                                    @endif
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
+
+
+                @if (!empty($first_email) || !empty($second_email))
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
+                        <div class="contact-info-box">
+                            <div class="icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Email</h4>
+                                <p>
+                                    @if (!empty($first_email))
+                                        <a href="mailto:{{ $first_email }}">{{ $first_email }}</a>
+                                    @endif
+                                    @if (!empty($second_email))
+                                        <span>|</span>
+                                        <a href="mailto:{{ $second_email }}">{{ $second_email }}</a>
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
             </div>
         </div>
     </section>
@@ -63,14 +109,16 @@
         <div class="container">
             <div class="contact-wrapper">
                 <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="contact-map">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6678.7619084840835!2d144.9618311901502!3d-37.81450084255415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642b4758afc1d%3A0x3119cc820fdfc62e!2sEnvato!5e0!3m2!1sen!2sbd!4v1641984054261!5m2!1sen!2sbd"
-                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
+
+                    @if (!empty($map_url))
+                        <div class="col-lg-6">
+                            <div class="contact-map">
+                                {!! $map_url !!}
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
                     <div class="col-lg-6">
                         <div class="contact-box-items">
                             <h2 class="text-anim">Send Us A Message.</h2>
@@ -109,19 +157,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 wow fadeInUp" data-wow-delay=".5s">
-                                        <button type="submit" class="theme-btn wow fadeInUp" data-wow-delay=".5s">
-                                            <span class="btn_inner">
-                                                <span class="btn_icon">
-                                                    <span>
-                                                        <i class="fa-solid fa-arrow-up-right"></i>
-                                                        <i class="fa-solid fa-arrow-up-right"></i>
-                                                    </span>
-                                                </span>
-                                                <span class="btn_text">
-                                                    <span>Send now</span>
-                                                </span>
-                                            </span>
-                                        </button>
+
+                                        <a class="gt-theme-btn-main style-5 mt-5" href="about.html">
+                                            <span class="gt-theme-btn">Send now</span>
+                                        </a>
                                     </div>
                                 </div>
                             </form>

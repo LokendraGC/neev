@@ -4,7 +4,7 @@ namespace App\Enums;
 
 class SocialMediaType
 {
-    const FACEBOOK = 'fa-facebook';
+    const FACEBOOK = 'fa-facebook-f';
     const TWITTER = 'fa-twitter';
     const INSTAGRAM = 'fa-instagram';
     const YOUTUBE = 'fa-youtube';
@@ -12,6 +12,8 @@ class SocialMediaType
     const LINKEDIN = 'fa-linkedin';
     const WHATSAPP = 'fa-whatsapp';
     const TIKTOK = 'fa-tiktok';
+
+    const VIMEO = 'fa-vimeo';
 
 
     public static function toArray()
@@ -25,7 +27,7 @@ class SocialMediaType
             self::LINKEDIN,
             self::WHATSAPP,
             self::TIKTOK,
-
+            self::VIMEO,
         ];
     }
 
@@ -41,7 +43,7 @@ class SocialMediaType
         $keyValuePairs['Linkedin'] = self::LINKEDIN;
         $keyValuePairs['Whatsapp'] = self::WHATSAPP;
         $keyValuePairs['Tiktok'] = self::TIKTOK;
-
+        $keyValuePairs['Vimeo'] = self::VIMEO;
 
 
         return $keyValuePairs;

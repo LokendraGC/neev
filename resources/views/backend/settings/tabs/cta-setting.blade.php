@@ -14,8 +14,10 @@
                         <div class="form-control file-amount">Choose File</div>
                     </div>
                     <div class="preview-closer">
+
+
                         @if (isset($settings['cta_background_image']) &&
-                                ($media = MediaHelper::getModel()->where('id', $settings['footer_logo'])->first()))
+                                ($media = MediaHelper::getModel()->where('id', $settings['cta_background_image'])->first()))
                             <input type="hidden" id="cta_background_image" name="cta_background_image" class="selected-files"
                                 value="{{ $settings['cta_background_image'] }}">
                             <div id="cta_background_image_select">

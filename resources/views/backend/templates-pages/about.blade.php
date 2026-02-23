@@ -48,7 +48,7 @@
                      @endisset
              </div>
              <span class="form-text text-muted">
-                 <small><i>(Recommended image size: 525 by 736px)</i></small>
+                 <small><i>Recommended Image size: 1920 by 600 px</i></small>
              </span>
          </div>
          <hr>
