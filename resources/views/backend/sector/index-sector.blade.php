@@ -24,7 +24,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                     
+
                         <form method="POST" action="{{ route('backend.category.sector.store') }}">
                             @csrf
                             <input type="hidden" name="type" value="{{ $type }}" />
@@ -46,7 +46,7 @@
                                     </div>
                                 @enderror --}}
                             </div>
-                         
+
                             <div class="my-3">
                                 <label for="content" class="form-label">Main
                                     Description</label>
@@ -69,6 +69,14 @@
                                         value="" />
                                     <div id="featured_image_select" class="clearfix"></div>
                                 </div>
+
+
+                                <span class="form-text text-muted">
+                                    <small><i>(Recommended image size: 1920 by 600 pixels)</i></small>
+                                </span>
+
+
+
                             </div>
                             <div class="d-block">
                                 <button class="btn btn-primary mt-3" type="submit">Add New
@@ -132,7 +140,7 @@
                                                             onclick="return confirm('Are you sure you want to delete?');"
                                                             class="text-danger">Delete</a>
                                                     </span>
-                                                   
+
                                                 </div>
                                             </td>
                                             <td>{{ $category->slug }}</td>

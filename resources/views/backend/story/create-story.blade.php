@@ -45,15 +45,22 @@
                                     <div class="tab-content">
                                         <div class="tab-pane {{ !request()->has('tab') || request()->query('tab') == 'general' ? 'show active' : '' }}"
                                             id="general">
+
+
                                             <div class="mb-3">
-                                                <label class="form-label" for="product-order">Order</label>
-                                                <input name="menu_order" type="number" class="form-control"
-                                                    id="product-order" value="0" />
+                                                <label class="form-label">Head Office</label>
+                                                <input type="text" name="head_office" class="form-control"
+                                                    value="" />
                                             </div>
+
+
                                             <div class="mb-3">
-                                                <label class="form-label">Designation</label>
-                                                <input type="text" name="designation" class="form-control" />
+                                                <label class="form-label">Stay Updated</label>
+                                                <input type="text" name="stay_updated_text" class="form-control"
+                                                    value="" />
                                             </div>
+
+
                                         </div>
                                         {{-- <div class="tab-pane {{ request()->query('tab') == 'best-seller' ? 'show active' : '' }}"
                                             id="best-seller"> --}}

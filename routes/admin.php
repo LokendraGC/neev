@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\TeamCategoryController;
 use App\Http\Controllers\Backend\CompanyController;
 use App\Http\Controllers\Backend\SectorController;
 use App\Http\Controllers\Backend\StoryController;
+use App\Http\Controllers\Backend\MediaController as BackendMediaController;
 
 Route::redirect('/backend', '/backend/dashboard')->middleware(['auth']);
 
@@ -149,6 +150,13 @@ Route::prefix('backend')->middleware(['auth', 'check.user.role'])->group(functio
     Route::post('team', [TeamController::class, 'store'])->name('backend.store.team');
     Route::get('team/{id}/edit', [TeamController::class, 'edit'])->name('backend.team.edit');
     Route::post('team/{id}/edit', [TeamController::class, 'update'])->name('backend.team.update');
+
+    // media routing
+    Route::get('media', [BackendMediaController::class, 'index'])->name('backend.media');
+    Route::get('media/create', [BackendMediaController::class, 'create'])->name('backend.media.create');
+    Route::post('media', [BackendMediaController::class, 'store'])->name('backend.store.media');
+    Route::get('media/{id}/edit', [BackendMediaController::class, 'edit'])->name('backend.media.edit');
+    Route::post('media/{id}/edit', [BackendMediaController::class, 'update'])->name('backend.media.update');
 
 
     // company routing

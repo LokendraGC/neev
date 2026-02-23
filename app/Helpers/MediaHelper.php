@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Media;
+use Illuminate\Support\Facades\Cache;
 
 class MediaHelper
 {
@@ -28,7 +29,10 @@ class MediaHelper
 
     public static function getImageById($id)
     {
-        $image = Media::where('id', $id)->first();
-        return $image ?? null;
+        $cacheKey = 'media_image_' . $id;
+
+        return Cache::remember($cacheKey, 3600, function () use ($id) {
+            return Media::with('user:id,name')->where('id', $id)->first();
+        });
     }
 }

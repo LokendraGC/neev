@@ -113,6 +113,14 @@
                                                                     <div id="featured_image_select"></div>
                                                                 @endisset
                                                         </div>
+
+
+                                                        <span class="form-text text-muted">
+                                                        <small><i>(Recommended image size: 1920 by 600 pixels)</i></small>
+                                                        </span>
+
+
+
                                                     </div>
 
 

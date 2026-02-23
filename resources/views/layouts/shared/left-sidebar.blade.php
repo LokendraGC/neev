@@ -221,6 +221,35 @@
                 </div>
             </li>
 
+
+
+             <li class="side-nav-item {{ request()->is('backend/media*') ? 'menuitem-active' : '' }}">
+
+                <a data-bs-toggle="collapse" href="#media" aria-expanded="true" aria-controls="media"
+                    class="side-nav-link">
+
+                    <i class="ri-image-line"></i>
+                    <span> Media </span>
+                    <span class="menu-arrow"></span>
+                </a>
+
+                <div class="collapse {{ request()->is('backend/media*') ? 'show' : '' }}" id="media">
+
+                    <ul class="side-nav-second-level">
+
+                        <li>
+                            <a href="{{ route('backend.media') }}">All Media</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('backend.media.create') }}">Add New Media</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+
             <li
                 class="side-nav-item {{ request()->is('backend/company*') || request()->is('backend/company/category/sector*') ? 'menuitem-active' : '' }}">
 

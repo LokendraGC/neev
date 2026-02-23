@@ -24,21 +24,28 @@ class SettingRepository
 
         // header
         $metaDatas['header_logo'] = $request->header_logo ?? null;
+        $metaDatas['map_url'] = $request->map_url ?? null;
+        // Info Section
+        $metaDatas['first_email'] = $request->first_email ?? null;
+        $metaDatas['second_email'] = $request->second_email ?? null;
+        $metaDatas['address'] = $request->address ?? null;
+        $metaDatas['first_phone'] = $request->first_phone ?? null;
+        $metaDatas['second_phone'] = $request->second_phone ?? null;
 
         // Footer
         $metaDatas['footer_logo'] = $request->footer_logo ?? null;
         $metaDatas['copyright_text'] = $request->copyright_text ?? null;
 
-        // Info Section
-        $metaDatas['email_address'] = $request->email_address ?? null;
-        $metaDatas['address'] = $request->address ?? null;
-        $metaDatas['phone'] = $request->phone ?? null;
-
         // Social Medias
-        $metaDatas['facebook'] = $request->facebook ?? null;
-        $metaDatas['twitter'] = $request->twitter ?? null;
-        $metaDatas['linkedin'] = $request->linkedin ?? null;
-        $metaDatas['youtube'] = $request->youtube ?? null;
+        $metaDatas['social_media'] = $request->social_media ? serialize($request->social_media) : null;
+
+        // CTA Section
+        $metaDatas['cta_background_image'] = $request->cta_background_image ?? null;
+        $metaDatas['cta_title'] = $request->cta_title ?? null;
+
+        // Banner Section
+        $metaDatas['banner_background_image'] = $request->banner_background_image ?? null;
+
 
         // add meta data as per form data
 
@@ -51,6 +58,6 @@ class SettingRepository
     // update Or insert data
     private function updateOrCreateMeta($setting, $key, $value)
     {
-        $setting->updateOrInsert( ['setting_name' => $key], ['setting_value' => $value] );
+        $setting->updateOrInsert(['setting_name' => $key], ['setting_value' => $value]);
     }
 }

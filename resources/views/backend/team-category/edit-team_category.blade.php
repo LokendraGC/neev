@@ -3,9 +3,6 @@
 
 
 @section('content')
-
-
-
     <main>
         <!-- Start Content-->
         <div class="container-fluid">
@@ -34,7 +31,7 @@
 
 
                                             <div class="mb-3" style="max-width: max-content;">
-                                                <label class="form-label" for="category-order">Order</label>
+                                                <label class="form-label" for="category-order"> Menu Order</label>
                                                 <input name="menu_order" type="number" class="form-control"
                                                     id="category-order" value="{{ $category->menu_order }}" required />
                                             </div>
@@ -42,7 +39,7 @@
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <div class="row">
                                         <div class="col-12">
@@ -116,10 +113,44 @@
                                                                     <div id="featured_image_select"></div>
                                                                 @endisset
                                                         </div>
+
+
+
+
                                                     </div>
 
 
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{-- team category builder --}}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div
+                                                        class="mb-2 d-flex align-content-center border-1 border-bottom">
+                                                        <h4 class="header-title">Team Category Details</h4>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="subtitle">Subtitle</label>
+                                                        <input name="subtitle" id="subtitle" type="text"
+                                                            class="form-control"
+                                                            value="{{ isset($metaDatas['subtitle']) ? $metaDatas['subtitle'] : '' }}" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="short_description">Short
+                                                            Description</label>
+                                                        <textarea name="short_description" id="short_description" class="form-control" rows="3">{{ isset($metaDatas['short_description']) ? $metaDatas['short_description'] : '' }}</textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

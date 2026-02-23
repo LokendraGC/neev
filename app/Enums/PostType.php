@@ -12,6 +12,8 @@ class PostType
 
     const COMPANY = 'company';
 
+    const MEDIA = 'media';
+
     public static function toArray()
     {
         return [
@@ -20,6 +22,7 @@ class PostType
             self::TEAM,
             self::STORY,
             self::COMPANY,
+            self::MEDIA,
         ];
     }
 }

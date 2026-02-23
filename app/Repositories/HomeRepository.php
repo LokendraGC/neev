@@ -9,56 +9,24 @@ class HomeRepository
     // insert or update meta data
     public function processMetaData($payload, $request)
     {
-        // dd( $request->all() );
+
         $data = [];
-        // $data['breaking_news_title'] = $request->breaking_news_title ?? null;
-        // // $data['breaking_news_counter'] = $request->breaking_news_counter ?? 1;
-        // $data['breaking_news_counter'] = max($request->breaking_news_counter ?? 1, 1);
+        $data['about_subtitle'] = isset($request->about_subtitle) ? $request->about_subtitle : NULL;
+        $data['about_title'] = isset($request->about_title) ? $request->about_title : NULL;
+        $data['our_vision'] = isset($request->our_vision) ? $request->our_vision : NULL;
+        $data['our_vision_description'] = isset($request->our_vision_description) ? $request->our_vision_description : NULL;
+        $data['our_mission'] = isset($request->our_mission) ? $request->our_mission : NULL;
+        $data['our_mission_description'] = isset($request->our_mission_description) ? $request->our_mission_description : NULL;
+        $data['media_main_title'] = isset($request->media_main_title) ? $request->media_main_title : NULL;
+        $data['banners'] = isset($request->banners) ? serialize($request->banners) : NULL;
+        $data['business_subtitle'] = isset($request->business_subtitle) ? $request->business_subtitle : NULL;
+        $data['business_title'] = isset($request->business_title) ? $request->business_title : NULL;
+        $data['business_description'] = isset($request->business_description) ? $request->business_description : NULL;
+        $data['business_button_link'] = isset($request->business_button_link) ? $request->business_button_link : NULL;
+        $data['business_button_title'] = isset($request->business_button_title) ? $request->business_button_title : NULL;
+        $data['media_main_title'] = isset($request->media_main_title) ? $request->media_main_title : NULL;
+        $data['media_description'] = isset($request->media_description) ? $request->media_description : NULL;
 
-        // $data['banner_news_counter'] = max($request->banner_news_counter ?? 1, 1);
-
-        // $data['main_news_title'] = $request->main_news_title ?? null;
-        // $data['poll_title'] = $request->poll_title ?? null;
-        // $data['choose_poll'] = $request->choose_poll ?? null;
-
-        // $data['choose_event'] = $request->choose_event ?? null;
-
-        // $data['business_title'] = $request->business_title ?? null;
-        // $data['choose_business'] = $request->choose_business ?? null;
-
-        // $data['video_title'] = $request->video_title ?? null;
-
-        // // two column with ads
-        // $data['two_col_first_title'] = $request->two_col_first_title ?? null;
-        // $data['two_col_first_category'] = $request->two_col_first_category ?? null;
-        // $data['two_col_second_title'] = $request->two_col_second_title ?? null;
-        // $data['two_col_second_category'] = $request->two_col_second_category ?? null;
-        
-        // // pradesh
-        // $data['pradesh_title'] = $request->pradesh_title ?? null;
-
-        // // three column
-        // $data['three_col_first_title'] = $request->three_col_first_title ?? null;
-        // $data['three_col_first_choose_category'] = $request->three_col_first_choose_category ?? null;
-
-        // $data['three_col_second_title'] = $request->three_col_second_title ?? null;
-        // $data['three_col_second_choose_category'] = $request->three_col_second_choose_category ?? null;
-
-        // $data['three_col_third_title'] = $request->three_col_third_title ?? null;
-        // $data['three_col_third_choose_category'] = $request->three_col_third_choose_category ?? null;
-        
-        // // entertainment
-        // if (isset($request->entertainment_cats)) {
-        //     $filteredSidebarContent = array_filter($request->entertainment_cats, function ($item) {
-        //         return !(is_null($item['category']));
-        //         // return !(is_null($item['title']) && is_null($item['category']));
-        //     });
-        //     $data['entertainment_cats'] = serialize($filteredSidebarContent);
-        // } else {
-        //     $data['entertainment_cats'] = null;
-        // }        
-
-        // add more meta data
         return $data;
     }
 }

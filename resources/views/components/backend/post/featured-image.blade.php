@@ -57,6 +57,30 @@
                     <div id="featured_image_select"></div>
                 @endisset
         </div>
+
+
+        @if (request()->segment(2) == 'post')
+            <span class="form-text text-muted">
+                <small><i>Recommended Image size: 843 by 552 px</i></small>
+            </span>
+        @elseif (request()->segment(2) == 'story')
+            <span class="form-text text-muted">
+                <small><i>Recommended Image format: SVG</i></small>
+            </span>
+        @elseif (request()->segment(3) == 1)
+            <span class="form-text text-muted">
+                <small><i>Recommended Image size: 1320 by 720 px</i></small>
+            </span>
+        @elseif (request()->segment(3) == 2)
+            <span class="form-text text-muted">
+                <small><i>Recommended Image size: 1320 by 720 px</i></small>
+            </span>
+        @elseif (request()->segment(2) == 'company')
+            <span class="form-text text-muted">
+                <small><i>Recommended Image size: 1400 by 875 px</i></small>
+            </span>
+        @endif
+
     </div>
 </div>
 </div>

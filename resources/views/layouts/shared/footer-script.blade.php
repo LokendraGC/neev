@@ -150,7 +150,7 @@
         maxFiles: 10,
         paramName: 'image',
         addRemoveLinks: true,
-        acceptedFiles: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp",
+        acceptedFiles: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp,application/pdf",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

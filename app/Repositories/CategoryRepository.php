@@ -81,9 +81,7 @@ class CategoryRepository
         $metaDatas = [];
         $metaDatas['seo_title'] = $request->seo_title ?? null;
         $metaDatas['seo_description'] = $request->seo_description ?? null;
-        // $metaDatas['nepali_title'] = $request->nepali_title ?? null;
-        // $metaDatas['common_banner_image'] = $request->common_banner_image ?? null;
-        // $metaDatas['theme_color'] = $request->theme_color ?? null;
+       $metaDatas['menu_order'] = $request->menu_order ?? null;
 
         // add meta data as per form data
 

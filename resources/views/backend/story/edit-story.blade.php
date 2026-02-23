@@ -45,16 +45,22 @@
                                 <div class="tab-content">
                                     <div class="tab-pane {{ !request()->has('tab') || request()->query('tab') == 'general' ? 'show active' : '' }}"
                                         id="general">
+                                       
+                                     
                                         <div class="mb-3">
-                                            <label class="form-label" for="product-order">Order</label>
-                                            <input name="menu_order" type="number" class="form-control"
-                                                id="product-order" value="{{ $post->menu_order }}" />
+                                            <label class="form-label">Head Office</label>
+                                            <input type="text" name="head_office" class="form-control"
+                                                value="{{ isset($metaDatas['head_office']) ? $metaDatas['head_office'] : '' }}" />
                                         </div>
+
+
                                         <div class="mb-3">
-                                            <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control"
-                                                value="{{ isset($metaDatas['designation']) ? $metaDatas['designation'] : '' }}" />
+                                            <label class="form-label">Stay Updated</label>
+                                            <input type="text" name="stay_updated_text" class="form-control"
+                                                value="{{ isset($metaDatas['stay_updated_text']) ? $metaDatas['stay_updated_text'] : '' }}" />
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>

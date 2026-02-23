@@ -10,20 +10,28 @@ use App\Repositories\TeamRepository;
 use Illuminate\Support\Facades\View;
 use App\Repositories\StoryRepository;
 use App\Repositories\CompanyRepository;
+use App\Repositories\AboutRepository;
+use App\Repositories\DownloadRepository;
+use App\Repositories\InvestorsRepository;
 
 class PageRepository
 {
     use ImageFieldTrait;
 
     // define template repository as per template name same as in TemplateType.php enums other wise not working
-    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository, $teamRepository, $storyRepository, $companyRepository;
+    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository, $teamRepository, $storyRepository, $companyRepository, $mediaRepository, $downloadRepository, $investorsRepository;
 
-    public function __construct(HomeRepository $homeRepository, TeamRepository $teamRepository, StoryRepository $storyRepository, CompanyRepository $companyRepository)
+    public function __construct(HomeRepository $homeRepository, TeamRepository $teamRepository, StoryRepository
+     $storyRepository, CompanyRepository $companyRepository, AboutRepository $aboutRepository, MediaRepository $mediaRepository, DownloadRepository $downloadRepository, InvestorsRepository $investorsRepository)
     {
-        $this->homeRepository = $homeRepository;;
+        $this->homeRepository = $homeRepository;
         $this->teamRepository = $teamRepository;
         $this->storyRepository = $storyRepository;
         $this->companyRepository = $companyRepository;
+        $this->aboutRepository = $aboutRepository;
+        $this->mediaRepository = $mediaRepository;
+        $this->downloadRepository = $downloadRepository;
+        $this->investorsRepository = $investorsRepository;
     }
 
     // insert or update meta data
@@ -32,7 +40,9 @@ class PageRepository
         $metaDatas = [];
         $metaDatas['seo_title'] = isset( $request->seo_title ) ? $request->seo_title : NULL;
         $metaDatas['seo_description'] = isset( $request->seo_description ) ? $request->seo_description : NULL;
+        $metaDatas['excerpt'] = isset( $request->excerpt ) ? $request->excerpt : NULL;
         $metaDatas['featured_image'] = isset( $request->featured_image ) ? $request->featured_image : NULL;
+        $metaDatas['common_single_banner_image'] = isset( $request->common_single_banner_image ) ? $request->common_single_banner_image : NULL;
         // add meta data as per form data
 
         return $metaDatas;

@@ -48,6 +48,10 @@
                             <div id="footer_logo_select"></div>
                         @endisset
                 </div>
+
+                <span class="form-text text-muted">
+                    <small><i>(Recommended Image size: 242 by 123 pixels)</i></small>
+                </span>
             </div>
         </div>
     </div>
