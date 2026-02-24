@@ -1,6 +1,6 @@
    @php
-
-       if (!empty($metaData)) {
+ 
+       if (!empty($metaData) && !empty($metaData->file_name)) {
            $image_url = 'storage/' . $metaData->file_name;
        } else {
            $image_url = asset('assets/img/home-1/project/bread-bg.png');

@@ -5,11 +5,14 @@
          $cta_title = SettingHelper::get_field('cta_title');
          $cta_background_image = SettingHelper::get_field('cta_background_image');
          $media = $cta_background_image ? MediaHelper::getImageById($cta_background_image) : null;
+      
+      
          if ($media && isset($media->file_name)) {
-             $image_url = 'storage/' . $media->file_name;
+             $image_url = asset('storage/' . $media->file_name);
          } else {
              $image_url = 'assets/img/home-1/cta-newsletter.jpg';
          }
+
 
      @endphp
      @if (!empty($cta_title) || !empty($image_url))

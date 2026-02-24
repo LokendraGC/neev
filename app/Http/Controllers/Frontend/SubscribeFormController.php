@@ -16,7 +16,7 @@ class SubscribeFormController extends Controller
     
     public function index(Request $request)
     {
-        $page_id = 9;
+        $page_id = 1;
 
         $post = Post::query()
             ->where('id', $page_id)

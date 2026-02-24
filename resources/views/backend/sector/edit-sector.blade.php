@@ -116,18 +116,29 @@
 
 
                                                         <span class="form-text text-muted">
-                                                        <small><i>(Recommended image size: 1920 by 600 pixels)</i></small>
+                                                            <small><i>(Recommended image size: 1920 by 600
+                                                                    pixels)</i></small>
                                                         </span>
 
-
-
                                                     </div>
-
-
 
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div class="mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label for="sector_description" class="form-label">Sector
+                                                        Description</label>
+                                                    <textarea id="sector_description" name="sector_description" class="form-control">{{ isset($metaDatas['sector_description']) ? $metaDatas['sector_description'] : '' }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
 

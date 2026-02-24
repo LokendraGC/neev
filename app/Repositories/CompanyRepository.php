@@ -16,6 +16,7 @@ class CompanyRepository
         $data['stay_updated_text'] = isset( $request->stay_updated_text ) ? $request->stay_updated_text : NULL;
         $data['website_url'] = isset( $request->website_url ) ? $request->website_url : NULL;
         $data['social_media_company'] = isset( $request->social_media_company ) ? serialize($request->social_media_company) : NULL;
+        $data['company_banner_image'] = isset( $request->company_banner_image ) ? $request->company_banner_image : NULL;
 
         return $data;
     }

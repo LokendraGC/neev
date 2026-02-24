@@ -11,25 +11,22 @@ class FrontController extends Controller
 {
     public function index()
     {
-        // get home page id for settings
-        $pageId = Setting::where('setting_name', 'page_on_front')->value('setting_value');
-
-        // check page id exists or not
+        $pageId = 1;
         $post = Post::findOrFail($pageId);
+        $postMeta = $post->GetAllMetaData();
 
-        // if exists take meta data of that id
-        $postMeta = $post->GetAllMetaData();    
-
-
-        // $karnalicat = Category::findOrFail(17);
-        // $karnaliposts = $karnalicat->posts()->latest()->take(8)->get();
+        $pages = Post::query()
+            ->where('post_type', 'page')
+            ->where('post_status', 'publish')
+            ->orderBy('menu_order')
+            ->latest()
+            ->get();
 
 
         return view('frontend.front', [
-            'pageId' => $pageId,
             'post' => $post,
             'postMeta' => $postMeta,
+            'pages' => $pages,
         ]);
     }
-
 }

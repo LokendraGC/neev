@@ -5,7 +5,9 @@ namespace App\Enums;
 class TemplateType
 {
     const DEFAULT = 'default';
+
     const HOME = 'home';
+
     const ABOUT = 'about';
 
     const SERVICES = 'services';
@@ -14,7 +16,7 @@ class TemplateType
 
     const BUSINESS = 'business';
 
-    const STORIES = 'stories';  
+    const STORIES = 'stories';
 
     const COMPANIES = 'companies';
 
@@ -89,7 +91,6 @@ class TemplateType
 
         // Merge 'Default' at the beginning
         return $defaultValue + $keyValuePairs;
-        
     }
 
     // if (!in_array($type, TemplateType::toArray())) {

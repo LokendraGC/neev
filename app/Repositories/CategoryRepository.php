@@ -82,6 +82,7 @@ class CategoryRepository
         $metaDatas['seo_title'] = $request->seo_title ?? null;
         $metaDatas['seo_description'] = $request->seo_description ?? null;
        $metaDatas['menu_order'] = $request->menu_order ?? null;
+       $metaDatas['main_description'] = $request->main_description ?? null;
 
         // add meta data as per form data
 

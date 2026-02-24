@@ -95,6 +95,16 @@
 
                 <div class="tab-pane {{ request()->query('tab') == 'banner' ? 'show active' : '' }}" id="banner">
 
+
+                    <div class="mb-3">
+                        <label for="banner_main_title" class="form-label">Banner Main Title</label>
+                        <input type="text" class="form-control" id="banner_main_title" name="banner_main_title"
+                            value="{{ isset($metaDatas['banner_main_title']) ? $metaDatas['banner_main_title'] : '' }}" />
+                    </div>
+
+                    <hr>
+
+
                     <div class="mb-3">
                         <label class="form-label">Banners</label>
                         <div class="table-responsive">
@@ -267,7 +277,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="business_title" class="form-label">Business Button Title</label>
-                            <input type="text" class="form-control" id="business_button_title" name="business_button_title"
+                            <input type="text" class="form-control" id="business_button_title"
+                                name="business_button_title"
                                 value="{{ isset($metaDatas['business_button_title']) ? $metaDatas['business_button_title'] : '' }}" />
                         </div>
 

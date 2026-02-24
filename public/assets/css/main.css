@@ -2644,7 +2644,7 @@ a.logo img{
   line-height: 50px;
   border-radius: 100px;
   border: 1px solid #E6E8EB;
-  background: transparent;
+  background: #022b73;
   text-align: center;
   font-size: 18px;
 }
@@ -2765,6 +2765,7 @@ a.logo img{
 .breadcrumb-wrapper .page-heading h1 {
   color: var(--white);
   font-size: 72px;
+  width: max-content;
   position: relative;
   text-transform: capitalize;
   z-index: 9;

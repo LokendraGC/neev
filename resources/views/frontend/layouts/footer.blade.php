@@ -11,10 +11,10 @@
          $first_email = SettingHelper::get_field('first_email');
          $second_email = SettingHelper::get_field('second_email');
 
-         if ($media && isset($media->file_name)) {
-             $image_url = 'storage/' . $media->file_name;
+         if ( !empty( $media ) && !empty( $media->file_name ) ) {
+             $image_url =  asset('storage/' . $media->file_name);   
          } else {
-             $image_url = 'assets/img/logo/neev-logo.png';
+             $image_url = asset('assets/img/logo/neev-logo.png');
          }
 
      @endphp

@@ -26,7 +26,8 @@ class HomeRepository
         $data['business_button_title'] = isset($request->business_button_title) ? $request->business_button_title : NULL;
         $data['media_main_title'] = isset($request->media_main_title) ? $request->media_main_title : NULL;
         $data['media_description'] = isset($request->media_description) ? $request->media_description : NULL;
-
+        $data['banner_main_title'] = isset($request->banner_main_title) ? $request->banner_main_title : NULL;
+        
         return $data;
     }
 }

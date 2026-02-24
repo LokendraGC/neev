@@ -50,10 +50,10 @@
            $office_timing = SettingHelper::get_field('office_timing');
            $websiteName = SettingHelper::get_field('site_title');
 
-           if ($media && isset($media->file_name)) {
-               $image_url = 'storage/' . $media->file_name;
+           if (!empty($media) && !empty($media->file_name)) {
+               $image_url = asset('storage/' . $media->file_name);
            } else {
-               $image_url = 'assets/img/logo/neev-logo.png';
+               $image_url = asset('assets/img/logo/neev-logo.png');
            }
 
        @endphp
@@ -65,7 +65,7 @@
                    <div class="offcanvas__content">
                        <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
 
-                           @if ($footer_logo)
+                           @if (!empty($image_url))
                                <div class="offcanvas__logo">
                                    <a href="{{ url('/') }}">
                                        <img src="{{ $image_url }}" alt="{{ $websiteName }}">
@@ -166,12 +166,11 @@
                                <div class="social-icon d-flex align-items-center">
 
                                    @foreach ($social_medias as $social_media)
-
                                        <a href="{{ $social_media['link'] ? $social_media['link'] : 'javascript:void(0)' }}"
-                                           target="{{ $social_media['link'] ? '_blank' : '_self' }}" class="text-white">
+                                           target="{{ $social_media['link'] ? '_blank' : '_self' }}"
+                                           class="text-white">
                                            <i class="fab {{ $social_media['media'] }}"></i>
                                        </a>
-
                                    @endforeach
 
 
@@ -196,14 +195,17 @@
                            $header_logo = SettingHelper::get_field('header_logo');
 
                            $media = $header_logo ? MediaHelper::getImageById($header_logo) : null;
-                           if ($media && isset($media->file_name)) {
-                               $image_url = 'storage/' . $media->file_name;
+
+                           if (!empty($media) && !empty($media->file_name)) {
+                               $image_url = asset('storage/' . $media->file_name);
                            } else {
-                               $image_url = 'assets/img/logo/neev-bg.png';
+                               $image_url = asset('assets/img/logo/neev-bg.png');
                            }
+
                        @endphp
 
-                       @if ($header_logo)
+
+                       @if (!empty($image_url))
                            <a href="{{ url('/') }}" class="logo">
                                <img src="{{ $image_url }}" alt="{{ $websiteName }}">
                            </a>

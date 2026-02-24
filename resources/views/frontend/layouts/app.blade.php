@@ -3,15 +3,15 @@
 
 <head>
     @php
-        $websiteName = $settings['site_title'] ?? null;
-        $headerLogo = $settings['header_logo'] ?? null;
+    $websiteName = $settings['site_title'] ?? null;
+    $headerLogo = $settings['header_logo'] ?? null;
     @endphp
     @include('frontend.partials.meta', [
-        'payload' => $payload,
-        'payloadMeta' => $payloadMeta,
-        'title' => $title,
-        'websiteName' => $websiteName,
-        'headerLogo' => $headerLogo,
+    'payload' => $payload,
+    'payloadMeta' => $payloadMeta,
+    'title' => $title,
+    'websiteName' => $websiteName,
+    'headerLogo' => $headerLogo,
     ])
     @include('frontend.partials.css')
 
@@ -26,9 +26,9 @@
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6652e88ffef97000199a5d0f&product=sop' async='async'></script> --}}
 
     @if ($additionalCSS = $settings['additional_CSS'] ?? null)
-        <style>
-            {{ $additionalCSS }}
-        </style>
+    <style>
+    {{ $additionalCSS }}
+    </style>
     @endif
 </head>
 
