@@ -119,51 +119,92 @@
                         </div>
                     @endif
 
+                    @php
+                        $contactDetails = unserialize($metaData['contact_details']);
+                    @endphp
+
                     <div class="col-lg-6">
                         <div class="contact-box-items">
                             <h2 class="text-anim">Send Us A Message.</h2>
-                            <form action="contact.php" id="contact-form" class="contact-form-box">
+
+                            @if (session('error'))
+                                <div class="text-danger text-center mt-4">{{ session('error') }}</div>
+                            @endif
+
+                            @if (session('success'))
+                                <div class="text-success text-center mt-4">{{ session('success') }}</div>
+                            @endif
+                            <form action="{{ route('contact.form') }}" method="POST" class="contact-form-box">
+                                @csrf
+                                @method('PUT')
                                 <div class="row g-4 align-items-center">
                                     <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                                         <div class="form-clt">
-                                            <input type="text" placeholder="Full name *">
-                                        </div>
+                                            <input type="text" name="name" placeholder="Full name *" value="{{ old('name') }}">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                     
+                                       </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                                        <div class="form-clt">
-                                            <input type="text" placeholder="Email address *">
+                                        <div class="form-clt email-input">
+                                            <input type="email" name="email" placeholder="Email address *" value="{{ old('email') }}">
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                                         <div class="form-clt">
-                                            <input type="text" placeholder="Phone number *">
+                                            <input type="text" name="phone" placeholder="Phone number *" value="{{ old('phone') }}">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                                        <div class="form-clt">
-                                            <div class="form">
-                                                <select class="single-select w-100">
-                                                    <option>Chose a option</option>
-                                                    <option>Digital Marketing</option>
-                                                    <option>Software & IT Service</option>
-                                                    <option>Finance & Investment</option>
-                                                </select>
+
+
+                                    @if (!empty($contactDetails))
+                                        <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                                            <div class="form-clt">
+                                                <div class="form">
+                                                    <select name="option" class="single-select w-100">
+                                                        <option>Chose a option</option>
+
+                                                        @foreach ($contactDetails as $contactDetail)
+                                                            <option value="{{ $contactDetail['title'] }}">
+                                                                {{ $contactDetail['title'] }}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    @error('option')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
+
+
                                     <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
                                         <div class="form-clt">
-                                            <textarea name="message" placeholder="Type your message"></textarea>
+                                            <textarea name="message" placeholder="Type your message" rows="5">{{ old('message') }}</textarea>
+                                            @error('message')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12 wow fadeInUp" data-wow-delay=".5s">
 
-                                        <a class="gt-theme-btn-main style-5 mt-5" href="about.html">
+                                        <button class="gt-theme-btn-main style-5 mt-5" type="submit">
                                             <span class="gt-theme-btn">Send now</span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
+
+
                         </div>
                     </div>
                 </div>

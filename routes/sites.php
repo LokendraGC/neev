@@ -6,6 +6,8 @@ use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\StoryController;
 use App\Http\Controllers\Frontend\CompanyController;
 use App\Http\Controllers\Frontend\SectorController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\SubscribeFormController;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 
@@ -21,3 +23,9 @@ Route::get('company/{slug}', [CompanyController::class, 'index'])->name('fronten
 
 // category route
 Route::get('sector/{slug}', [SectorController::class, 'index'])->name('frontend.category.sector.index');
+
+// contact from route
+Route::match(['put', 'post'], 'contact-form', [ContactController::class, 'index'])->name('contact.form');
+
+// subscribe form route
+Route::match(['put', 'post'], 'subscribe-form', [SubscribeFormController::class, 'index'])->name('subscribe.form');

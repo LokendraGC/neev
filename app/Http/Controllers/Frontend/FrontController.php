@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Setting;
 use App\Http\Controllers\Controller;
 
+
 class FrontController extends Controller
 {
     public function index()
@@ -17,7 +18,7 @@ class FrontController extends Controller
         $post = Post::findOrFail($pageId);
 
         // if exists take meta data of that id
-        $postMeta = $post->GetAllMetaData();
+        $postMeta = $post->GetAllMetaData();    
 
 
         // $karnalicat = Category::findOrFail(17);

@@ -177,8 +177,22 @@
                                      </p>
                                      <div class="cta-newsletter-wrapper">
                                          <div class="newsletter-form ">
-                                             <form action="#">
-                                                 <input type="text" placeholder="Enter your email...">
+                                             @if (session('error'))
+                                                 <div class="text-danger text-center mt-4">{{ session('error') }}</div>
+                                             @endif
+
+                                             @if (session('success'))
+                                                 <div class="text-success text-center mt-4">{{ session('success') }}
+                                                 </div>
+                                             @endif
+                                             <form action="{{ route('subscribe.form') }}" method="POST"
+                                                 class="contact-form-box">
+                                                 @csrf
+                                                 @method('PUT')
+                                                 <input type="email" name="email" placeholder="Enter your email..." value="{{ old('email') }}">
+                                                 @error('email')
+                                                     <span class="text-danger">{{ $message }}</span>
+                                                 @enderror
                                                  <button class="email-btn" type="submit">
                                                      <i class="fa-solid fa-envelope"></i>
                                                  </button>
@@ -218,23 +232,29 @@
 
                          @php
                              $privacy_policy = 24;
-                             $privacy_policy_page = !empty($privacy_policy) ? PostHelper::getModel()->find($privacy_policy) : null;
+                             $privacy_policy_page = !empty($privacy_policy)
+                                 ? PostHelper::getModel()->find($privacy_policy)
+                                 : null;
 
                              $terms_and_conditions = 25;
-                             $terms_and_conditions_page = !empty($terms_and_conditions) ? PostHelper::getModel()->find($terms_and_conditions) : null;
+                             $terms_and_conditions_page = !empty($terms_and_conditions)
+                                 ? PostHelper::getModel()->find($terms_and_conditions)
+                                 : null;
                          @endphp
 
                          <ul class="footer-list wow fadeInUp" data-wow-delay=".7s">
 
                              @if (!empty($privacy_policy_page))
                                  <li>
-                                     <a href="{{ route('frontend.post.index', $privacy_policy_page->slug) }}">{{ $privacy_policy_page->post_title }}</a>
+                                     <a
+                                         href="{{ route('frontend.post.index', $privacy_policy_page->slug) }}">{{ $privacy_policy_page->post_title }}</a>
                                  </li>
                              @endif
 
                              @if (!empty($terms_and_conditions_page))
                                  <li>
-                                     <a href="{{ route('frontend.post.index', $terms_and_conditions_page->slug) }}">{{ $terms_and_conditions_page->post_title }}</a>
+                                     <a
+                                         href="{{ route('frontend.post.index', $terms_and_conditions_page->slug) }}">{{ $terms_and_conditions_page->post_title }}</a>
                                  </li>
                              @endif
                          </ul>

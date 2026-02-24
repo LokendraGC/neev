@@ -13156,3 +13156,7 @@ button.mfp-close { z-index: 10000004 !important; }
   height: 100%;
   object-fit: cover;
 }
+
+input[type="email"] {
+  text-transform: lowercase !important;
+}

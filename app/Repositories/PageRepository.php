@@ -14,6 +14,7 @@ use App\Repositories\AboutRepository;
 use App\Repositories\DownloadRepository;
 use App\Repositories\InvestorsRepository;
 use App\Repositories\SustainabilityRepository;
+use App\Repositories\ContactRepository;
 
 class PageRepository
 {
@@ -26,14 +27,14 @@ class PageRepository
     public function __construct(
         HomeRepository $homeRepository,
         TeamRepository $teamRepository,
-        StoryRepository
-        $storyRepository,
+        StoryRepository $storyRepository,
         CompanyRepository $companyRepository,
         AboutRepository $aboutRepository,
         MediaRepository $mediaRepository,
         DownloadRepository $downloadRepository,
         InvestorsRepository $investorsRepository,
-        SustainabilityRepository $sustainabilityRepository
+        SustainabilityRepository $sustainabilityRepository,
+        ContactRepository $contactRepository
     ) {
         $this->homeRepository = $homeRepository;
         $this->teamRepository = $teamRepository;
@@ -44,6 +45,7 @@ class PageRepository
         $this->downloadRepository = $downloadRepository;
         $this->investorsRepository = $investorsRepository;
         $this->sustainabilityRepository = $sustainabilityRepository;
+        $this->contactRepository = $contactRepository;
     }
 
     // insert or update meta data
