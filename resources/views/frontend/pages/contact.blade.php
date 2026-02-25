@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app', ['payload' => $post, 'payloadMeta' => $metaData, 'title' => $post->post_title])
 
+
+
 @section('main-section')
     @include('frontend.partials.breadcrumb-section', [
         'title' => $post->post_title,

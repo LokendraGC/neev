@@ -27,13 +27,32 @@ class FrontMenuRepository
             ];
         }
 
+
+        if ( $type == 'sector') {
+
+            $menuItem = CategoryHelper::getModel()
+            ->where(['id' => $meta['menu_item_object_id'], 'type' => 'sector'])
+            ->first();
+            $menuTitle = $menu->post_title;
+            $menuLink = '/' . $meta['menu_item_object'] . '/' . $menuItem->slug . '/';
+            $menuCSS = isset($meta['menu_item_classes']) ? $meta['menu_item_classes'] : '';
+            $menuTarget = isset($meta['menu_item_target']) ? $meta['menu_item_target'] : '_self';
+
+            return [
+                'title' => $menuTitle,
+                'link' => $menuLink,
+                'css' => $menuCSS,
+                'target' => $menuTarget,
+            ];
+        }
+
         if ( $type == 'page' ) {
 
             $menuItem = PostHelper::getModel()
             ->where(['id' => $meta['menu_item_object_id'], 'post_type' => 'page'])
             ->first();
             $menuTitle = $menu->post_title;
-            $menuLink = route($meta['menu_item_route'], $menuItem->slug);
+            $menuLink = '/' . $menuItem->slug . '/';
             $menuCSS = isset($meta['menu_item_classes']) ? $meta['menu_item_classes'] : '';
             $menuTarget = isset($meta['menu_item_target']) ? $meta['menu_item_target'] : '_self';
 

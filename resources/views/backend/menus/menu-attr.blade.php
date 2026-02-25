@@ -16,7 +16,7 @@
             {{ $item->post_title }}
         </div>
         <div class="menu_item_options">
-            {{ ucfirst($item_meta['menu_item_type_name']) }}
+            {{ isset($item_meta['menu_item_type_name']) ? ucfirst($item_meta['menu_item_type_name']) : '' }}
             <span>
                 <a class="" data-bs-toggle="collapse" href="#multiCollapseExample{{ $item->id }}" role="button"
                     aria-expanded="false" aria-controls="multiCollapseExample{{ $item->id }}"><i

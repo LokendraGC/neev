@@ -214,45 +214,9 @@
                        <div class="mean__menu-wrapper">
                            <div class="main-menu">
                                <nav id="mobile-menu">
-                                   <ul>
-
-                                       <li>
-                                           <a href="about.html">Our Story</a>
-                                           <ul class="submenu">
-                                               <li><a href="about.html#about-us">About Us</a></li>
-                                               <li><a href="about.html#vision-values">Vision & Values</a></li>
-                                               <li><a href="about.html#leadership">Leadership</a></li>
-                                               <li><a href="about.html#our-location">Our Locations</a></li>
-                                           </ul>
-                                       </li>
-                                       <li>
-                                           <a href="service.html">
-                                               Business
-
-                                           </a>
-                                           <ul class="submenu">
-                                               <li><a href="service-detail.html">Hospitality & Tourism</a></li>
-                                               <li><a href="service.html">Agro Industry</a></li>
-                                               <li><a href="service.html"> Solar Energy</a></li>
-                                           </ul>
-                                       </li>
-                                       <li>
-                                           <a href="media.html">Media</a>
-                                           <ul class="submenu">
-                                               <li><a href="media.html#media-coverage">Media Reports</a></li>
-                                               <li><a href="media.html#press-release">Press Release</a></li>
-                                               <li><a href="download.html">Download</a></li>
-                                           </ul>
-                                       </li>
-                                       <li>
-                                           <a href="investors.html">Investors</a>
-
-                                       </li>
-                                       <li>
-                                           <a href="sustainability.html">Sustainability</a>
-
-                                       </li>
-                                   </ul>
+                                 
+                                  @include('frontend.layouts.main-menu')
+                                
                                </nav>
                            </div>
                            <a href="#" class="main-header__search search-toggler d-none d-xxl-block">
@@ -279,12 +243,14 @@
        <div class="search-popup">
            <div class="search-popup__overlay search-toggler"></div>
            <div class="search-popup__content">
-               <form role="search" method="get" class="search-popup__form" action="#">
-                   <input type="text" id="search" name="search" placeholder="Search Here...">
+              
+               <form role="search" method="get" class="search-popup__form" action="{{ route('frontend.search') }}">
+                   <input type="text" id="search" name="search" placeholder="Search Here..." value="{{ request()->input('search') }}">
                    <button type="submit" aria-label="search submit" class="search-btn">
                        <span><i class="fa-regular fa-magnifying-glass"></i></span>
                    </button>
                </form>
+
            </div>
        </div>
 

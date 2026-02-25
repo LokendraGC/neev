@@ -36,6 +36,8 @@ class TemplateType
 
     const THANK_YOU = 'thank-you';
 
+    const SEARCH = 'search';
+
     public static function toArray()
     {
         return [
@@ -55,6 +57,7 @@ class TemplateType
             self::POLICY,
             self::TERMS,
             self::THANK_YOU,
+            self::SEARCH,
         ];
     }
 
@@ -79,6 +82,7 @@ class TemplateType
         $keyValuePairs['Policy'] = self::POLICY;
         $keyValuePairs['Terms'] = self::TERMS;
         $keyValuePairs['Thank You'] = self::THANK_YOU;
+        $keyValuePairs['Search'] = self::SEARCH;
 
 
 

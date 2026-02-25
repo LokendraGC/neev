@@ -12,10 +12,6 @@ use App\Http\Controllers\Frontend\SubscribeFormController;
 Route::get('/', [FrontController::class, 'index'])->name('home');
 
 
-// for all dynamic post and pages
-Route::match(['get', 'post'], '{slug}', [PostController::class, 'index'])->name('frontend.post.index');
-
-
 // for all dynamic story
 Route::get('story/{slug}', [StoryController::class, 'index'])->name('frontend.story.index');
 Route::get('company/{slug}', [CompanyController::class, 'index'])->name('frontend.company.index');
@@ -29,3 +25,9 @@ Route::match(['put', 'post'], 'contact-form', [ContactController::class, 'index'
 
 // subscribe form route
 Route::match(['put', 'post'], 'subscribe-form', [SubscribeFormController::class, 'index'])->name('subscribe.form');
+
+// search route
+Route::match(['get', 'post'], 'search', [PostController::class, 'search'])->name('frontend.search');
+
+// for all dynamic post and pages
+Route::match(['get', 'post'], '{slug}', [PostController::class, 'index'])->name('frontend.post.index');

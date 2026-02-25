@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use App\Helpers\CategoryHelper;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -170,5 +171,67 @@ class PostController extends Controller
         }
 
         abort(403, 'Not Found');
+    }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        $type = $request->input('type'); // optional: 'company', 'story', 'post'
+        $sectorId = $request->input('sector'); // optional: category id
+
+        // Get sector category info (optional)
+        $sector_cat = Category::where('type', 'sector')->first();
+        $sector_catMeta = $sector_cat ? $this->categoryRepository->getMetaDatas($sector_cat) : null;
+
+        // Build query
+        $postsQuery = Post::query()
+            ->where('post_status', 'publish');
+
+        // Filter by type if provided
+        if ($type) {
+            $postsQuery->where('post_type', $type);
+        } else {
+            // If no type, include all 3 types
+            $postsQuery->whereIn('post_type', ['company', 'story', 'post']);
+        }
+
+        // Search in title, slug, or content
+        if ($query) {
+            $postsQuery->where(function ($q) use ($query) {
+                $q->where('post_title', 'like', '%' . $query . '%')
+                    ->orWhere('slug', 'like', '%' . $query . '%')
+                    ->orWhere('post_content', 'like', '%' . $query . '%');
+            });
+        }
+
+        // Filter by sector category if provided
+        if ($sectorId) {
+            $postsQuery->whereHas('categories', function ($q) use ($sectorId) {
+                $q->where('categories.id', $sectorId);
+            });
+        }
+
+        // Get results
+        $posts = $postsQuery->latest()->get();
+
+        // Prepare layout variables
+        $payload = $posts->first() ?? new Post();
+        $payloadMeta = [
+            'seo_title' => $query ? "Search results for: " . $query : "Search Results",
+            'seo_description' => "Search results for " . $query . " on Neev.",
+        ];
+
+        return view('frontend.pages.search', [
+            'posts' => $posts,
+            'sector_cat' => $sector_cat,
+            'sector_catMeta' => $sector_catMeta,
+            'query' => $query,
+            'type' => $type,
+            'sectorId' => $sectorId,
+            'payload' => $payload,
+            'payloadMeta' => $payloadMeta,
+            'title' => $payloadMeta['seo_title']
+        ]);
     }
 }

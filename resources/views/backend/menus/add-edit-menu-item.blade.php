@@ -391,177 +391,23 @@
                                         </form>
                                     @endif
                                     {{-- end pages --}}
-
-                                    {{-- categories --}}
-                                    @if ($categories)
+                               
+                                    {{-- sector category --}}
+                                    @if ($sector_categories)
                                         <form action="{{ route('backend.menu.update_edit_menu_item', $menu->id) }}"
                                             method="POST" class="mt-2">
                                             @csrf
                                             <div class="accordion-item">
-                                                <h2 class="accordion-header" id="categories">
+                                                <h2 class="accordion-header" id="sectorCats">
                                                     <button class="accordion-button fw-medium collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#category"
-                                                        aria-expanded="false" aria-controls="category">
-                                                        Categories
+                                                        data-bs-toggle="collapse" data-bs-target="#sectorCat"
+                                                        aria-expanded="false" aria-controls="sectorCat">
+                                                        Sector Categories
                                                     </button>
                                                 </h2>
-                                                @foreach ($categories as $category)
-                                                    <div id="category" class="accordion-collapse collapse"
-                                                        aria-labelledby="categories" data-bs-parent="#accordionExample">
-                                                        <div class="accordion-body px-2 pt-2 pb-1">
-                                                            <div class="">
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                        id="post{{ $category->id }}"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_object_id]"
-                                                                        value="{{ $category->id }}" />
-                                                                    <label class="form-check-label"
-                                                                        for="post{{ $category->id }}">{{ $category->name }}</label>
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_type]"
-                                                                        value="category">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_object]"
-                                                                        value="category">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_title]"
-                                                                        value="{{ $category->name }}">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_parent_id]"
-                                                                        value="0">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_attr_title]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_classes]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_target]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_url]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_route]"
-                                                                        value="frontend.category.index">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_type_name]"
-                                                                        value="Category">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @php
-                                                        $menuItemCount++;
-                                                    @endphp
-                                                @endforeach
-                                                <div id="category" class="accordion-collapse collapse"
-                                                    aria-labelledby="categories" data-bs-parent="#accordionExample">
-                                                    <hr class="m-0">
-                                                    <div class="add-to-menu-btn text-end p-1">
-                                                        <button type="submit" class="btn btn-soft-primary">Add to
-                                                            Menu</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                    @endif
-                                    {{-- end categories --}}
-
-                                    {{-- wiki category --}}
-                                    @if ($wikiCats)
-                                        <form action="{{ route('backend.menu.update_edit_menu_item', $menu->id) }}"
-                                            method="POST" class="mt-2">
-                                            @csrf
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="wikiCats">
-                                                    <button class="accordion-button fw-medium collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#wikiCat"
-                                                        aria-expanded="false" aria-controls="wikiCat">
-                                                        Wiki Categories
-                                                    </button>
-                                                </h2>
-                                                @foreach ($wikiCats as $category)
-                                                    <div id="wikiCat" class="accordion-collapse collapse"
-                                                        aria-labelledby="wikiCats" data-bs-parent="#accordionExample">
-                                                        <div class="accordion-body px-2 pt-2 pb-1">
-                                                            <div class="">
-                                                                <div class="form-check">
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                        id="post{{ $category->id }}"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_object_id]"
-                                                                        value="{{ $category->id }}" />
-                                                                    <label class="form-check-label"
-                                                                        for="post{{ $category->id }}">{{ $category->name }}</label>
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_type]"
-                                                                        value="category">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_object]"
-                                                                        value="wiki-category">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_title]"
-                                                                        value="{{ $category->name }}">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_parent_id]"
-                                                                        value="0">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_attr_title]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_classes]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_target]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_url]"
-                                                                        value="">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_route]"
-                                                                        value="frontend.category.index">
-                                                                    <input type="hidden"
-                                                                        name="menu_item[{{ $menuItemCount }}][menu_item_type_name]"
-                                                                        value="Wiki Category">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @php
-                                                        $menuItemCount++;
-                                                    @endphp
-                                                @endforeach
-                                                <div id="wikiCat" class="accordion-collapse collapse"
-                                                    aria-labelledby="wikiCats" data-bs-parent="#accordionExample">
-                                                    <hr class="m-0">
-                                                    <div class="add-to-menu-btn text-end p-1">
-                                                        <button type="submit" class="btn btn-soft-primary">Add to
-                                                            Menu</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                    @endif
-                                    {{-- end wiki category --}}
-
-                                    {{-- webstories category --}}
-                                    @if ($webstoriesCats)
-                                        <form action="{{ route('backend.menu.update_edit_menu_item', $menu->id) }}"
-                                            method="POST" class="mt-2">
-                                            @csrf
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="webstoriesCats">
-                                                    <button class="accordion-button fw-medium collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#webstoriesCat"
-                                                        aria-expanded="false" aria-controls="webstoriesCat">
-                                                        Web Stories Categories
-                                                    </button>
-                                                </h2>
-                                                @foreach ($webstoriesCats as $category)
-                                                    <div id="webstoriesCat" class="accordion-collapse collapse"
-                                                        aria-labelledby="webstoriesCats"
+                                                @foreach ($sector_categories as $category)
+                                                    <div id="sectorCat" class="accordion-collapse collapse"
+                                                        aria-labelledby="sectorCats"
                                                         data-bs-parent="#accordionExample">
                                                         <div class="accordion-body px-2 pt-2 pb-1">
                                                             <div class="">
@@ -577,7 +423,7 @@
                                                                         value="category">
                                                                     <input type="hidden"
                                                                         name="menu_item[{{ $menuItemCount }}][menu_item_object]"
-                                                                        value="web-stories-category">
+                                                                        value="sector">
                                                                     <input type="hidden"
                                                                         name="menu_item[{{ $menuItemCount }}][menu_item_title]"
                                                                         value="{{ $category->name }}">
@@ -598,10 +444,10 @@
                                                                         value="">
                                                                     <input type="hidden"
                                                                         name="menu_item[{{ $menuItemCount }}][menu_item_route]"
-                                                                        value="frontend.category.index">
+                                                                        value="frontend.category.sector.index">
                                                                     <input type="hidden"
                                                                         name="menu_item[{{ $menuItemCount }}][menu_item_type_name]"
-                                                                        value="Web Stories Category">
+                                                                        value="Sector Category">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -610,8 +456,8 @@
                                                         $menuItemCount++;
                                                     @endphp
                                                 @endforeach
-                                                <div id="webstoriesCat" class="accordion-collapse collapse"
-                                                    aria-labelledby="webstoriesCats" data-bs-parent="#accordionExample">
+                                                <div id="sectorCat" class="accordion-collapse collapse"
+                                                        aria-labelledby="sectorCats" data-bs-parent="#accordionExample">
                                                     <hr class="m-0">
                                                     <div class="add-to-menu-btn text-end p-1">
                                                         <button type="submit" class="btn btn-soft-primary">Add to
@@ -622,7 +468,7 @@
                                             </div>
                                         </form>
                                     @endif
-                                    {{-- end webstories category --}}
+                                    {{-- end sector category --}}
 
                                     {{-- custom links --}}
                                     <form action="{{ route('backend.menu.update_edit_menu_item', $menu->id) }}"
@@ -723,12 +569,12 @@
 @endsection
 
 @section('script')
-    {{-- @vite(['resources/js/pages/demo.form-advanced.js']) --}}
+   @vite(['resources/js/pages/demo.form-advanced.js'])
 @endsection
 @push('backend-js')
     <script defer src="{{ asset('jquery.nestable.js') }}"></script>
     <script>
-        $(document).ready(function() {
+         $(document).ready(function() {
             var updateOutput = function(e) {
                 // Check if the event target is the .dd element
                 if ($(e.target).hasClass('dd')) {
@@ -745,7 +591,7 @@
                         success: function(response) {
                             toastr.success('Menu Updated', {
                                 progressBar: true,
-                                positionClass: 'toast-top-right',
+                                positionClass: 'toast-bottom-right',
                                 closeButton: true,
                                 toastClass: 'mt-5',
                             });
@@ -756,9 +602,10 @@
                     });
                 }
             };
+
             $('.dd').nestable({
                     'serialize': true,
-                    'maxDepth': @json($depth),
+                    'maxDepth': 3,
                     'includeContent': true
                 })
                 .on('change', updateOutput);
@@ -773,7 +620,7 @@
             var confirmation = confirm("Are you sure you want to remove this menu item?");
             if (confirmation) {
                 var baseUrl = "{{ url('/') }}/";
-                var URL = baseUrl + 'admin/menu/' + menu_id + '/delete/' + item_id;
+               var URL = baseUrl + 'backend/menu/' + menu_id + '/delete/' + item_id;
                 console.log(URL);
                 $.ajax({
                     type: "POST",

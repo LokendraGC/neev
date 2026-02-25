@@ -1,5 +1,6 @@
    @php
 
+
        $common_banner = SettingHelper::get_field('banner_background_image');
 
        $media = MediaHelper::getImageById($common_banner);
@@ -11,10 +12,11 @@
        }
 
        if (!empty($metaData) && !empty($metaData->file_name)) {
-           $image_url = 'storage/' . $metaData->file_name;
+           $image_url = asset('storage/' . $metaData->file_name);
        } else {
            $image_url = $banner_url;
        }
+
    @endphp
 
 

@@ -57,7 +57,7 @@
                 </a>
             </li>
 
-            {{-- @can(['read_menu'])
+            
                 <li class="side-nav-item {{ request()->segment(2) === 'menu' ? 'menuitem-active' : '' }}">
                     <a data-bs-toggle="collapse" href="#menus" aria-expanded="false" aria-controls="menus"
                         class="side-nav-link">
@@ -78,7 +78,7 @@
                         </ul>
                     </div>
                 </li>
-            @endcan --}}
+          
 
             @can(['read_site_settings', 'update_site_settings'])
                 <li class="side-nav-item">
