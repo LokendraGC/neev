@@ -76,9 +76,14 @@ class TeamController extends Controller
         $categories = Category::where('type', $this->categoryType)->get();
 
 
+        $teamCategories = Category::where('type', 'team_category')->orderBy('name', 'ASC')->get();
+
+
+
         return view('backend.team.create-team', [
             'type' => $type,
             'categories' => $categories,
+            'teamCategories' => $teamCategories,
         ]);
     }
 

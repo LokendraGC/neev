@@ -62,4 +62,15 @@ class Category extends Model
     {
         return $this->categoryMeta->pluck('meta_value', 'meta_key')->toArray();
     }
+
+
+    public function teams()
+{
+    return $this->belongsToMany(Post::class)
+                ->where('post_type', 'team')
+                ->where('post_status', 'publish')
+                ->orderBy('menu_order', 'asc');
+}
+
+
 }

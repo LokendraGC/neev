@@ -153,7 +153,7 @@
         <section class="news-section section-padding">
             <div class="container">
 
-              <h3 class="download-card-title">Stories</h3>
+              <h2 class="section-title">Stories</h2>
 
 
                 <div class="row g-4">
@@ -162,9 +162,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                             <div class="news-box-items mt-0">
 
-
                                 @php
-
                                     $story_meta = $story->GetAllMetaData();
 
                                     $media = MediaHelper::getImageById($story_meta['featured_image']);

@@ -22,11 +22,19 @@ class FrontController extends Controller
             ->latest()
             ->get();
 
+        $page_id = 4;
+
+        $media_page = Post::query()->where('id', $page_id)->where('post_status', 'publish')->first();
+
+        $media_page_meta = $media_page->GetAllMetaData();
+
 
         return view('frontend.front', [
             'post' => $post,
             'postMeta' => $postMeta,
             'pages' => $pages,
+            'media_page' => $media_page,
+            'media_page_meta' => $media_page_meta,
         ]);
     }
 }

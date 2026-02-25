@@ -74,6 +74,12 @@
                     {{-- feature image --}}
                     <x-backend.post.featured-image />
 
+
+                    {{-- team categories --}}
+                  
+                    <x-backend.post.category title="Team Categories" name="team_categories[]" type="multiple"
+                        :categories="$teamCategories" />
+
                 </div>
             </div>
         </form>

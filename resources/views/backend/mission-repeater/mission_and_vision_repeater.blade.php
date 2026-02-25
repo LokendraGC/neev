@@ -16,7 +16,11 @@
     $(document).on('click', '.add_more_slider', function() {
         let clickedRow = $(this).closest('tr');
         let row = addSliderRow();
-        clickedRow.after(row);
+        if (clickedRow.length) {
+            clickedRow.after(row);
+        } else {
+            $('.addMoreSlider').append(row);
+        }
         updateSerialNumbersSlider();
         updateOrderFields();
         updateRowIndices();
@@ -67,26 +71,27 @@
         let tr = `
         <tr>
             <td class="custom-table-no no">${numberOfRow + 1}</td>
+        
+          
             <td>
+                <input type="text" class="form-control" name="mission_and_vision_details[${numberOfRow}][title]" value="" />
+            </td>
+            <td>
+                <textarea class="editor" id="content" name="mission_and_vision_details[${numberOfRow}][description]"></textarea>
+            </td>
+                <td>
                 <div class="media-input image-input">
-                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="movement_details${numberOfRow}_image" data-select="single">
+                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details${numberOfRow}_image" data-select="single">
                         <div class="input-group-prepend">
                             <div class="input-group-text bg-soft-secondary font-weight-medium">Browse</div>
                         </div>
                         <div class="form-control file-amount">Choose File</div>
                     </div>
                     <div class="preview-closer">
-                        <input type="hidden" id="movement_details${numberOfRow}_image" name="movement_details[${numberOfRow}][image]" class="selected-files" value="" />
-                        <div id="movement_details${numberOfRow}_image_select"></div>
+                        <input type="hidden" id="mission_and_vision_details${numberOfRow}_image" name="mission_and_vision_details[${numberOfRow}][image]" class="selected-files" value="" />
+                        <div id="mission_and_vision_details${numberOfRow}_image_select"></div>
                     </div>
                 </div>
-            </td>
-          
-            <td>
-                <input type="text" class="form-control" name="movement_details[${numberOfRow}][title]" value="" />
-            </td>
-            <td>
-                <textarea class="editor" id="movement_details_${numberOfRow}_short_description" name="movement_details[${numberOfRow}][short_description]"></textarea>
             </td>
             <td class="text-center">
                 <a href="javascript:void(0);" class="text-success fs-16 px-1 add_more_slider">
@@ -130,22 +135,22 @@
                 let $element = $(this);
                 let currentName = $element.attr('name');
 
-                if (currentName && currentName.includes('movement_details[')) {
-                    let newName = currentName.replace(/movement_details\[\d+\]/,
-                        `movement_details[${index}]`);
+                if (currentName && currentName.includes('mission_and_vision_details[')) {
+                    let newName = currentName.replace(/mission_and_vision_details\[\d+\]/,
+                        `mission_and_vision_details[${index}]`);
                     $element.attr('name', newName);
                 }
 
                 // Update IDs for image fields
                 let currentId = $element.attr('id');
-                if (currentId && currentId.includes('movement_details')) {
+                if (currentId && currentId.includes('mission_and_vision_details')) {
                     if (currentId.includes('_image')) {
-                        let newId = currentId.replace(/movement_details\d+_image/,
-                            `movement_details${index}_image`);
+                        let newId = currentId.replace(/mission_and_vision_details\d+_image/,
+                            `mission_and_vision_details${index}_image`);
                         $element.attr('id', newId);
-                    } else if (currentId.includes('_short_description')) {
-                        let newId = currentId.replace(/movement_details_\d+_short_description/,
-                            `movement_details_${index}_short_description`);
+                    } else if (currentId.includes('_description')) {
+                        let newId = currentId.replace(/mission_and_vision_details_\d+_description/,
+                            `mission_and_vision_details_${index}_description`);
                         $element.attr('id', newId);
                     }
                 }
@@ -155,20 +160,20 @@
             $row.find('.open-media-manager').each(function() {
                 let $mediaManager = $(this);
                 let currentField = $mediaManager.attr('data-field');
-                if (currentField && currentField.includes('movement_details')) {
-                    let newField = currentField.replace(/movement_details\d+_image/,
-                        `movement_details${index}_image`);
+                if (currentField && currentField.includes('mission_and_vision_details')) {
+                    let newField = currentField.replace(/mission_and_vision_details\d+_image/,
+                        `mission_and_vision_details${index}_image`);
                     $mediaManager.attr('data-field', newField);
                 }
             });
 
             // Update div IDs for image select
-            $row.find('div[id*="movement_details"][id*="_image_select"]').each(function() {
+            $row.find('div[id*="mission_and_vision_details"][id*="_image_select"]').each(function() {
                 let $div = $(this);
                 let currentId = $div.attr('id');
                 if (currentId) {
-                    let newId = currentId.replace(/movement_details\d+_image_select/,
-                        `movement_details${index}_image_select`);
+                    let newId = currentId.replace(/mission_and_vision_details\d+_image_select/,
+                        `mission_and_vision_details${index}_image_select`);
                     $div.attr('id', newId);
                 }
             });
@@ -177,21 +182,21 @@
             $row.find('.remove-attachment').each(function() {
                 let $button = $(this);
                 let currentSlug = $button.attr('data-slug');
-                if (currentSlug && currentSlug.includes('movement_details')) {
-                    let newSlug = currentSlug.replace(/movement_details\d+_image/,
-                        `movement_details${index}_image`);
+                if (currentSlug && currentSlug.includes('mission_and_vision_details')) {
+                    let newSlug = currentSlug.replace(/mission_and_vision_details\d+_image/,
+                        `mission_and_vision_details${index}_image`);
                     $button.attr('data-slug', newSlug);
                 }
             });
 
             // Update select2 dropdowns for page selection
-            $row.find('select[name*="movement_details"][name*="[page]"]').each(function() {
+            $row.find('select[name*="mission_and_vision_details"][name*="[page]"]').each(function() {
                 let $select = $(this);
                 let currentName = $select.attr('name');
-                if (currentName && currentName.includes('movement_details[') && currentName.includes(
+                if (currentName && currentName.includes('mission_and_vision_details[') && currentName.includes(
                         '[page]')) {
-                    let newName = currentName.replace(/movement_details\[\d+\]/,
-                        `movement_details[${index}]`);
+                    let newName = currentName.replace(/mission_and_vision_details\[\d+\]/,
+                        `mission_and_vision_details[${index}]`);
                     $select.attr('name', newName);
                     // Reinitialize select2 if it was initialized
                     if ($select.hasClass('select2-hidden-accessible')) {
