@@ -73,18 +73,69 @@ class PostController extends Controller
             $all_teams = Post::where('post_type', 'team')->where('post_status', 'publish')->get();
 
             $bods = $all_teams->filter(function ($team) use ($bod_cat) {
-                if (!$bod_cat) return false;
+                if (!$bod_cat)
+                    return false;
                 $meta = $team->GetAllMetaData();
                 $cats = isset($meta['team_categories']) ? unserialize($meta['team_categories']) : [];
                 return is_array($cats) && in_array($bod_cat->id, $cats);
             });
 
             $management_teams = $all_teams->filter(function ($team) use ($management_cat) {
-                if (!$management_cat) return false;
+                if (!$management_cat)
+                    return false;
                 $meta = $team->GetAllMetaData();
                 $cats = isset($meta['team_categories']) ? unserialize($meta['team_categories']) : [];
                 return is_array($cats) && in_array($management_cat->id, $cats);
             });
+
+            $companies = Post::where('post_type', 'company')->where('post_status', 'publish')->get();
+            $sectors = Category::where('type', 'sector')->get();
+
+            // Media Page Data
+            $mediasQuery = Post::where('post_type', 'media')->where('post_status', 'publish')->latest();
+
+            // Extract Years from all published media before filtering
+            $all_medias = (clone $mediasQuery)->get();
+            $media_years = $all_medias->map(function ($media) {
+                $meta = $media->GetAllMetaData();
+                return $meta['year'] ?? \Carbon\Carbon::parse($media->created_at)->format('Y');
+            })->filter()->unique()->sortDesc();
+
+            // Apply Filters if template is media
+            if (isset($metaDatas['page_template']) && $metaDatas['page_template'] === 'media') {
+                $medias = $all_medias->filter(function ($media) {
+                    $meta = $media->GetAllMetaData();
+                    $match = true;
+
+                    if (request('sector')) {
+                        $sector_cats = isset($meta['sector_categories']) ? unserialize($meta['sector_categories']) : [];
+                        $sector_cats = is_array($sector_cats) ? $sector_cats : [];
+                        if (!in_array(request('sector'), $sector_cats)) {
+                            $match = false;
+                        }
+                    }
+
+                    if (request('company')) {
+                        if (($meta['choose_company'] ?? null) != request('company')) {
+                            $match = false;
+                        }
+                    }
+
+                    if (request('year')) {
+                        $year = $meta['year'] ?? \Carbon\Carbon::parse($media->created_at)->format('Y');
+                        if ($year != request('year')) {
+                            $match = false;
+                        }
+                    }
+
+                    return $match;
+                });
+
+                $stories = Post::where('post_type', 'story')->where('post_status', 'publish')->latest()->get();
+            } else {
+                $medias = collect();
+                $stories = collect();
+            }
 
             $viewName = $this->getViewName($post, $metaDatas);
             if ($viewName) {
@@ -96,6 +147,12 @@ class PostController extends Controller
                     'board_of_directors' => $bods,
                     'management_cat' => $management_cat,
                     'management_teams' => $management_teams,
+                    'companies' => $companies,
+                    'sectors' => $sectors,
+                    'medias' => $medias,
+                    'stories' => $stories,
+                    'media_years' => $media_years,
+                    'total_medias_count' => $all_medias->count(),
                 ]);
             }
         }

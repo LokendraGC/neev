@@ -8,18 +8,22 @@ use App\Traits\ImageFieldTrait;
 use App\Repositories\HomeRepository;
 use App\Repositories\AboutRepository;
 use Illuminate\Support\Facades\View;
+use App\Repositories\InvestorsRepository;
+use App\Repositories\DownloadRepository;
 
 class PageRepository
 {
     use ImageFieldTrait;
 
     // define template repository as per template name same as in TemplateType.php enums other wise not working
-    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository;
+    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository,$investorsRepository, $downloadRepository;
 
-    public function __construct(HomeRepository $homeRepository, AboutRepository $aboutRepository)
+    public function __construct(HomeRepository $homeRepository, AboutRepository $aboutRepository, InvestorsRepository $investorsRepository, DownloadRepository $downloadRepository)
     {
-        $this->homeRepository = $homeRepository;;
+        $this->homeRepository = $homeRepository;
         $this->aboutRepository = $aboutRepository;
+        $this->investorsRepository = $investorsRepository;
+        $this->downloadRepository = $downloadRepository;
     }
 
     // insert or update meta data
