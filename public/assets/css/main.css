@@ -13161,3 +13161,18 @@ button.mfp-close { z-index: 10000004 !important; }
 input[type="email"] {
   text-transform: lowercase !important;
 }
+
+
+.post-content-details blockquote{
+  max-width: 650px;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-style: italic;
+  line-height: 26px;
+
+
+  border-left: 4px solid var(--theme);
+    padding: 40px;
+    background-color: var(--bg);
+    border-radius: 8px;
+}

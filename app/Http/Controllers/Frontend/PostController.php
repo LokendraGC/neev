@@ -159,9 +159,13 @@ class PostController extends Controller
 
 
         if ($post->post_type === 'post') {
+
+            $related_posts = Post::where('post_type', 'post')->where('post_status', 'publish')->where('id', '!=', $post->id)->latest()->take(3)->get();
+
             return view('frontend.single-post', [
                 'post' => $post,
                 'postMeta' => $metaDatas,
+                'related_posts' => $related_posts,
             ]);
         }
 

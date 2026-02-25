@@ -1,11 +1,22 @@
  @php
+
+     $common_banner = SettingHelper::get_field('banner_background_image');
+
+     $media = MediaHelper::getImageById($common_banner);
+
+     if (!empty($media) && !empty($media->file_name)) {
+         $banner_url = asset('storage/' . $media->file_name);
+     } else {
+         $banner_url = asset('assets/img/home-1/project/bread-bg.png');
+     }
+
      $background_image = $postMeta['featured_image'];
      $media = MediaHelper::getImageById($background_image);
 
      if (!empty($media) && !empty($media->file_name)) {
          $image_url = asset('storage/' . $media->file_name);
      } else {
-         $image_url = asset('assets/img/home-1/project/bread-bg.png');
+         $image_url = $banner_url;
      }
 
  @endphp

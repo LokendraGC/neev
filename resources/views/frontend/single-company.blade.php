@@ -22,31 +22,42 @@
     @endphp
 
 
- @php
-     $background_image = $postMeta['company_banner_image'];
+    @php
 
-     $media = MediaHelper::getImageById($background_image);
+        $common_banner = SettingHelper::get_field('banner_background_image');
 
-     if (!empty($media) && !empty($media->file_name)) {
-         $image_url = asset('storage/' . $media->file_name);
-     } else {
-         $image_url = asset('assets/img/home-1/project/bread-bg.png');
-     }
+        $media = MediaHelper::getImageById($common_banner);
 
- @endphp
+        if (!empty($media) && !empty($media->file_name)) {
+            $banner_url = asset('storage/' . $media->file_name);
+        } else {
+            $banner_url = asset('assets/img/home-1/project/bread-bg.png');
+        }
+
+        $background_image = $postMeta['company_banner_image'];
+
+        $media = MediaHelper::getImageById($background_image);
+
+        if (!empty($media) && !empty($media->file_name)) {
+            $image_url = asset('storage/' . $media->file_name);
+        } else {
+            $image_url = $banner_url;
+        }
+
+    @endphp
 
 
- <div class="breadcrumb-wrapper bg-cover" style="background-image: url('{{ $image_url }}');">
-     <div class="hero-dark-overlay"></div>
-     <div class="container">
-         <div class="page-heading">
-             <div class="breadcrumb-sub-title">
-                 <h1 class="text-white wow fadeInUp" data-wow-delay=".3s">{{ $post->post_title }}</h1>
-                 <p>{{ $post->post_excerpt }}</p>
-             </div>
-         </div>
-     </div>
- </div>
+    <div class="breadcrumb-wrapper bg-cover" style="background-image: url('{{ $image_url }}');">
+        <div class="hero-dark-overlay"></div>
+        <div class="container">
+            <div class="page-heading">
+                <div class="breadcrumb-sub-title">
+                    <h1 class="text-white wow fadeInUp" data-wow-delay=".3s">{{ $post->post_title }}</h1>
+                    <p>{{ $post->post_excerpt }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="breadcrumb-new">
@@ -110,10 +121,10 @@
                                 @endphp
 
                                 @if (!empty($social_medias))
-                                  <div class="social-icon d-flex align-items-center wow fadeInUp"
-                                         data-wow-delay=".5s">
+                                    <div class="social-icon d-flex align-items-center wow fadeInUp" data-wow-delay=".5s">
                                         @foreach ($social_medias as $social_media)
-                                            <a aria-label="{{ $social_media['media'] }}" href="{{ $social_media['link'] ? $social_media['link'] : 'javascript:void(0)' }}"
+                                            <a aria-label="{{ $social_media['media'] }}"
+                                                href="{{ $social_media['link'] ? $social_media['link'] : 'javascript:void(0)' }}"
                                                 target="{{ $social_media['link'] ? '_blank' : '_self' }}"
                                                 class="text-white">
                                                 <i class="fab {{ $social_media['media'] }}"></i>

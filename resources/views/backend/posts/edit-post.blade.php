@@ -21,7 +21,7 @@
                                 {{-- excerpt --}}
                                 <x-backend.post.excerpt :content="$post->post_excerpt" />
 
-                                @include('backend.posts.fields-post')
+                              {{--  @include('backend.posts.fields-post') --}}
 
                                 {{-- seo --}}
                                 <x-backend.seo.seo-section :metaDatas="$metaDatas" />
