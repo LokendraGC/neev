@@ -18,6 +18,9 @@
 
     <div class="breadcrumb-new">
         <div class="container">
+
+
+
             <div class="page-heading">
                 <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".5s">
                     <li><a href="{{ url('/') }}">Home</a></li>
@@ -46,6 +49,10 @@
     @if (!empty($companies) && count($companies) > 0)
         <section class="news-section section-padding">
             <div class="container">
+
+             <h2 class="section-title">Companies</h2>
+
+
                 <div class="row g-4">
 
                     @foreach ($companies as $company)

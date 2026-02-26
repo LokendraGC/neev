@@ -15,6 +15,11 @@
     @if (!empty($sectors) && count($sectors) > 0)
         <section class="project-section fix section-padding">
             <div class="container">
+
+             <h2 class="section-title">Services</h2>
+
+
+
                 <div class="row g-4">
 
                     @php

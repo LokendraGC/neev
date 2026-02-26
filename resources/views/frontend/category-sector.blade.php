@@ -279,4 +279,93 @@ $business_page = PostHelper::getModel()
 @endif
 
 @include('frontend.partials.cta-section')
+
+
+@push('frontend-js')
+<script>
+    $(document).ready(function() {
+        // Ensure GSAP and plugins are loaded
+        if (typeof gsap === 'undefined') {
+            console.warn('GSAP is not defined. Skipping sticky navigation logic.');
+            return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        const tabs = document.querySelector(".sticky-tabs-wrapper");
+        const mainHeader = document.querySelector("#header-sticky");
+
+        if (tabs) {
+            // Pinning logic for tabs
+            ScrollTrigger.create({
+                trigger: tabs,
+                start: () => {
+                    const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
+                    return `top-=${headerHeight} top`;
+                },
+                endTrigger: "html",
+                end: "max",
+                pin: true,
+                pinSpacing: false,
+                addClass: "is-stuck"
+            });
+
+            const links = gsap.utils.toArray(".tab-nav-list a");
+            links.forEach(a => {
+                const href = a.getAttribute("href");
+                if (!href || href === '#' || !href.startsWith('#')) return;
+
+                try {
+                    const element = document.querySelector(href);
+                    if (!element) return;
+
+                    // Active state handling
+                    ScrollTrigger.create({
+                        trigger: element,
+                        start: "top center",
+                        end: "bottom center",
+                        onEnter: () => setActive(a),
+                        onEnterBack: () => setActive(a),
+                    });
+                } catch (e) {
+                    console.error(`Invalid selector: ${href}`, e);
+                }
+            });
+
+            function setActive(link) {
+                links.forEach(el => el.classList.remove("active"));
+                link.classList.add("active");
+            }
+
+            // Click to scroll logic
+            links.forEach(a => {
+                a.addEventListener("click", e => {
+                    e.preventDefault();
+                    const target = a.getAttribute("href");
+                    if (!target || target === '#' || !target.startsWith('#')) return;
+
+                    const element = document.querySelector(target);
+                    if (!element) return;
+
+                    // Calculate offset dynamically at moment of click
+                    const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
+                    const tabsHeight = tabs.offsetHeight;
+                    const totalOffset = headerHeight + tabsHeight;
+
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: {
+                            y: target,
+                            offsetY: totalOffset
+                        },
+                        ease: "power2.inOut"
+                    });
+                });
+            });
+        }
+    });
+</script>
+@endpush
+
+
 @endsection
