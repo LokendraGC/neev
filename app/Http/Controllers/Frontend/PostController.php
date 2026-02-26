@@ -179,15 +179,15 @@ class PostController extends Controller
         $query = $request->input('search');
         $type = $request->input('type'); // optional: 'company', 'story', 'post'
         $sectorId = $request->input('sector'); // optional: category id
-
+    
         // Get sector category info (optional)
         $sector_cat = Category::where('type', 'sector')->first();
         $sector_catMeta = $sector_cat ? $this->categoryRepository->getMetaDatas($sector_cat) : null;
-
-        // Build query
+    
+        // Build query - search only in title
         $postsQuery = Post::query()
             ->where('post_status', 'publish');
-
+    
         // Filter by type if provided
         if ($type) {
             $postsQuery->where('post_type', $type);
@@ -195,35 +195,38 @@ class PostController extends Controller
             // If no type, include all 3 types
             $postsQuery->whereIn('post_type', ['company', 'story', 'post']);
         }
-
-        // Search in title, slug, or content
+    
+        // Search in title only (removed slug and content)
         if ($query) {
-            $postsQuery->where(function ($q) use ($query) {
-                $q->where('post_title', 'like', '%' . $query . '%')
-                    ->orWhere('slug', 'like', '%' . $query . '%')
-                    ->orWhere('post_content', 'like', '%' . $query . '%');
-            });
+            $postsQuery->where('post_title', 'like', '%' . $query . '%');
         }
-
+    
         // Filter by sector category if provided
         if ($sectorId) {
             $postsQuery->whereHas('categories', function ($q) use ($sectorId) {
                 $q->where('categories.id', $sectorId);
             });
         }
-
+    
         // Get results
         $posts = $postsQuery->latest()->get();
-
+    
+        // Get the selected sector name if sectorId is provided
+        $selectedSector = null;
+        if ($sectorId) {
+            $selectedSector = Category::find($sectorId);
+        }
+    
         // Prepare layout variables
         $payload = $posts->first() ?? new Post();
         $payloadMeta = [
             'seo_title' => $query ? "Search results for: " . $query : "Search Results",
             'seo_description' => "Search results for " . $query . " on Neev.",
         ];
-
+    
         return view('frontend.pages.search', [
             'posts' => $posts,
+            'selectedSector' => $selectedSector,
             'sector_cat' => $sector_cat,
             'sector_catMeta' => $sector_catMeta,
             'query' => $query,
