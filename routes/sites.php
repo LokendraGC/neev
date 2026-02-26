@@ -31,3 +31,5 @@ Route::match(['get', 'post'], 'search', [PostController::class, 'search'])->name
 
 // for all dynamic post and pages
 Route::match(['get', 'post'], '{slug}', [PostController::class, 'index'])->name('frontend.post.index');
+
+

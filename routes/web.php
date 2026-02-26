@@ -69,4 +69,11 @@ Route::group(['prefix' => 'test'], function () {
     Route::get('{any}', [RoutingController::class, 'root'])->name('any');
 });
 
+
 require base_path('routes/sites.php');
+
+
+// not found page
+Route::fallback(function () {
+    return view('frontend.not-found');
+});

@@ -22,22 +22,15 @@ class PostController extends Controller
 
     public function index($slug)
     {
-
         return $this->handlePost($slug);
     }
 
     public function getPayload($slug)
     {
-        $post = Post::query()
+        return Post::query()
             ->whereSlug($slug)
             ->where('post_status', 'publish')
             ->first();
-
-        if (!$post) {
-            abort(403, 'Not Found');
-        }
-
-        return $post;
     }
 
     public function getMetaData($post)
@@ -58,8 +51,19 @@ class PostController extends Controller
 
     private function handlePost($slug)
     {
+
+        
         $post = $this->getPayload($slug);
+       
+       
+        if (!$post) {
+            return response()->view('frontend.not-found', [], 404);
+        }
+
+        
         $metaDatas = $this->getMetaData($post);
+
+       
 
         $homePage = Post::where('slug', 'home')->where('post_status', 'publish')->first();
         $homeMeta = $homePage ? $this->getMetaData($homePage) : [];
