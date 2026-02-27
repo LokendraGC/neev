@@ -16,7 +16,7 @@
     @include('frontend.partials.css')
 
     {{-- schema --}}
-    {{-- @include('frontend.schema.organization', ['websiteName' => $websiteName, 'headerLogo' => $headerLogo])
+    @include('frontend.schema.organization', ['websiteName' => $websiteName, 'headerLogo' => $headerLogo])
     @include('frontend.schema.website', ['websiteName' => $websiteName])
     @include('frontend.schema.local-business', [
         'websiteName' => $websiteName,

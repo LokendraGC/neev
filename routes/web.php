@@ -52,7 +52,7 @@ Route::get('storage', function () {
     Artisan::call('storage:link');
 });
 
-// Route::get('/sitemap_index.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap_index.xml', [SitemapController::class, 'index']);
 
 Route::get('neev-login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
