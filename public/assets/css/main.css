@@ -13176,3 +13176,21 @@ input[type="email"] {
     background-color: var(--bg);
     border-radius: 8px;
 }
+
+
+
+.about-content p{
+  text-align: justify;
+}
+
+.about-inner-section .about-counter-wrapper .about-counter-item p{
+  text-align: justify;
+}
+
+.project-wrapper-3 .section-title p{
+  text-align: justify;
+}
+
+.project-section-2 p{
+  text-align: justify;
+}
