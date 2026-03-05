@@ -289,7 +289,7 @@ $business_page = PostHelper::getModel()
                                 <img src="{{ $image_url }}" alt="{{ $sector->name }}">
                                 <img src="{{ $image_url }}" alt="{{ $sector->name }}">
                             </div>
-                            <div class="content">
+                            <div class="content sector-description">
                                 <h3>
                                     <a
                                         href="{{ route('frontend.category.sector.index', $sector->slug) }}">{{ $sector->name }}</a>
