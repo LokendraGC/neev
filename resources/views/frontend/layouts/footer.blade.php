@@ -102,7 +102,7 @@
                          <div class="col-xl-2 col-lg-3 col-md-6 wow fadeInUp footer-column" data-wow-delay=".4s">
                              <div class="footer-widget-items">
                                  <div class="widget-head">
-                                     <h3>Quick Links</h3>
+                                     <h3>Corporate</h3>
                                  </div>
 
                                  @include('frontend.layouts.footer-menu', [
