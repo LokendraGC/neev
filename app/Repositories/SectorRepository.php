@@ -19,6 +19,8 @@ class SectorRepository
         $data['seo_description'] = isset( $request->seo_description ) ? $request->seo_description : NULL;
         // add more meta data
 
+        $data['sector_details'] = isset( $request->sector_details ) ? serialize($request->sector_details) : NULL;
+
         return $data;
     }
 }

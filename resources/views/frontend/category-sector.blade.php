@@ -71,10 +71,18 @@ $business_page = PostHelper::getModel()
     </div>
 </div>
 
+
+@php
+$sectorDetails = unserialize($catMeta['sector_details']);
+@endphp
+
 <nav class="sticky-tabs-wrapper">
     <div class="container">
         <ul class="tab-nav-list">
             <li><a href="#purpose" class="active">Description</a></li>
+            @if (!empty($sectorDetails) && count($sectorDetails) > 0)
+            <li><a href="#sector-details">Sector Details</a></li>
+            @endif
             <li><a href="#chairman">Companies</a></li>
             <li><a href="#stories">Stories</a></li>
             <li><a href="#other-businesses">Other Businesses</a></li>
@@ -101,6 +109,58 @@ $business_page = PostHelper::getModel()
 </section>
 
 <!-- Brand Section Start -->
+@php
+$sectorDetails = unserialize($catMeta['sector_details']);
+@endphp
+@if (!empty($sectorDetails) && count($sectorDetails) > 0)
+    @foreach ($sectorDetails as $item)
+
+    @php
+    $media = MediaHelper::getImageById($item['image']);
+    if (!empty($media) && !empty($media->file_name)) {
+    $image_url = asset('storage/' . $media->file_name);
+    } else {
+    $image_url = asset('assets/img/commitment.jpg');
+    }
+    @endphp
+<section id="sector-details" class="award-section fix section-padding section-bg-5">
+            <div class="container">
+                <div class="award-wrapper detail">
+
+                    <div class="row align-items-center g-4">
+
+                    
+
+                        @if (!empty($image_url))
+                            <div class="col-xl-4">
+                                <img src="{{ $image_url }}"
+                                    alt="{{ $item['title'] }}" class="rounded-3 w-100">
+                            </div>
+                        @endif
+
+                        @if (!empty($item['description']))
+                            <div class="col-xl-8">
+                                @if (!empty($item['title']))
+                                    <h2 class="title text_invert-2 wow fadeInUp">{{ $item['title'] }}</h2>
+                                @endif
+
+                                @if (!empty($item['description']))
+                                <p class="tx-title sec_title tz-itm-title tz-itm-anim">
+                                        {!! $item['description'] !!}
+                                    </p>
+                                @endif
+
+
+                            </div>
+                        @endif
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endforeach
+        @endif
 
 
 
