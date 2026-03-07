@@ -329,14 +329,14 @@ $stories = PostHelper::getModel()
     <div class="container">
         <div class="section-title-area">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="section-title style-2">
                         <h2 class="text-anim">
                             Media
                         </h2>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-9">
 
                     {!! $media_page->post_content ?? '' !!}
 
