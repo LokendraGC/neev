@@ -23,7 +23,7 @@
         'headerLogo' => $headerLogo,
     ])
     @stack('schema')
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6652e88ffef97000199a5d0f&product=sop' async='async'></script> --}}
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6652e88ffef97000199a5d0f&product=sop' async='async'></script> 
 
     @if ($additionalCSS = $settings['additional_CSS'] ?? null)
     <style>

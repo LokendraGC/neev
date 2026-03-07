@@ -38,6 +38,12 @@ class TemplateType
 
     const SEARCH = 'search';
 
+    const VISION = 'vision';
+
+    const LEADERSHIP = 'leadership';
+
+    const OUR_LOCATION = 'our-location';
+
     public static function toArray()
     {
         return [
@@ -58,6 +64,9 @@ class TemplateType
             self::TERMS,
             self::THANK_YOU,
             self::SEARCH,
+            self::VISION,
+            self::LEADERSHIP,
+            self::OUR_LOCATION,
         ];
     }
 
@@ -83,6 +92,9 @@ class TemplateType
         $keyValuePairs['Terms'] = self::TERMS;
         $keyValuePairs['Thank You'] = self::THANK_YOU;
         $keyValuePairs['Search'] = self::SEARCH;
+        $keyValuePairs['Vision'] = self::VISION;
+        $keyValuePairs['Leadership'] = self::LEADERSHIP;
+        $keyValuePairs['Our Location'] = self::OUR_LOCATION;
 
 
 
