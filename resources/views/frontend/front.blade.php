@@ -100,15 +100,19 @@ $about_page = PostHelper::getModel()
 
                         @isset($postMeta['about_subtitle'])
                         <h6 class="sub-title wow fadeInUp">
-                            {{ $postMeta['about_subtitle'] }}
+                            <a href="{{ route('frontend.post.index', $about_page->slug) }}">
+                                {{ $postMeta['about_subtitle'] }}
+                            </a>
                         </h6>
                         @endisset
 
 
                         <h1 class="text-anim">
-                            @isset($postMeta['about_title'])
-                            {{ $postMeta['about_title'] }}
-                            @endisset
+                            <a href="{{ route('frontend.post.index', $about_page->slug) }}">
+                                @isset($postMeta['about_title'])
+                                {{ $postMeta['about_title'] }}
+                                @endisset
+                            </a>
                         </h1>
 
 
@@ -122,10 +126,10 @@ $about_page = PostHelper::getModel()
 
 
                     @if (!empty($about_page))
-                    <a class="gt-theme-btn-main style-5 mt-5"
+                    <!-- <a class="gt-theme-btn-main style-5 mt-5"
                         href="{{ route('frontend.post.index', $about_page->slug) }}">
                         <span class="gt-theme-btn">Explore more</span>
-                    </a>
+                    </a> -->
                     @endif
 
 

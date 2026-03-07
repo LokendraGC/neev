@@ -13198,3 +13198,7 @@ input[type="email"] {
 .sector-description p{
   text-align: justify !important;
 }
+
+.about-content a:hover{
+  color:#022b73;
+}
