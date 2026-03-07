@@ -13202,3 +13202,20 @@ input[type="email"] {
 .about-content a:hover{
   color:#022b73;
 }
+
+/* Footer newsletter - button right after input */
+.footer-newsletter-form .newsletter-input-row {
+  margin-top: 15px;
+}
+.footer-newsletter-form .newsletter-input-row input {
+  display: block;
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 8px;
+}
+.footer-newsletter-form .newsletter-input-row .gt-theme-btn-main {
+  margin: 0;
+}

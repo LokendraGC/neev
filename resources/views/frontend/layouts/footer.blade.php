@@ -159,7 +159,9 @@
                                  <div class="newsletter-form wow fadeInUp" data-wow-delay=".3s"
                                      style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
                                      <p>
-                                         Sign up for our newsletter!
+                                         Subscribe to our newsletter for the 
+                                         <br>
+                                         latest updates straight to your inbox.
                                      </p>
                                      <div class="cta-newsletter-wrapper">
                                          <div class="newsletter-form ">
@@ -172,17 +174,19 @@
                                                  </div>
                                              @endif
                                              <form action="{{ route('subscribe.form') }}" method="POST"
-                                                 class="contact-form-box">
+                                                 class="contact-form-box footer-newsletter-form">
                                                  @csrf
                                                  @method('PUT')
-                                                 <input type="email" name="email" placeholder="Enter your email..."
-                                                     value="{{ old('email') }}">
+                                                 <div class="newsletter-input-row">
+                                                     <input style="text-transform: none !important;" type="email" name="email" placeholder="Enter your email address to subscribe"
+                                                         value="{{ old('email') }}">
+                                                     <button class="gt-theme-btn-main style-5" type="submit">
+                                                         <span class="gt-theme-btn">Subscribe</span>
+                                                     </button>
+                                                 </div>
                                                  @error('email')
                                                      <span class="text-danger">{{ $message }}</span>
                                                  @enderror
-                                                 <button class="email-btn" type="submit">
-                                                     <i class="fa-solid fa-envelope"></i>
-                                                 </button>
                                              </form>
                                          </div>
                                      </div>
@@ -201,20 +205,6 @@
                              <a href="https://webtechnepal.com/" target="_blank">
                                  Webtech Nepal</a>
                          </p>
-
-
-                         @if (!empty($social_medias))
-                             <div class="social-icon d-flex align-items-center wow fadeInUp" data-wow-delay=".5s">
-
-                                 @foreach ($social_medias as $social_media)
-                                     <a href="{{ $social_media['link'] ? $social_media['link'] : 'javascript:void(0)' }}"
-                                         target="{{ $social_media['link'] ? '_blank' : '_self' }}" class="text-white">
-                                         <i class="fab {{ $social_media['media'] }}"></i>
-                                     </a>
-                                 @endforeach
-
-                             </div>
-                         @endif
 
 
                          @php
