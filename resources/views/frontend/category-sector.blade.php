@@ -120,7 +120,7 @@ $sectorDetails = unserialize($catMeta['sector_details']);
     if (!empty($media) && !empty($media->file_name)) {
     $image_url = asset('storage/' . $media->file_name);
     } else {
-    $image_url = asset('assets/img/commitment.jpg');
+    $image_url = asset('assets/img/sector-img.png');
     }
     @endphp
 <section id="sector-details" class="award-section fix section-padding section-bg-5">
