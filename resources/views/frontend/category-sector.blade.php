@@ -73,7 +73,11 @@ $business_page = PostHelper::getModel()
 
 
 @php
-$sectorDetails = unserialize($catMeta['sector_details']);
+$sectorDetails = [];
+if (!empty($catMeta['sector_details'])) {
+    $unserialized = @unserialize($catMeta['sector_details']);
+    $sectorDetails = (is_array($unserialized)) ? $unserialized : [];
+}
 @endphp
 
 <nav class="sticky-tabs-wrapper">
@@ -109,9 +113,6 @@ $sectorDetails = unserialize($catMeta['sector_details']);
 </section>
 
 <!-- Brand Section Start -->
-@php
-$sectorDetails = unserialize($catMeta['sector_details']);
-@endphp
 @if (!empty($sectorDetails) && count($sectorDetails) > 0)
     @foreach ($sectorDetails as $item)
 
