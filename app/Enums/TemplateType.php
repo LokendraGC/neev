@@ -44,6 +44,10 @@ class TemplateType
 
     const OUR_LOCATION = 'our-location';
 
+    const PRESS_RELEASE = 'press-release';
+
+    const EVENTS = 'events';
+
     public static function toArray()
     {
         return [
@@ -67,6 +71,8 @@ class TemplateType
             self::VISION,
             self::LEADERSHIP,
             self::OUR_LOCATION,
+            self::PRESS_RELEASE,
+            self::EVENTS,
         ];
     }
 
@@ -95,6 +101,8 @@ class TemplateType
         $keyValuePairs['Vision'] = self::VISION;
         $keyValuePairs['Leadership'] = self::LEADERSHIP;
         $keyValuePairs['Our Location'] = self::OUR_LOCATION;
+        $keyValuePairs['Press Release'] = self::PRESS_RELEASE;
+        $keyValuePairs['Events'] = self::EVENTS;
 
 
 
