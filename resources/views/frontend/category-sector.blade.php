@@ -275,7 +275,7 @@ if (!empty($catMeta['sector_details'])) {
 
                 @if (!empty($catMeta['location_description']))
                 <div class="col-lg-12 wow fadeInUp" data-wow-delay=".4s">
-                    <div>
+                    <div class="location-description">
                         {!! $catMeta['location_description'] ?? '' !!}
                     </div>
                 </div>

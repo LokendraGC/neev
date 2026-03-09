@@ -8,10 +8,7 @@
     ])
 
 
-    @php
-        $posts = PostHelper::getModel()->where('post_type', 'post')->where('post_status', 'publish')->latest()->get();
-    @endphp
-
+ 
     @if (!empty($posts) && count($posts) > 0)
         <section class="news-section section-padding">
             <div class="container">
@@ -86,6 +83,18 @@
                 </div>
  --}}
 
+            </div>
+        </section>
+        @else 
+        <section class="news-section section-padding">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h2>No news found</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     @endif

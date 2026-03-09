@@ -50,7 +50,6 @@ class CategoryDataTable extends Component
             $html .= '<div class="row-action">';
             $html .= '<span class="edit"><a href="' . route('backend.category.edit', $category->id) . '" class="text-primary">Edit</a></span>';
             $html .= '<span class="delete"> | <a href="' . route('backend.category.delete', $category->id) . '" onclick="return confirm(\'Are you sure you want to delete?\');" class="text-danger">Delete</a></span>';
-            $html .= '<span class="view"> | <a href="' . $this->siteURL . '/category/' . $category->slug . '" class="text-primary" target="_blank">View</a></span>';
             $html .= '</div>';
             $html .= '</td>';
             $html .= '<td>' . $category->slug . '</td>';

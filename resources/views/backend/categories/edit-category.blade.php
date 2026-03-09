@@ -128,11 +128,11 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between ">
-                                                <p class="">
+                                                <!-- <p class="">
                                                     <a class="btn btn-outline-primary"
                                                         href="{{ $siteURL . '/category/' . $category->slug }}"
                                                         target="_blank">View</a>
-                                                </p>
+                                                </p> -->
                                                 <p>
                                                     <input class="btn btn-primary" type="submit" value="Update" />
                                                 </p>
