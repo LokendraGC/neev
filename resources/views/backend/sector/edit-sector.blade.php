@@ -114,7 +114,6 @@
                                                                 @endisset
                                                         </div>
 
-
                                                         <span class="form-text text-muted">
                                                             <small><i>(Recommended image size: 1920 by 600
                                                                     pixels)</i></small>
@@ -130,33 +129,107 @@
                                         <div class="mb-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <label for="sector_description" class="form-label">Sector
+                                                  <div class="mb-3">
+                                                  <label for="sector_description" class="form-label">Sector
                                                         Description</label>
                                                     <textarea id="sector_description" name="sector_description" class="form-control">{{ isset($metaDatas['sector_description']) ? $metaDatas['sector_description'] : '' }}</textarea>
                                                
-                                               
-                                                                     <!-- repeater fields -->
- <div class="row mb-3">
+                                                    </div>
 
-{{-- Details --}}
-<div class="mb-3">
-    <label class="form-label">Sector Details</label>
-    <div class="table-responsive">
-        <table class="table table-bordered mb-0">
-            <thead>
-                <tr>
-                    <th class="custom-table-sno" style="width:5%">S.No</th>
-                    <th style="width:25%">Title</th>
-                    <th style="width:25%">Description</th>
-                    <th style="width:25%">Upload Icon
-                        <span class="form-text text-muted">
-                            <small><i>(Recommended image size: 645 by 620 px)</i></small>
-                        </span>
-                    </th>
-                    <th style="width:10%" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody class="addMoreSustainability">
+
+                                                    <div class="mb-3">
+                                                  <label for="location_name" class="form-label">Location
+                                                        Name</label>
+                                                        <input type="text" id="location_name" name="location_name" class="form-control" value="{{ isset($metaDatas['location_name']) ? $metaDatas['location_name'] : '' }}" />
+                                               
+                                                    </div>
+
+
+                                                    <div class="mb-3">
+       <label for="location_image" class="form-label">Location Image</label>
+            <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                style="cursor: pointer;" data-field="location_image" data-select="single">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-soft-secondary font-weight-medium">
+                        Browse</div>
+                </div>
+                <div class="form-control file-amount">Choose File</div>
+            </div>
+            <div class="preview-closer">
+                @if (isset($metaDatas['location_image']) &&
+                        ($media = MediaHelper::getModel()->where('id', $metaDatas['location_image'])->first()))
+                    <input type="hidden" id="location_image" name="location_image" class="selected-files"
+                        value="{{ $metaDatas['location_image'] }}">
+                    @error('location_image')
+                        <div class="valid-feedback d-block text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div id="location_image_select">
+                        <div class="file-preview box sm">
+                            <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
+                                <div
+                                    class="align-items-center align-self-stretch d-flex justify-content-center thumb h-auto">
+                                    <img class="img-fit" src="{{ asset('storage/' . $media->file_name) }}"
+                                        alt="image" />
+                                </div>
+                                <div class="col body">
+                                    <h6 class="d-flex">
+                                        <span class="text-truncate title">{{ $media->file_original_name }}</span>
+                                        <span class="flex-shrink-0 ext">.{{ $media->extension }}</span>
+                                    </h6>
+                                    <p>{{ MediaHelper::getKBorMB($media->file_size) }}
+                                </div>
+                                <div class="remove"><button data-id="{{ $media->id }}" data-slug="location_image"
+                                        class="btn btn-sm btn-link remove-attachment" type="button"><i
+                                            class="bi bi-x-circle"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <input type="hidden" id="location_image" name="location_image" class="selected-files"
+                        value="" />
+                    @error('location_image')
+                        <div class="valid-feedback d-block ">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div id="location_image_select"></div>
+                @endisset
+        </div>
+        <span class="form-text text-muted">
+            <small><i>Recommended image size: 1431 by 631 px</i></small>
+        </span>
+
+
+        <div class="mb-3">
+         <label for="location_description" class="form-label">Location Description</label>
+         <textarea class="editor" id="content" name="location_description">{{ isset($metaDatas['location_description']) ? $metaDatas['location_description'] : '' }}</textarea>
+     </div>
+                                                    </div>
+
+                                                    <!-- repeater fields -->
+                                                    <div class="row mb-3">
+                                                        {{-- Details --}}
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Sector Details</label>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered mb-0">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="custom-table-sno" style="width:5%">S.No</th>
+                                                                            <th style="width:25%">Title</th>
+                                                                            <th style="width:25%">Description</th>
+                                                                            <th style="width:25%">Upload Icon
+                                                                                <span class="form-text text-muted">
+                                                                                    <small><i>(Recommended image size: 645 by 620 px)</i></small>
+                                                                                </span>
+                                                                            </th>
+                                                                            <th style="width:10%" class="text-center">Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="addMoreSustainability">
                 @isset($metaDatas['sector_details'])
                     @php
                         $sectorDetails = unserialize($metaDatas['sector_details']);
@@ -253,26 +326,18 @@
                         </tr>
                     @endforeach
                 @endisset
-            </tbody>
-        </table>
-        <div class="text-end mt-2">
-            <button type="button" class="btn btn-primary btn-sm add_sustainability">Add
-                Detail</button>
-        </div>
-    </div>
-</div>
-
-
-</div>
-                                               
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="text-end mt-2">
+                                                                    <button type="button" class="btn btn-primary btn-sm add_sustainability">Add
+                                                                        Detail</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                  
-
-
-
                                     </div>
                                 </div>
 

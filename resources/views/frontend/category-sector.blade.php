@@ -88,6 +88,9 @@ if (!empty($catMeta['sector_details'])) {
             <li><a href="#sector-details">Sector Details</a></li>
             @endif
             <li><a href="#chairman">Companies</a></li>
+            @if (!empty($catMeta['location_image']))
+            <li><a href="#location">Location</a></li>
+            @endif
             <li><a href="#stories">Stories</a></li>
             <li><a href="#other-businesses">Other Businesses</a></li>
         </ul>
@@ -228,8 +231,63 @@ if (!empty($catMeta['sector_details'])) {
 </div>
 @endif
 
-<!-- stories Section Start -->
+<!-- Our Location Section Start - Image at top, text below (Golyan Group style) -->
+@if (!empty($catMeta['location_image']))
 
+<section id="location" class="section-padding">
+    <div class="container">
+        <div class="section-title-area">
+            <div class="section-title style-2">
+                @if (!empty($catMeta['location_name']))
+                    <h2 class="text-anim">
+                        {{ $catMeta['location_name'] ?? 'Our Location' }}
+                    </h2>
+                @endif
+            </div>
+        </div>
+    
+        <div class="location-content">
+            <div class="row g-4 align-items-center">
+
+                @php
+
+                $location_image = $catMeta['location_image'];
+                $location_image_media = MediaHelper::getImageById($location_image);
+
+                if (!empty($location_image_media) && !empty($location_image_media->file_name)) {
+                $location_image_url = asset('storage/' . $location_image_media->file_name);
+                } else {
+                $location_image_url = asset('assets/img/map.png');
+                }
+
+                $websiteName = SettingHelper::get_field('site_title');
+
+                @endphp
+
+                @if (!empty($location_image_url))
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="location-image">
+                        <img src="{{ $location_image_url }}" alt="{{ $websiteName }} Nationwide"
+                            class="img-fluid rounded">
+                    </div>
+                </div>
+                @endif
+
+                @if (!empty($catMeta['location_description']))
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay=".4s">
+                    <div>
+                        {!! $catMeta['location_description'] ?? '' !!}
+                    </div>
+                </div>
+                @endif
+
+
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+<!-- stories Section Start -->
 @if (!empty($stories) && count($stories) > 0)
 <section class="testimonial-section-2 fix section-padding pb-0" id="stories">
     <div class="container">
