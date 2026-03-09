@@ -123,7 +123,7 @@
 
                                 <div class="gt-single-sideber-widget">
                                     <div class="gt-widget-title">
-                                        <h3>Recent Post</h3>
+                                        <h3>Related Posts</h3>    
                                     </div>
                                     <div class="gt-recent-post-area">
 

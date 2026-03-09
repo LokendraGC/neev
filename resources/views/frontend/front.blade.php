@@ -221,7 +221,14 @@ $business_page = PostHelper::getModel()
 ->first();
 @endphp
 
+@php
+                $sectors = CategoryHelper::getModel()
+                ->where('type', 'sector')
+                ->orderBy('menu_order', 'asc')
+                ->get();
+                @endphp
 
+@if (!empty($sectors) && count($sectors) > 0)
 <section class="project-section-3 fix tp-panel-pin-area section-padding section-bg approach-area">
     <div class="line-shape">
         <img src="{{ asset('assets/img/home-3/project/line-shape.png') }}" alt="img">
@@ -265,12 +272,7 @@ $business_page = PostHelper::getModel()
                 </div>
 
 
-                @php
-                $sectors = CategoryHelper::getModel()
-                ->where('type', 'sector')
-                ->orderBy('menu_order', 'asc')
-                ->get();
-                @endphp
+           
 
                 @if (!empty($sectors) && count($sectors) > 0)
                 <div class="col-lg-7">
@@ -312,7 +314,7 @@ $business_page = PostHelper::getModel()
         </div>
     </div>
 </section>
-
+@endif
 
 <!-- Global Section Start -->
 
@@ -324,7 +326,7 @@ $stories = PostHelper::getModel()
 ->get();
 @endphp
 
-
+@if (!empty($stories) && count($stories) > 0)
 <section class="project-section-2 tp-team-area  section-padding bg-cover">
     <div class="container">
         <div class="section-title-area">
@@ -397,7 +399,7 @@ $stories = PostHelper::getModel()
     @endif
 
 </section>
-
+@endif
 
 
 @include('frontend.partials.cta-section')

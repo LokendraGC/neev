@@ -148,6 +148,21 @@
         </div>
 
 </section>
+
+@else 
+
+<section class="news-section section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="text-center">
+                    <h2>No media coverage found</h2>
+                </div>
+            </div>
+        </div>
+
+</section>
+
 @endif
 
 
@@ -228,6 +243,19 @@
                 </div>
  --}}
 
+    </div>
+</section>
+@else 
+
+<section class="news-section section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="text-center">
+                    <h2>No stories found</h2>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endif
