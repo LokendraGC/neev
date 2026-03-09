@@ -113,7 +113,7 @@
                          </div>
 
 
-                         <div class="col-xl-3 ps-lg-0 col-lg-4 col-md-6 wow fadeInUp footer-column"
+                         <div class="col-xl-2 ps-lg-0 col-lg-4 col-md-6 wow fadeInUp footer-column"
                              data-wow-delay=".6s">
                              <div class="footer-widget-items">
                                  <div class="widget-head">
@@ -128,7 +128,7 @@
 
                              </div>
                          </div>
-                         <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".8s">
+                         <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".8s">
                              <div class="footer-widget-items">
 
                                  <div class="widget-head">
@@ -178,7 +178,7 @@
                                                  @csrf
                                                  @method('PUT')
                                                  <div class="newsletter-input-row">
-                                                     <input style="text-transform: none !important;" type="email" name="email" placeholder="Enter your email address to subscribe"
+                                                     <input style="text-transform: none !important;" type="email" name="email" placeholder="Enter email to subscribe"
                                                          value="{{ old('email') }}">
                                                      <button class="gt-theme-btn-main style-5" type="submit">
                                                          <span class="gt-theme-btn">Subscribe</span>

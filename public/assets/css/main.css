@@ -1630,10 +1630,10 @@ a.logo img{
 .header-main .main-menu ul li .submenu li a {
   position: relative;
   z-index: 11;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--header);
-  line-height: 38px;
+  line-height: 34px;
   padding: 0px 0px 0px 32px;
   padding-right: 22px;
   width: 100%;
@@ -13203,19 +13203,34 @@ input[type="email"] {
   color:#022b73;
 }
 
-/* Footer newsletter - button right after input */
+/* Footer newsletter - button inside input field */
 .footer-newsletter-form .newsletter-input-row {
   margin-top: 15px;
-}
-.footer-newsletter-form .newsletter-input-row input {
-  display: block;
+  position: relative;
   width: 100%;
-  padding: 14px 18px;
-  font-size: 14px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.2);
-  margin-bottom: 8px;
+  overflow: hidden;
+}
+.footer-newsletter-form .newsletter-input-row input {
+  width: 100%;
+  padding: 14px 18px 14px 18px;
+  padding-right: 130px;
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+@media (max-width: 767px) {
+  .footer-newsletter-form .newsletter-input-row input::placeholder {
+    font-size: 11px;
+  }
 }
 .footer-newsletter-form .newsletter-input-row .gt-theme-btn-main {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
   margin: 0;
+  height: auto;
 }
