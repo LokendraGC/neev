@@ -69,7 +69,7 @@
 
                 @if (!empty($meta['location_details']))
                 <div class="col-lg-12 wow fadeInUp" data-wow-delay=".4s">
-                    <div>
+                    <div class="location-description">
                         {!! $meta['location_details'] ?? '' !!}
                     </div>
                 </div>

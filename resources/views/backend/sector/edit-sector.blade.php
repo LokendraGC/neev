@@ -203,7 +203,7 @@
         </span>
 
 
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
          <label for="location_description" class="form-label">Location Description</label>
          <textarea class="editor" id="content" name="location_description">{{ isset($metaDatas['location_description']) ? $metaDatas['location_description'] : '' }}</textarea>
      </div>

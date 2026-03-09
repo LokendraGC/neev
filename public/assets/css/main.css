@@ -13234,3 +13234,8 @@ input[type="email"] {
   margin: 0;
   height: auto;
 }
+
+.location-description p {
+  margin-bottom: 6px;
+  text-align: justify;
+}
