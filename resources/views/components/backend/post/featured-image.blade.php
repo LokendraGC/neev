@@ -81,7 +81,7 @@
             </span>
         @elseif (request()->segment(2) == 'company')
             <span class="form-text text-muted">
-                <small><i>Recommended Image size: 1400 by 875 px</i></small>
+                <small><i>Recommended Image size: 420 by 290 px</i></small>
             </span>
         @endif
 

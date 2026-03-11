@@ -45,21 +45,21 @@
                                             aria-controls="info-section"
                                             aria-selected="{{ request()->query('tab') == 'info-section' ? 'true' : 'false' }}"
                                             tabindex="-1">
-                                            Info Section
+                                            Info 
                                         </a>
                                         <a class="nav-link {{ request()->query('tab') == 'cta-section' ? 'active' : '' }}"
                                             id="cta-section-tab" data-bs-toggle="pill" href="#cta-section" role="tab"
                                             aria-controls="cta-section"
                                             aria-selected="{{ request()->query('tab') == 'cta-section' ? 'true' : 'false' }}"
                                             tabindex="-1">
-                                            CTA Section
+                                            CTA 
                                         </a>
                                         <a class="nav-link {{ request()->query('tab') == 'banner-section' ? 'active' : '' }}"
                                             id="banner-section-tab" data-bs-toggle="pill" href="#banner-section" role="tab"
                                             aria-controls="banner-section"
                                             aria-selected="{{ request()->query('tab') == 'banner-section' ? 'true' : 'false' }}"
                                             tabindex="-1">
-                                           Common Banner Section
+                                           Common Banner 
                                         </a>
                                     </div>
                                 </div>

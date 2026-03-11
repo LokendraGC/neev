@@ -143,38 +143,38 @@
 <script>
     Dropzone.autoDiscover = false;
     const dropzone = $("#image").dropzone({
-        uploadprogress: function(file, progress, bytesSent) {
-            // $("button[type=submit]").prop('disabled', true);
-        },
         url: "{{ route('temp-images.create') }}",
         maxFiles: 10,
+        parallelUploads: 10,
         paramName: 'image',
         addRemoveLinks: true,
+        previewsContainer: '#image-wrapper',
         acceptedFiles: "image/jpeg,image/png,image/gif,image/svg+xml,image/webp,application/pdf",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(file, response) {
-            //     var html = `<div class="col-md-3 mb-3" id="product-image-row-${response.image_id}">
-            //                     <div class="card image-card">
-            //                         <a href="#" onclick="deleteImage(${response.image_id});" class="btn btn-danger">Delete</a>
-            //                         <img src="${response.imagePath}" alt="" class="w-100 card-img-top">
-            //                         <div class="card-body">
-            //                             <input type="text" name="caption[]"  value="" class="form-control"/>
-            //                             <input type="hidden" name="image_id[]" value="${response.image_id}"/>
-            //                         </div>
-            //                     </div>
-            //                 </div>`;
-            // var html = `Uploaded.`;
-            toastr.success('Image has been uploaded.', {
+            this.removeFile(file);
+        },
+        queuecomplete: function() {
+            toastr.success('Upload complete. Refreshing media library...', {
                 progressBar: true,
                 positionClass: 'toast-bottom-center',
                 closeButton: true,
                 toastClass: 'mt-5',
             });
-            $("#image-wrapper").append(html);
-            // $("button[type=submit]").prop('disabled', false);
-            // this.removeFile(file);
+            // Clear dropzone for next upload
+            this.removeAllFiles(true);
+            // Switch to Choose File tab
+            var tab1El = document.querySelector('#tab1-tab');
+            if (tab1El && typeof bootstrap !== 'undefined') {
+                var tab = new bootstrap.Tab(tab1El);
+                tab.show();
+            }
+            // Refresh media list via Livewire
+            if (typeof Livewire !== 'undefined') {
+                Livewire.dispatch('media-updated');
+            }
         }
     });
 

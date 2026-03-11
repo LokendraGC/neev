@@ -12930,7 +12930,7 @@ button.mfp-close { z-index: 10000004 !important; }
   float: none;
   width: 100%;
   min-width: 180px;
-  padding: 12px 40px 12px 16px;
+  padding: 12px 40px 38px 16px;
   height: 48px;
   line-height: 28px;
   border: 1px solid rgba(0, 0, 0, 0.12);

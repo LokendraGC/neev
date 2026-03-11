@@ -2,7 +2,7 @@
 
 @section('main-section')
     @include('frontend.partials.breadcrumb-section', [
-        'title' => $title,
+        'title' => 'Search results',
         'excerpt' => $query ? 'Search results for: ' . $query : 'Search Results',
         'metaData' => null,
     ])
