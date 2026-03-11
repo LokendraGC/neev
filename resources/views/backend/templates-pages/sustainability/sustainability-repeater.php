@@ -137,8 +137,27 @@
                 }
             });
 
+            // Update data-field attributes for media manager
+            $row.find('.open-media-manager').each(function () {
+                let $mediaManager = $(this);
+                let currentField = $mediaManager.attr('data-field');
+                if (currentField && currentField.includes('sustainability_details')) {
+                    if (currentField.includes('_image')) {
+                        let newField = currentField.replace(/sustainability_details_\d+_image/, `sustainability_details_${index}_image`);
+                        $mediaManager.attr('data-field', newField);
+                    } else if (currentField.includes('_pdf')) {
+                        let newField = currentField.replace(/sustainability_details_\d+_pdf/, `sustainability_details_${index}_pdf`);
+                        $mediaManager.attr('data-field', newField);
+                    }
+                }
+            });
 
- 
+            // Update preview div IDs for media manager
+            $row.find('[id^="sustainability_details_"][id$="_image_select"]').each(function () {
+                let $previewDiv = $(this);
+                let newId = `sustainability_details_${index}_image_select`;
+                $previewDiv.attr('id', newId);
+            });
         });
     }
 

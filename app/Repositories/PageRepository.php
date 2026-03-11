@@ -10,20 +10,22 @@ use App\Repositories\AboutRepository;
 use Illuminate\Support\Facades\View;
 use App\Repositories\InvestorsRepository;
 use App\Repositories\DownloadRepository;
+use App\Repositories\SustainabilityRepository;
 
 class PageRepository
 {
     use ImageFieldTrait;
 
     // define template repository as per template name same as in TemplateType.php enums other wise not working
-    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository,$investorsRepository, $downloadRepository;
+    protected $homeRepository, $blogRepository, $contactRepository, $aboutRepository, $searchRepository, $investorsRepository, $downloadRepository, $sustainabilityRepository;
 
-    public function __construct(HomeRepository $homeRepository, AboutRepository $aboutRepository, InvestorsRepository $investorsRepository, DownloadRepository $downloadRepository)
+    public function __construct(HomeRepository $homeRepository, AboutRepository $aboutRepository, InvestorsRepository $investorsRepository, DownloadRepository $downloadRepository, SustainabilityRepository $sustainabilityRepository)
     {
         $this->homeRepository = $homeRepository;
         $this->aboutRepository = $aboutRepository;
         $this->investorsRepository = $investorsRepository;
         $this->downloadRepository = $downloadRepository;
+        $this->sustainabilityRepository = $sustainabilityRepository;
     }
 
     // insert or update meta data
