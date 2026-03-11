@@ -30,14 +30,14 @@
     <div class="media-filter-bar">
         <div class="container">
             <div class=" wow fadeInUp" data-wow-delay=".2s">
-                <form id="mediaFilterForm" class="media-filter-form d-flex flex-wrap align-items-center gap-3" method="GET" action="{{ url()->current() }}#media-coverage">
+                <div id="mediaFilterForm" class="media-filter-form d-flex flex-wrap align-items-center gap-3">
 
                     @if (!empty($sectors) && count($sectors) > 0)
                     <div class="media-filter-select">
-                        <select class="single-select media-filter-dropdown" name="sector" onchange="this.form.submit()">
+                        <select class="single-select media-filter-dropdown" name="sector" id="filterSector">
                             <option value="">Sector</option>
                             @foreach ($sectors as $sector)
-                            <option value="{{ $sector->id }}" {{ request('sector') == $sector->id ? 'selected' : '' }}>{{ $sector->name }}</option>
+                            <option value="{{ $sector->id }}">{{ $sector->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -45,10 +45,10 @@
 
                     @if (!empty($companies) && count($companies) > 0)
                     <div class="media-filter-select">
-                        <select class="single-select media-filter-dropdown" name="company" onchange="this.form.submit()">
+                        <select class="single-select media-filter-dropdown" name="company" id="filterCompany">
                             <option value="">Company</option>
                             @foreach ($companies as $company)
-                            <option value="{{ $company->id }}" {{ request('company') == $company->id ? 'selected' : '' }}>{{ $company->post_title }}</option>
+                            <option value="{{ $company->id }}">{{ $company->post_title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -56,26 +56,24 @@
 
                     @if (!empty($media_years) && $media_years->count() > 0)
                     <div class="media-filter-select">
-                        <select class="single-select media-filter-dropdown" name="year" onchange="this.form.submit()">
+                        <select class="single-select media-filter-dropdown" name="year" id="filterYear">
                             <option value="">All Years</option>
                             @foreach ($media_years as $year)
-                            <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
                     </div>
                     @endif
 
-                    @if(request('sector') || request('company') || request('year'))
-                    <div class="media-filter-clear">
-                        <a href="{{ url()->current() }}#media-coverage" class="btn btn-sm btn-outline-secondary">Clear Filters</a>
+                    <div class="media-filter-clear" id="mediaFilterClear" style="display: none;">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Clear Filters</button>
                     </div>
-                    @endif
-                </form>
+                </div>
             </div>
         </div>
         <div class="section-padding">
             <div class="container">
-                <div class="row g-4">
+                <div class="row g-4" id="mediaCoverageGrid">
 
                     @if(count($medias) > 0)
                     @foreach ($medias as $media)
@@ -120,9 +118,13 @@
                     @endforeach
                     @else
                     <div class="col-12 text-center py-5">
-                        <p class="text-muted">No media coverage found matching your filters.</p>
+                        <p class="text-muted">No media coverage found.</p>
                     </div>
                     @endif
+
+                    <div class="col-12 text-center py-5" id="mediaNoResults" style="display: none;">
+                        <p class="text-muted">No media coverage found matching your filters.</p>
+                    </div>
 
                 </div>
 
@@ -267,6 +269,41 @@
 @push('frontend-js')
 <script>
     $(document).ready(function() {
+        // Media filter - client-side, no page refresh
+        function applyMediaFilters() {
+            var sector = $('#filterSector').val() || '';
+            var company = $('#filterCompany').val() || '';
+            var year = $('#filterYear').val() || '';
+            var hasFilters = sector || company || year;
+
+            $('#mediaFilterClear').toggle(hasFilters);
+
+            var visibleCount = 0;
+            $('.media-coverage-item').each(function() {
+                var $item = $(this);
+                var itemSectors = ($item.data('sector') || '').toString().split(',').map(function(s) { return s.trim(); });
+                var itemCompany = ($item.data('company') || '').toString();
+                var itemYear = ($item.data('year') || '').toString();
+
+                var match = true;
+                if (sector && itemSectors.indexOf(sector) === -1) match = false;
+                if (company && itemCompany != company) match = false;
+                if (year && itemYear != year) match = false;
+
+                $item.toggle(match);
+                if (match) visibleCount++;
+            });
+
+            $('#mediaNoResults').toggle(visibleCount === 0);
+        }
+
+        $('#filterSector, #filterCompany, #filterYear').on('change', applyMediaFilters);
+
+        $('#mediaFilterClear button').on('click', function() {
+            $('#filterSector, #filterCompany, #filterYear').val('');
+            applyMediaFilters();
+        });
+
         // Ensure GSAP and plugins are loaded
         if (typeof gsap === 'undefined') {
             console.warn('GSAP is not defined. Skipping sticky navigation logic.');

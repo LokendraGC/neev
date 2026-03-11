@@ -96,35 +96,9 @@ class PostController extends Controller
                 return $meta['year'] ?? \Carbon\Carbon::parse($media->created_at)->format('Y');
             })->filter()->unique()->sortDesc();
 
-            // Apply Filters if template is media
+            // Apply Filters if template is media (filtering done client-side for no page refresh)
             if (isset($metaDatas['page_template']) && $metaDatas['page_template'] === 'media') {
-                $medias = $all_medias->filter(function ($media) {
-                    $meta = $media->GetAllMetaData();
-                    $match = true;
-
-                    if (request('sector')) {
-                        $sector_cats = isset($meta['sector_categories']) ? unserialize($meta['sector_categories']) : [];
-                        $sector_cats = is_array($sector_cats) ? $sector_cats : [];
-                        if (!in_array(request('sector'), $sector_cats)) {
-                            $match = false;
-                        }
-                    }
-
-                    if (request('company')) {
-                        if (($meta['choose_company'] ?? null) != request('company')) {
-                            $match = false;
-                        }
-                    }
-
-                    if (request('year')) {
-                        $year = $meta['year'] ?? \Carbon\Carbon::parse($media->created_at)->format('Y');
-                        if ($year != request('year')) {
-                            $match = false;
-                        }
-                    }
-
-                    return $match;
-                });
+                $medias = $all_medias;
 
                 $stories = Post::where('post_type', 'story')->where('post_status', 'publish')->latest()->get();
             } else {
@@ -159,6 +133,7 @@ class PostController extends Controller
                     'stories' => $stories,
                     'media_years' => $media_years,
                     'total_medias_count' => $all_medias->count(),
+                    'total_stories_count' => isset($stories) ? $stories->count() : 0,
                     'posts' => $posts,
                     'events' => $events,
                     'press_releases' => $press_releases,

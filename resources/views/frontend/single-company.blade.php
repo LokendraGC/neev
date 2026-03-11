@@ -106,6 +106,13 @@
                                 </div>
                             @endif
 
+                            @if (!empty($postMeta['website_url']))
+                                <div class="story-sidebar-address mb-4">
+                                    <strong>Official website</strong><br>
+                                    {{ $postMeta['website_url'] }}
+                                </div>
+                            @endif
+
                             <div class="story-stay-updated">
 
                                 <h3>Share this story</h3>
