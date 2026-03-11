@@ -27,9 +27,9 @@
 
 @if (!empty($total_medias_count) && $total_medias_count > 0)
 <section id="media-coverage" class="media-reports-section">
-    <div class="media-filter-bar">
+    <div class="media-filter-bar" style="position: relative; z-index: 10;">
         <div class="container">
-            <div class=" wow fadeInUp" data-wow-delay=".2s">
+            <div>
                 <div id="mediaFilterForm" class="media-filter-form d-flex flex-wrap align-items-center gap-3">
 
                     @if (!empty($sectors) && count($sectors) > 0)
@@ -66,7 +66,7 @@
                     @endif
 
                     <div class="media-filter-clear" id="mediaFilterClear" style="display: none;">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Clear Filters</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary clear-filters-btn" style="padding: 12px 16px; border: 1px solid rgba(0,0,0,0.12); border-radius: 6px; font-size: 14px; background: var(--white); color: var(--text); line-height: 1; height: 48px;">Clear Filters</button>
                     </div>
                 </div>
             </div>
