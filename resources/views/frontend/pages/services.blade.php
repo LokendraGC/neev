@@ -16,8 +16,11 @@
         <section class="project-section fix section-padding">
             <div class="container">
 
-             <h2 class="section-title">Services</h2>
+             <h2 class="section-title">{{ $post->post_title }}</h2>
 
+<div class="section-title style-4">
+{!! $post->post_content !!}
+</div>
 
 
                 <div class="row g-4">
@@ -67,7 +70,7 @@
 
                                         
                                         @if (!empty($sectorMeta['sector_description']))
-                                        <p> {{ \Str::limit($sectorMeta['sector_description'], 100) ?? '' }}</p>
+                                        <p> {{ $sectorMeta['sector_description'] }}</p>
                                         @endif
                                         
                                     </div>

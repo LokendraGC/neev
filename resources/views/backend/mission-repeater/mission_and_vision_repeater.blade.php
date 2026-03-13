@@ -79,29 +79,29 @@
             </td>
             <td>
                 <div class="media-input image-input">
-                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details${numberOfRow}_image" data-select="single">
+                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details_${numberOfRow}_image" data-select="single">
                         <div class="input-group-prepend">
                             <div class="input-group-text bg-soft-secondary font-weight-medium">Browse</div>
                         </div>
                         <div class="form-control file-amount">Choose File</div>
                     </div>
                     <div class="preview-closer">
-                        <input type="hidden" id="mission_and_vision_details${numberOfRow}_image" name="mission_and_vision_details[${numberOfRow}][image]" class="selected-files" value="" />
-                        <div id="mission_and_vision_details${numberOfRow}_image_select"></div>
+                        <input type="hidden" id="mission_and_vision_details_${numberOfRow}_image" name="mission_and_vision_details[${numberOfRow}][image]" class="selected-files" value="" />
+                        <div id="mission_and_vision_details_${numberOfRow}_image_select"></div>
                     </div>
                 </div>
             </td>
             <td>
                 <div class="media-input image-input">
-                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details${numberOfRow}_icon" data-select="single">
+                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details_${numberOfRow}_icon" data-select="single">
                         <div class="input-group-prepend">
                             <div class="input-group-text bg-soft-secondary font-weight-medium">Browse</div>
                         </div>
                         <div class="form-control file-amount">Choose File</div>
                     </div>
                     <div class="preview-closer">
-                        <input type="hidden" id="mission_and_vision_details${numberOfRow}_icon" name="mission_and_vision_details[${numberOfRow}][icon]" class="selected-files" value="" />
-                        <div id="mission_and_vision_details${numberOfRow}_icon_select"></div>
+                        <input type="hidden" id="mission_and_vision_details_${numberOfRow}_icon" name="mission_and_vision_details[${numberOfRow}][icon]" class="selected-files" value="" />
+                        <div id="mission_and_vision_details_${numberOfRow}_icon_select"></div>
                     </div>
                 </div>
             </td>
@@ -156,9 +156,9 @@
                 let currentId = $element.attr('id');
                 if (currentId && currentId.includes('mission_and_vision_details')) {
                     if (currentId.includes('_image')) {
-                        $element.attr('id', `mission_and_vision_details${index}_image`);
+                        $element.attr('id', `mission_and_vision_details_${index}_image`);
                     } else if (currentId.includes('_icon')) {
-                        $element.attr('id', `mission_and_vision_details${index}_icon`);
+                        $element.attr('id', `mission_and_vision_details_${index}_icon`);
                     }
                 }
             });
@@ -169,9 +169,9 @@
                 let currentField = $mediaManager.attr('data-field');
                 if (currentField && currentField.includes('mission_and_vision_details')) {
                     if (currentField.includes('_image')) {
-                        $mediaManager.attr('data-field', `mission_and_vision_details${index}_image`);
+                        $mediaManager.attr('data-field', `mission_and_vision_details_${index}_image`);
                     } else if (currentField.includes('_icon')) {
-                        $mediaManager.attr('data-field', `mission_and_vision_details${index}_icon`);
+                        $mediaManager.attr('data-field', `mission_and_vision_details_${index}_icon`);
                     }
                 }
             });
@@ -182,9 +182,9 @@
                 let currentId = $div.attr('id');
                 if (currentId) {
                     if (currentId.includes('_image_select')) {
-                        $div.attr('id', `mission_and_vision_details${index}_image_select`);
+                        $div.attr('id', `mission_and_vision_details_${index}_image_select`);
                     } else if (currentId.includes('_icon_select')) {
-                        $div.attr('id', `mission_and_vision_details${index}_icon_select`);
+                        $div.attr('id', `mission_and_vision_details_${index}_icon_select`);
                     }
                 }
             });
@@ -195,9 +195,9 @@
                 let currentSlug = $button.attr('data-slug');
                 if (currentSlug && currentSlug.includes('mission_and_vision_details')) {
                     if (currentSlug.includes('_image')) {
-                        $button.attr('data-slug', `mission_and_vision_details${index}_image`);
+                        $button.attr('data-slug', `mission_and_vision_details_${index}_image`);
                     } else if (currentSlug.includes('_icon')) {
-                        $button.attr('data-slug', `mission_and_vision_details${index}_icon`);
+                        $button.attr('data-slug', `mission_and_vision_details_${index}_icon`);
                     }
                 }
             });

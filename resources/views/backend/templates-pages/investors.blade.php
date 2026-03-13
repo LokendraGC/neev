@@ -51,11 +51,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label for="common_single_banner_image" class="form-label">Upload Banner
-                                        Image</label>
+                                    <label for="invest_side_image" class="form-label">Upload Side Image</label>
                                     <div class="input-group open-media-manager" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" style="cursor: pointer;"
-                                        data-field="common_single_banner_image" data-select="single">
+                                        data-field="invest_side_image" data-select="single">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-soft-secondary font-weight-medium">
                                                 Browse</div>
@@ -64,12 +63,12 @@
                                         <div class="form-control file-amount">Choose File</div>
                                     </div>
                                     <div class="preview-closer">
-                                        @if (isset($metaDatas['common_single_banner_image']) &&
-                                                ($media = MediaHelper::getModel()->where('id', $metaDatas['common_single_banner_image'])->first()))
-                                            <input type="hidden" id="common_single_banner_image"
-                                                name="common_single_banner_image" class="selected-files"
-                                                value="{{ $metaDatas['common_single_banner_image'] }}">
-                                            <div id="common_single_banner_image_select">
+                                        @if (isset($metaDatas['invest_side_image']) &&
+                                                ($media = MediaHelper::getModel()->where('id', $metaDatas['invest_side_image'])->first()))
+                                            <input type="hidden" id="invest_side_image"
+                                                name="invest_side_image" class="selected-files"
+                                                value="{{ $metaDatas['invest_side_image'] }}">
+                                            <div id="invest_side_image_select">
                                                 <div class="file-preview box sm">
                                                     <div
                                                         class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
@@ -89,7 +88,7 @@
                                                             <p>{{ MediaHelper::getKBorMB($media->file_size) }}</p>
                                                         </div>
                                                         <div class="remove"><button data-id="{{ $media->id }}"
-                                                                data-slug="common_single_banner_image"
+                                                                data-slug="invest_side_image"
                                                                 class="btn btn-sm btn-link remove-attachment"
                                                                 type="button"><i class="bi bi-x-circle"></i></button>
                                                         </div>
@@ -97,11 +96,11 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <input type="hidden" id="common_single_banner_image"
-                                                name="common_single_banner_image" class="selected-files"
+                                            <input type="hidden" id="invest_side_image"
+                                                name="invest_side_image" class="selected-files"
                                                 value="" />
-                                            <div id="common_single_banner_image_select"></div>
-                                        @endisset
+                                            <div id="invest_side_image_select"></div>
+                                        @endif
                                 </div>
                                 <span class="form-text text-muted">
                                     <small><i>(Recommended image size: 525 by 736px)</i></small>

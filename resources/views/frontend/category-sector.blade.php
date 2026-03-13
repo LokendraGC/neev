@@ -97,23 +97,56 @@ if (!empty($catMeta['sector_details'])) {
     </div>
 </nav>
 
-<section id="purpose" class="award-section fix section-padding">
+@php
+$sustainability_image = $catMeta['sector_image']  ?? null;
+
+
+$media = MediaHelper::getImageById($sustainability_image);
+
+if (!empty($media) && !empty($media->file_name)) {
+$sustainability_image_url = asset('storage/' . $media->file_name);
+$custom_css = 'col-xl-6';
+} else {
+$sustainability_image_url = null;
+$custom_css = 'col-xl-9';
+$custom_div = '<div class="col-xl-3"></div>';
+}
+
+
+@endphp
+
+
+
+<section id="purpose" class="award-section fix section-padding inner-about">
     <div class="container">
         <div class="award-wrapper detail">
-            <h2 class="title text_invert-2">
-                {{ $cat->name }}
-            </h2>
+            <h2 class="title text_invert-2 wow fadeInUp">{{ $cat->name ?? 'Sustainability' }}</h2>
             <div class="row">
-                <div class="col-xl-3"></div>
-                <div class="col-xl-9">
+
+                @if ($sustainability_image_url)
+                <div class="col-xl-6">
+                    <img src="{{ $sustainability_image_url }}" alt="{{ $cat->name }}">
+                </div>
+                @endif
+
+                @if ( !empty($custom_div) )
+                {!! $custom_div !!}
+                @endif
+
+                @if (!empty($catMeta['main_description']))
+                <div class="{{$custom_css}}">
                     <div class="section-title style-4">
                         {!! $catMeta['main_description'] !!}
                     </div>
                 </div>
+                @endif
+
+
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- Brand Section Start -->
 @if (!empty($sectorDetails) && count($sectorDetails) > 0)
@@ -126,7 +159,7 @@ if (!empty($catMeta['sector_details'])) {
     } else {
     $image_url = asset('assets/img/sector-img.png');
     }
-    @endphp
+@endphp
 <section id="sector-details" class="award-section fix section-padding section-bg-5">
             <div class="container">
                 <div class="award-wrapper detail">
@@ -373,7 +406,7 @@ if (!empty($catMeta['sector_details'])) {
                 <div class="project-box-items-inner">
 
                     @if (!empty($image_url))
-                    <div class="thumb service-thumb">
+                    <div class="thumb">
                         <img src="{{ $image_url }}" alt="{{ $otherCategory->name }}">
                         <img src="{{ $image_url }}" alt="{{ $otherCategory->name }}">
                     </div>

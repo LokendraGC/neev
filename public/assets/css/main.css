@@ -13297,3 +13297,8 @@ input[type="email"] {
       padding: 10px;
       border-radius: 5px;
       }
+
+
+      .investor-image img{
+      width: 350px;
+      }

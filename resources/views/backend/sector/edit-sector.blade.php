@@ -40,6 +40,69 @@
                                     </div>
 
 
+                                    <br>
+                                    <div class="row">
+   <div class="col-md-12">
+       <div class="mb-3">
+           <label for="sustainability_image" class="form-label">Upload Sector Image</label>
+           <div class="input-group open-media-manager" data-bs-toggle="modal"
+           data-bs-target="#exampleModal" style="cursor: pointer;" data-field="sector_image"
+           data-select="single">
+           <div class="input-group-prepend">
+               <div class="input-group-text bg-soft-secondary font-weight-medium">
+               Browse</div>
+           </div>
+
+           <div class="form-control file-amount">Choose File</div>
+       </div>
+       <div class="preview-closer">
+        @if (isset($metaDatas['sector_image']) &&
+        ($media = MediaHelper::getModel()->where('id', $metaDatas['sector_image'])->first()))
+        
+        <input type="hidden" id="sector_image" name="sector_image"
+        class="selected-files" value="{{ $metaDatas['sector_image'] }}">
+
+        <div id="sector_image_select">
+            <div class="file-preview box sm">
+                <div class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
+                    <div class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                        <img class="img-fit"
+                        src="{{ asset('storage/' . $media->file_name) }}"
+                        alt="image" />
+                    </div>
+                    <div class="col body">
+                        <h6 class="d-flex">
+                            <span class="text-truncate title">{{ $media->file_original_name }}</span>
+                            <span class="flex-shrink-0 ext">.{{ $media->extension }}</span>
+                        </h6>
+                        <p>{{ MediaHelper::getKBorMB($media->file_size) }}</p>
+                    </div>
+                    <div class="remove">
+                        <button data-id="{{ $media->id }}"
+                            data-slug="sector_image"
+                            class="btn btn-sm btn-link remove-attachment"
+                            type="button">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @else
+        <input type="hidden" id="sector_image" name="sector_image"
+        class="selected-files" value="" />
+        <div id="sector_image_select"></div>
+        @endif
+    </div>
+    <span class="form-text text-muted">
+       <small><i>Recommended Image size: 1431 by 631 px</i></small>
+   </span>
+</div>
+<hr>
+</div> 
+</div>
+                                    <br>
 
                                     <div class="row">
                                         <div class="col-12">

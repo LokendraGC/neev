@@ -18,6 +18,7 @@ class SectorRepository
         $data['seo_title'] = isset( $request->seo_title ) ? $request->seo_title : NULL;
         $data['seo_description'] = isset( $request->seo_description ) ? $request->seo_description : NULL;
         $data['location_name'] = isset( $request->location_name ) ? $request->location_name : NULL;
+        $data['sector_image'] = isset( $request->sector_image ) ? $request->sector_image : NULL;
         $data['location_image'] = isset( $request->location_image ) ? $request->location_image : NULL;
         $data['location_description'] = isset( $request->location_description ) ? $request->location_description : NULL;
         // add more meta data

@@ -27,7 +27,7 @@ $home_page = PostHelper::getModel()
 
 
     @if (!empty($vision_and_mission_details) && count($vision_and_mission_details) > 0)
-<section id="mission-vision" class="award-section fix section-padding section-bg-5">
+    <section id="mission-vision" class="about-inner-section fix section-padding">
     <div class="container">
           
             <div class="about-counter-wrapper">

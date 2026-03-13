@@ -27,13 +27,41 @@
         </div>
     </nav>
 
+
+@php
+$invest_side_image = $metaData['invest_side_image'] ?? null;
+$custom_div = null;
+
+$media = MediaHelper::getImageById($invest_side_image);
+
+if (!empty($media) && !empty($media->file_name)) {
+    $invest_side_image_url = asset('storage/' . $media->file_name);
+    $custom_css = 'col-xl-8';
+} else {
+    $invest_side_image_url = null;
+    $custom_css = 'col-xl-9';
+    $custom_div = '<div class="col-xl-3"></div>';
+}
+@endphp
+
     <section id="investors" class="award-section fix section-padding">
         <div class="container">
             <div class="award-wrapper detail">
                 <h2 class="title text_invert-2 wow fadeInUp">{{ $post->post_title }}</h2>
                 <div class="row">
-                    <div class="col-xl-3"></div>
-                    <div class="col-xl-9">
+                
+                @if ($invest_side_image_url)
+                <div class="col-xl-4 investor-image">
+                    <img src="{{ $invest_side_image_url }}" alt="{{ $post->post_title }}">
+                </div>
+                @endif
+
+                @if ( !empty($custom_div) )
+                {!! $custom_div !!}
+                @endif
+
+
+                    <div class="{{$custom_css}}">
                         <div class="section-title style-4">
                             {!! $post->post_content !!}
 

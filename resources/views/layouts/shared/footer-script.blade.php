@@ -203,14 +203,13 @@
 
 <script>
     $(document).ready(function() {
-        $(document).on('click', '.open-media-manager', function() {
-            // $('.open-media-manager').click(function() {
-            var fieldValue = $(this).data('field');
-            var dataSelect = $(this).data('select');
+        $(document).on('click', '.open-media-manager', function(e) {
+            var fieldValue = $(this).attr('data-field') || $(this).data('field');
+            var dataSelect = $(this).attr('data-select') || $(this).data('select');
             var mediaIds = jQuery('#' + fieldValue).val() ? jQuery('#' + fieldValue).val() : '';
             $('body').attr('data-field', fieldValue).attr('data-select', dataSelect).attr('data-ids',
                 mediaIds);
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $('#exampleModal').data('media-field', fieldValue).data('media-select', dataSelect);
         });
         $('#selectFiles').click(function() {
             var button = $(this);
@@ -219,15 +218,11 @@
                 selectedIds.push($(this).data('id'));
             });
 
-            // check single or multiple
-            var select = $('body').attr('data-select');
-            // console.log(select)
-
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            // Use field stored on modal when it was opened (avoids wrong field when multiple inputs in same row)
+            var fieldId = $('#exampleModal').data('media-field') || $('body').attr('data-field');
+            var select = $('#exampleModal').data('media-select') || $('body').attr('data-select');
             var selectedIdsString = selectedIds.join(',');
-            var fieldId = $('body').attr('data-field');
-            // console.log(fieldId);
-            // console.log(selectedIdsString)
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
             if (selectedIdsString) {
                 $('#' + fieldId).val(selectedIdsString);
                 $.ajax({

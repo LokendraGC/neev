@@ -11,7 +11,7 @@ class InvestorsRepository
         $data = [];
 
         $data['investors_details'] = isset( $request->investors_details ) ? serialize($request->investors_details) : NULL;
-        $data['common_single_banner_image'] = isset( $request->common_single_banner_image ) ? $request->common_single_banner_image : NULL;
+        $data['invest_side_image'] = isset( $request->invest_side_image ) ? $request->invest_side_image : NULL;
         $data['investors_details_description'] = isset( $request->investors_details_description ) ? $request->investors_details_description : NULL;
         $data['partner_details'] = isset( $request->partner_details ) ? serialize($request->partner_details) : NULL;
        
