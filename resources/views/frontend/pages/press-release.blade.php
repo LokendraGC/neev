@@ -24,6 +24,10 @@ $image_url = null;
 @if (!empty($press_releases) && count($press_releases) > 0)
         <section class="news-section section-padding">
             <div class="container">
+
+            <h2 class="section-title">{{{$post->post_title}}}</h2>
+
+
                 <div class="row g-4">
 
                     @foreach ($press_releases as $post)
