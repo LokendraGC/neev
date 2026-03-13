@@ -5,13 +5,13 @@
 @php
         $about_page_id = 2;
 
-        $media_page = PostHelper::getModel()
+        $about_page = PostHelper::getModel()
             ->where('id', $about_page_id)
             ->where('post_type', 'page')
             ->where('post_status', 'publish')
             ->first();
 
-            $meta = $media_page->GetAllMetaData();
+            $meta = $about_page->GetAllMetaData();
     @endphp
 
     @include('frontend.partials.breadcrumb-section', [
@@ -72,10 +72,10 @@ $image_url = asset('assets/img/home-1/project/bread-bg.png');
                 @endif
 
 
-                @if (!empty($post->post_content))
+                @if (!empty($about_page->post_content))
                 <div class="col-xl-6">
                     <div class="section-title style-4">
-                        {!! $post->post_content !!}
+                        {!! $about_page->post_content !!}
                     </div>
                 </div>
                 @endif
