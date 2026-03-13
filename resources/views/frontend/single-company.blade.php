@@ -109,7 +109,7 @@
                             @if (!empty($postMeta['website_url']))
                                 <div class="story-sidebar-address mb-4">
                                     <strong>Official website</strong><br>
-                                    {{ $postMeta['website_url'] }}
+                                    <a href="{{ $postMeta['website_url'] }}" target="_blank">{{ $postMeta['website_url'] }}</a>
                                 </div>
                             @endif
 
