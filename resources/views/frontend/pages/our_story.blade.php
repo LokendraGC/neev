@@ -479,6 +479,9 @@ $image_url = asset('assets/img/profile_img.jpg');
                     const element = document.querySelector(target);
                     if (!element) return;
 
+                    // Mark the clicked tab active immediately for instant feedback
+                    setActive(a);
+
                     // Calculate offset dynamically at moment of click
                     const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
                     const tabsHeight = tabs.offsetHeight;

@@ -405,7 +405,7 @@ span {
   font-family: "Inter", sans-serif;
   align-items: center;
   gap: 30px;
-  border-radius: 40px;
+  border-radius: 15px;
   transition: 0.4s;
 }
 @media (max-width: 575px) {
@@ -2760,6 +2760,12 @@ a.logo img{
     text-align: center;
     padding-top: 150px;
     padding-bottom: 120px;
+  }
+  .breadcrumb-wrapper{
+          height: 300px;
+  }
+  .breadcrumb-sub-title{
+      width:100%;
   }
 }
 .breadcrumb-wrapper .page-heading h1 {
@@ -7835,6 +7841,7 @@ p.tx-title.sec_title.tz-itm-title.tz-itm-anim {
   left: 30px;
   right: 30px;
   z-index: 9;
+    padding: 0px 21px 0px 0px;
 }
 .project-image-items-2 .project-title a {
   color: var(--white);
@@ -11662,7 +11669,7 @@ p.tx-title.sec_title.tz-itm-title.tz-itm-anim {
   .cta-newsletter-wrapper {
     flex-wrap: wrap;
     gap: 30px;
-    text-align: center;
+    text-align: left;
     justify-content: center;
   }
 }
@@ -11718,8 +11725,8 @@ p.tx-title.sec_title.tz-itm-title.tz-itm-anim {
   width: 100%;
   border: none;
   background-color: var(--white);
-  padding: 22px 30px;
-  border-radius: 48px;
+  padding: 22px;
+  border-radius: 15px;
   line-height: 1;
   color: var(--text);
 }
@@ -13208,6 +13215,8 @@ input[type="email"] {
   margin-top: 15px;
   position: relative;
   width: 100%;
+  padding: 14px 18px;
+  font-size: 12px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.2);
   overflow: hidden;
@@ -13239,4 +13248,29 @@ input[type="email"] {
   margin-bottom: 6px;
   text-align: justify;
 }
-
+ @media(max-width: 767px){
+            .sticky-tabs-wrapper .container{
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+            .sticky-tabs-wrapper .container::-webkit-scrollbar{
+                height: 4px;
+            }
+            .sticky-tabs-wrapper .container::-webkit-scrollbar-thumb{
+                background: rgba(0,0,0,.2);
+                border-radius: 4px;
+            }
+            .tab-nav-list{
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+                min-width: max-content;
+                padding-bottom: 4px;
+            }
+            .tab-nav-list li{
+                float: none;
+                flex-shrink: 0;
+            }
+        }
