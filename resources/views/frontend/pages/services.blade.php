@@ -53,7 +53,7 @@
                             <div class="project-box-items-inner">
 
                                 @if (!empty($image_url))
-                                    <div class="thumb">
+                                    <div class="thumb service-thumb">
                                         <img src="{{ $image_url }}" alt="{{ $sector->name }}">
                                         <img src="{{ $image_url }}" alt="{{ $sector->name }}">
                                     </div>

@@ -373,7 +373,7 @@ if (!empty($catMeta['sector_details'])) {
                 <div class="project-box-items-inner">
 
                     @if (!empty($image_url))
-                    <div class="thumb">
+                    <div class="thumb service-thumb">
                         <img src="{{ $image_url }}" alt="{{ $otherCategory->name }}">
                         <img src="{{ $image_url }}" alt="{{ $otherCategory->name }}">
                     </div>

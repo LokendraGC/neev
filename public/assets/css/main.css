@@ -13274,3 +13274,10 @@ input[type="email"] {
                 flex-shrink: 0;
             }
         }
+
+
+        .service-thumb{
+          height: 213px;
+          object-fit: cover;
+          width: 100%;
+        }
