@@ -96,8 +96,8 @@ class PostController extends Controller
                 return $meta['year'] ?? \Carbon\Carbon::parse($media->created_at)->format('Y');
             })->filter()->unique()->sortDesc();
 
-            // Apply Filters if template is media (filtering done client-side for no page refresh)
-            if (isset($metaDatas['page_template']) && $metaDatas['page_template'] === 'media') {
+            // Apply Filters if template is media or media-coverage (filtering done client-side for no page refresh)
+            if (isset($metaDatas['page_template']) && in_array($metaDatas['page_template'], ['media', 'media-coverage'])) {
                 $medias = $all_medias;
 
                 $stories = Post::where('post_type', 'story')->where('post_status', 'publish')->latest()->get();

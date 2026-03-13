@@ -12,8 +12,7 @@ class SustainabilityRepository
 
         $data = [];
         $data['sustainability_details'] = isset($request->sustainability_details) ? serialize($request->sustainability_details) : NULL;
-        
-        
+        $data['sustainability_image'] = isset($request->sustainability_image) ? $request->sustainability_image : NULL;
         return $data;
     }
 }

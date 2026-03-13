@@ -64,6 +64,12 @@
                                         <h3><a
                                                 href="{{ route('frontend.category.sector.index', $sector->slug) }}">{{ $sector->name }}</a>
                                         </h3>
+
+                                        
+                                        @if (!empty($sectorMeta['sector_description']))
+                                        <p> {{ \Str::limit($sectorMeta['sector_description'], 100) ?? '' }}</p>
+                                        @endif
+                                        
                                     </div>
                                     <a href="{{ route('frontend.category.sector.index', $sector->slug) }}"
                                         class="circle-check"><i class="fa-solid fa-arrow-up-right"></i></a>

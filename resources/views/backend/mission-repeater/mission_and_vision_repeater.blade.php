@@ -2,84 +2,82 @@
 <script>
     // Pages data for select2 dropdowns
     const pagesData = @json($pages ?? []);
-    // English section - slider
-    $(document).on('click', '.add_slider', function() {
-        let row = addSliderRow();
-        $('.addMoreSlider').append(row);
-        updateSerialNumbersSlider();
-        updateOrderFields();
-        updateRowIndices();
-        initializeSummernote();
-        initializeSelect2();
+
+    // Add new row via main "Add Detail" button
+    $(document).on('click', '.add_mission_vision', function() {
+        let row = addMissionVisionRow();
+        $('.addMoreMissionVision').append(row);
+        updateMissionVisionSerialNumbers();
+        updateMissionVisionOrderFields();
+        updateMissionVisionRowIndices();
+        initializeMissionVisionSummernote();
+        initializeMissionVisionSelect2();
     });
 
-    $(document).on('click', '.add_more_slider', function() {
+    // Add row via inline "+" button inside a row
+    $(document).on('click', '.add_more_mission_vision', function() {
         let clickedRow = $(this).closest('tr');
-        let row = addSliderRow();
+        let row = addMissionVisionRow();
         if (clickedRow.length) {
             clickedRow.after(row);
         } else {
-            $('.addMoreSlider').append(row);
+            $('.addMoreMissionVision').append(row);
         }
-        updateSerialNumbersSlider();
-        updateOrderFields();
-        updateRowIndices();
-        initializeSummernote();
-        initializeSelect2();
+        updateMissionVisionSerialNumbers();
+        updateMissionVisionOrderFields();
+        updateMissionVisionRowIndices();
+        initializeMissionVisionSummernote();
+        initializeMissionVisionSelect2();
     });
 
-    $('.addMoreSlider').delegate('.remove_slider', 'click', function() {
+    $(document).on('click', '.remove_mission_vision', function() {
         $(this).closest('tr').remove();
-        updateSerialNumbersSlider();
-        updateOrderFields();
-        updateRowIndices();
+        updateMissionVisionSerialNumbers();
+        updateMissionVisionOrderFields();
+        updateMissionVisionRowIndices();
     });
 
-    // Move row up - English section
-    $(document).on('click', '.addMoreSlider .move-up', function() {
+    // Move row up
+    $(document).on('click', '.addMoreMissionVision .mv-move-up', function() {
         let currentRow = $(this).closest('tr');
         let prevRow = currentRow.prev('tr');
-
         if (prevRow.length) {
             currentRow.insertBefore(prevRow);
-            updateSerialNumbersSlider();
-            updateOrderFields();
-            updateRowIndices();
-            initializeSummernote();
-            initializeSelect2();
+            updateMissionVisionSerialNumbers();
+            updateMissionVisionOrderFields();
+            updateMissionVisionRowIndices();
+            initializeMissionVisionSummernote();
+            initializeMissionVisionSelect2();
         }
     });
 
-    // Move row down - English section
-    $(document).on('click', '.addMoreSlider .move-down', function() {
+    // Move row down
+    $(document).on('click', '.addMoreMissionVision .mv-move-down', function() {
         let currentRow = $(this).closest('tr');
         let nextRow = currentRow.next('tr');
-
         if (nextRow.length) {
             currentRow.insertAfter(nextRow);
-            updateSerialNumbersSlider();
-            updateOrderFields();
-            updateRowIndices();
-            initializeSummernote();
-            initializeSelect2();
+            updateMissionVisionSerialNumbers();
+            updateMissionVisionOrderFields();
+            updateMissionVisionRowIndices();
+            initializeMissionVisionSummernote();
+            initializeMissionVisionSelect2();
         }
     });
 
-    function addSliderRow() {
-        let numberOfRow = $('.addMoreSlider tr').length;
+    function addMissionVisionRow() {
+        let numberOfRow = $('.addMoreMissionVision tr').length;
 
         let tr = `
         <tr>
             <td class="custom-table-no no">${numberOfRow + 1}</td>
-        
-          
             <td>
                 <input type="text" class="form-control" name="mission_and_vision_details[${numberOfRow}][title]" value="" />
             </td>
             <td>
                 <textarea class="editor" id="content" name="mission_and_vision_details[${numberOfRow}][description]"></textarea>
             </td>
-                <td>
+            <td>
                 <div class="media-input image-input">
                     <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details${numberOfRow}_image" data-select="single">
                         <div class="input-group-prepend">
@@ -93,18 +91,32 @@
                     </div>
                 </div>
             </td>
+            <td>
+                <div class="media-input image-input">
+                    <div class="input-group open-media-manager" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;" data-field="mission_and_vision_details${numberOfRow}_icon" data-select="single">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-soft-secondary font-weight-medium">Browse</div>
+                        </div>
+                        <div class="form-control file-amount">Choose File</div>
+                    </div>
+                    <div class="preview-closer">
+                        <input type="hidden" id="mission_and_vision_details${numberOfRow}_icon" name="mission_and_vision_details[${numberOfRow}][icon]" class="selected-files" value="" />
+                        <div id="mission_and_vision_details${numberOfRow}_icon_select"></div>
+                    </div>
+                </div>
+            </td>
             <td class="text-center">
-                <a href="javascript:void(0);" class="text-success fs-16 px-1 add_more_slider">
+                <a href="javascript:void(0);" class="text-success fs-16 px-1 add_more_mission_vision">
                     <i class="bi bi-plus-circle"></i>
                 </a>
-                <a href="javascript:void(0);" class="text-danger fs-16 px-1 remove_slider">
+                <a href="javascript:void(0);" class="text-danger fs-16 px-1 remove_mission_vision">
                     <i class="bi bi-x-circle"></i>
                 </a>
                 <hr>
-                <a href="javascript:void(0);" class="text-primary fs-16 px-1 move-up" title="Move Up">
+                <a href="javascript:void(0);" class="text-primary fs-16 px-1 mv-move-up" title="Move Up">
                     <i class="bi bi-arrow-up-circle"></i>
                 </a>
-                <a href="javascript:void(0);" class="text-primary fs-16 px-1 move-down" title="Move Down">
+                <a href="javascript:void(0);" class="text-primary fs-16 px-1 mv-move-down" title="Move Down">
                     <i class="bi bi-arrow-down-circle"></i>
                 </a>
             </td>
@@ -114,44 +126,39 @@
         return tr;
     }
 
-    function updateSerialNumbersSlider() {
-        $('.addMoreSlider tr').each(function(index) {
+    function updateMissionVisionSerialNumbers() {
+        $('.addMoreMissionVision tr').each(function(index) {
             $(this).find('.custom-table-no').text(index + 1);
         });
     }
 
-    function updateOrderFields() {
-        $('.addMoreSlider tr').each(function(index) {
+    function updateMissionVisionOrderFields() {
+        $('.addMoreMissionVision tr').each(function(index) {
             $(this).find('.row-order').val(index);
         });
     }
 
-    function updateRowIndices() {
-        $('.addMoreSlider tr').each(function(index) {
+    function updateMissionVisionRowIndices() {
+        $('.addMoreMissionVision tr').each(function(index) {
             let $row = $(this);
 
-            // Update all name attributes to use the new index
+            // Update all name attributes
             $row.find('input, textarea, select').each(function() {
                 let $element = $(this);
                 let currentName = $element.attr('name');
-
                 if (currentName && currentName.includes('mission_and_vision_details[')) {
                     let newName = currentName.replace(/mission_and_vision_details\[\d+\]/,
                         `mission_and_vision_details[${index}]`);
                     $element.attr('name', newName);
                 }
 
-                // Update IDs for image fields
+                // Update IDs for image and icon fields
                 let currentId = $element.attr('id');
                 if (currentId && currentId.includes('mission_and_vision_details')) {
                     if (currentId.includes('_image')) {
-                        let newId = currentId.replace(/mission_and_vision_details\d+_image/,
-                            `mission_and_vision_details${index}_image`);
-                        $element.attr('id', newId);
-                    } else if (currentId.includes('_description')) {
-                        let newId = currentId.replace(/mission_and_vision_details_\d+_description/,
-                            `mission_and_vision_details_${index}_description`);
-                        $element.attr('id', newId);
+                        $element.attr('id', `mission_and_vision_details${index}_image`);
+                    } else if (currentId.includes('_icon')) {
+                        $element.attr('id', `mission_and_vision_details${index}_icon`);
                     }
                 }
             });
@@ -161,73 +168,56 @@
                 let $mediaManager = $(this);
                 let currentField = $mediaManager.attr('data-field');
                 if (currentField && currentField.includes('mission_and_vision_details')) {
-                    let newField = currentField.replace(/mission_and_vision_details\d+_image/,
-                        `mission_and_vision_details${index}_image`);
-                    $mediaManager.attr('data-field', newField);
+                    if (currentField.includes('_image')) {
+                        $mediaManager.attr('data-field', `mission_and_vision_details${index}_image`);
+                    } else if (currentField.includes('_icon')) {
+                        $mediaManager.attr('data-field', `mission_and_vision_details${index}_icon`);
+                    }
                 }
             });
 
-            // Update div IDs for image select
-            $row.find('div[id*="mission_and_vision_details"][id*="_image_select"]').each(function() {
+            // Update preview div IDs
+            $row.find('div[id*="mission_and_vision_details"]').each(function() {
                 let $div = $(this);
                 let currentId = $div.attr('id');
                 if (currentId) {
-                    let newId = currentId.replace(/mission_and_vision_details\d+_image_select/,
-                        `mission_and_vision_details${index}_image_select`);
-                    $div.attr('id', newId);
+                    if (currentId.includes('_image_select')) {
+                        $div.attr('id', `mission_and_vision_details${index}_image_select`);
+                    } else if (currentId.includes('_icon_select')) {
+                        $div.attr('id', `mission_and_vision_details${index}_icon_select`);
+                    }
                 }
             });
 
-            // Update data-slug attributes on remove buttons
+            // Update data-slug on remove buttons
             $row.find('.remove-attachment').each(function() {
                 let $button = $(this);
                 let currentSlug = $button.attr('data-slug');
                 if (currentSlug && currentSlug.includes('mission_and_vision_details')) {
-                    let newSlug = currentSlug.replace(/mission_and_vision_details\d+_image/,
-                        `mission_and_vision_details${index}_image`);
-                    $button.attr('data-slug', newSlug);
-                }
-            });
-
-            // Update select2 dropdowns for page selection
-            $row.find('select[name*="mission_and_vision_details"][name*="[page]"]').each(function() {
-                let $select = $(this);
-                let currentName = $select.attr('name');
-                if (currentName && currentName.includes('mission_and_vision_details[') && currentName.includes(
-                        '[page]')) {
-                    let newName = currentName.replace(/mission_and_vision_details\[\d+\]/,
-                        `mission_and_vision_details[${index}]`);
-                    $select.attr('name', newName);
-                    // Reinitialize select2 if it was initialized
-                    if ($select.hasClass('select2-hidden-accessible')) {
-                        $select.select2('destroy');
+                    if (currentSlug.includes('_image')) {
+                        $button.attr('data-slug', `mission_and_vision_details${index}_image`);
+                    } else if (currentSlug.includes('_icon')) {
+                        $button.attr('data-slug', `mission_and_vision_details${index}_icon`);
                     }
-                    $select.select2();
-                    populateSelect2Pages($select);
                 }
             });
         });
     }
 
-    // Initialize and populate select2 dropdowns with pages
-    function initializeSelect2() {
-        $('.addMoreSlider select.select2[name*="[page]"], .addMoreSliderNepali select.select2[name*="[page]"]').each(
-            function() {
-                let $select = $(this);
-                if (!$select.hasClass('select2-hidden-accessible')) {
-                    $select.select2();
-                    populateSelect2Pages($select);
-                }
-            });
+    function initializeMissionVisionSelect2() {
+        $('.addMoreMissionVision select.select2[name*="[page]"]').each(function() {
+            let $select = $(this);
+            if (!$select.hasClass('select2-hidden-accessible')) {
+                $select.select2();
+                populateMissionVisionSelect2Pages($select);
+            }
+        });
     }
 
-    // Populate select2 dropdown with pages data
-    function populateSelect2Pages($select) {
+    function populateMissionVisionSelect2Pages($select) {
         if (pagesData && pagesData.length > 0) {
             let currentValue = $select.val() || '0';
-            // Clear existing options except "None"
             $select.find('option:not([value="0"])').remove();
-            // Add pages
             pagesData.forEach(function(page) {
                 let option = new Option(page.post_title, page.id, false, false);
                 $select.append(option);
@@ -236,11 +226,10 @@
         }
     }
 
-    // Initialize Summernote editor on new textareas - English section
-    function initializeSummernote() {
-        $('.addMoreSlider textarea.editor').each(function() {
+    // Initialize Summernote on dynamically added mission & vision textareas
+    function initializeMissionVisionSummernote() {
+        $('.addMoreMissionVision textarea.editor').each(function() {
             let $textarea = $(this);
-            // Check if Summernote is already initialized on this textarea
             if (!$textarea.next('.note-editor').length && !$textarea.data('summernote')) {
                 $textarea.summernote({
                     tabsize: 2,
@@ -261,7 +250,9 @@
                     callbacks: {
                         onImageUpload: function(files) {
                             const editor = $(this);
-                            uploadImage(files[0], editor);
+                            if (typeof uploadImage === 'function') {
+                                uploadImage(files[0], editor);
+                            }
                         }
                     }
                 });

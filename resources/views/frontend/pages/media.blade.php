@@ -8,6 +8,18 @@
 'metaData' => $metaData['featured_image'] ? MediaHelper::getImageById($metaData['featured_image']) : null,
 ])
 
+@php 
+$media_page_id = 5;
+$media_page = PostHelper::getModel()
+    ->where('id', $media_page_id)
+    ->where('post_type', 'page')
+    ->where('post_status', 'publish')
+    ->first();
+    $meta = $media_page->GetAllMetaData();
+
+
+$resourcesDetails = isset($meta['resources_details']) ? unserialize($meta['resources_details']) : [];
+@endphp
 
 <nav class="sticky-tabs-wrapper">
     <div class="container">
@@ -15,6 +27,18 @@
 
             @if( !empty($total_medias_count) && $total_medias_count > 0 )
             <li><a href="#media-coverage" class="active">Media Coverage</a></li>
+            @endif
+
+            @if( !empty($events) && count($events) > 0 )
+            <li><a href="#events">Events</a></li>
+            @endif
+
+            @if( !empty($press_releases) && count($press_releases) > 0 )
+            <li><a href="#press-releases">Press Releases</a></li>
+            @endif
+
+            @if( !empty($resourcesDetails) && count($resourcesDetails) > 0 )
+            <li><a href="#downloads">Downloads</a></li>
             @endif
 
             @if( !empty($total_stories_count) && $total_stories_count > 0 )
@@ -25,6 +49,8 @@
     </div>
 </nav>
 
+
+<!-- Media Coverage -->
 @if (!empty($total_medias_count) && $total_medias_count > 0)
 <section id="media-coverage" class="media-reports-section">
     <div class="media-filter-bar" style="position: relative; z-index: 10;">
@@ -168,8 +194,281 @@
 @endif
 
 
+<!-- Events -->
+@if (!empty($events) && count($events) > 0)
+        <section id="events" class="news-section section-padding">
+            <div class="container">
+
+            <h2 class="section-title">Events</h2>
+
+            
+                <div class="row g-4">
+
+                    @foreach ($events as $post)
+                        @php
+                            $meta = $post->GetAllMetaData();
+
+                            $media = MediaHelper::getImageById($meta['featured_image'] ?? null);
+
+                            if (!empty($media) && !empty($media->file_name)) {
+                                $image_url = asset('storage/' . $media->file_name);
+                            } else {
+                                $image_url = asset('assets/img/home-1/news/news-01.jpg');
+                            }
+                        @endphp
+                        <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                            <div class="news-box-items mt-0">
+
+                                @if (!empty($image_url))
+                                    <div class="thumb">
+                                        <img src="{{ $image_url }}" alt="{{ $post->post_title }}">
+                                        <img src="{{ $image_url }}" alt="{{ $post->post_title }}">
+                                    </div>
+                                @endif
 
 
+                                <div class="content">
+                                    <ul>
+
+                                        <li>
+                                            <span>{{ $post->created_at->format('d M, Y') }}</span>
+                                        </li>
+                                    </ul>
+                                    <h3>
+                                        <a
+                                            href="{{ route('frontend.post.index', $post->slug) }}">{{ $post->post_title }}</a>
+                                    </h3>
+                                    <div class="news-bottom">
+                                        <a href="{{ route('frontend.post.index', $post->slug) }}" class="link-btn">
+                                            <span class="content-wrap">
+                                                <span class="default-content">
+                                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                                    <span>Read more</span>
+                                                </span>
+                                                <span class="hover-content">
+                                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                                    <span>Read more</span>
+                                                </span>
+                                            </span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+                </div>
+
+                {{-- 
+                <div class="page-nav-wrap text-center">
+                    <ul>
+                        <li><a class="page-numbers" href="#"><i class="fa-solid fa-arrow-up-left"></i></a></li>
+                        <li class="active"><a class="page-numbers" href="#">01</a></li>
+                        <li><a class="page-numbers" href="#">02</a></li>
+                        <li><a class="page-numbers" href="#">03</a></li>
+                        <li><a class="page-numbers" href="#"><i class="fa-solid fa-arrow-up-right"></i></a></li>
+                    </ul>
+                </div>
+ --}}
+
+            </div>
+        </section>
+        @else 
+        <section class="news-section section-padding">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h2>No events found</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+<!-- Press Releases -->
+@if (!empty($press_releases) && count($press_releases) > 0)
+        <section id="press-releases" class="news-section section-padding">
+            <div class="container">
+
+            <h2 class="section-title">Press Releases</h2>
+
+
+                <div class="row g-4">
+
+                    @foreach ($press_releases as $post)
+                        @php
+                            $meta = $post->GetAllMetaData();
+
+                            $media = MediaHelper::getImageById($meta['featured_image'] ?? null);
+
+                            if (!empty($media) && !empty($media->file_name)) {
+                                $image_url = asset('storage/' . $media->file_name);
+                            } else {
+                                $image_url = asset('assets/img/home-1/news/news-01.jpg');
+                            }
+                        @endphp
+                        <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                            <div class="news-box-items mt-0">
+
+                                @if (!empty($image_url))
+                                    <div class="thumb">
+                                        <img src="{{ $image_url }}" alt="{{ $post->post_title }}">
+                                        <img src="{{ $image_url }}" alt="{{ $post->post_title }}">
+                                    </div>
+                                @endif
+
+
+                                <div class="content">
+                                    <ul>
+
+                                        <li>
+                                            <span>{{ $post->created_at->format('d M, Y') }}</span>
+                                        </li>
+                                    </ul>
+                                    <h3>
+                                        <a
+                                            href="{{ route('frontend.post.index', $post->slug) }}">{{ $post->post_title }}</a>
+                                    </h3>
+                                    <div class="news-bottom">
+                                        <a href="{{ route('frontend.post.index', $post->slug) }}" class="link-btn">
+                                            <span class="content-wrap">
+                                                <span class="default-content">
+                                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                                    <span>Read more</span>
+                                                </span>
+                                                <span class="hover-content">
+                                                    <i class="fa-solid fa-arrow-up-right"></i>
+                                                    <span>Read more</span>
+                                                </span>
+                                            </span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+                </div>
+
+                {{-- 
+                <div class="page-nav-wrap text-center">
+                    <ul>
+                        <li><a class="page-numbers" href="#"><i class="fa-solid fa-arrow-up-left"></i></a></li>
+                        <li class="active"><a class="page-numbers" href="#">01</a></li>
+                        <li><a class="page-numbers" href="#">02</a></li>
+                        <li><a class="page-numbers" href="#">03</a></li>
+                        <li><a class="page-numbers" href="#"><i class="fa-solid fa-arrow-up-right"></i></a></li>
+                    </ul>
+                </div>
+ --}}
+
+            </div>
+        </section>
+        @else 
+        <section class="news-section section-padding">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h2>No press releases found</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+<!-- Downloads -->
+@if (!empty($resourcesDetails) && count($resourcesDetails) > 0)
+        <section id="downloads" class="download-section section-padding">
+            <div class="container">
+
+            <h2 class="section-title">Downloads</h2>
+
+
+                <div class="download-cards-row row g-4">
+
+                    @php
+                        $count = 1;
+                        $delay = 0.15;
+                    @endphp
+                    @foreach ($resourcesDetails as $index => $item)
+                        @php
+                            $media = MediaHelper::getImageById($item['image']);
+                            if (!empty($media) && !empty($media->file_name)) {
+                                $image_url = asset('storage/' . $media->file_name);
+                            } else {
+                                $image_url = asset('assets/img/pdf-preview.png');
+                            }
+
+                            $pdf = MediaHelper::getImageById($item['pdf']);
+                            if (!empty($pdf) && !empty($pdf->file_name)) {
+                                $pdf_url = asset('storage/' . $pdf->file_name);
+                            } else {
+                                $pdf_url = asset('assets/img/pdf-preview.png');
+                            }
+
+                        @endphp
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{{ $delay }}s">
+                            <div class="download-card">
+
+                                @if (!empty($image_url))
+                                    <div class="download-card-image">
+                                        <img src="{{ $image_url }}" alt="{{ $item['title'] }}">
+                                    </div>
+                                @endif
+
+                                @if (!empty($item['title']))
+                                    <h3 class="download-card-title">
+                                    <a href="{{ $pdf_url }}" target="_blank">
+                                        {{ $item['title'] }}
+                                    </a>
+                                    </h3>
+                                @endif
+
+                                @if (!empty($pdf_url))
+                                    <a href="{{ $pdf_url }}" class="download-card-cta" download>
+                                        <span>Download Now</span>
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        @php
+                            $count++;
+                            $delay = $count * 0.15;
+                        @endphp
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+    @else 
+    <section class="news-section section-padding">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h2>No downloads found</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+
+<!-- Stories -->
 @if (!empty($stories) && count($stories) > 0)
 <section id="stories" class="news-section section-padding">
     <div class="container">

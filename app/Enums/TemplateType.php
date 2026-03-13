@@ -50,6 +50,8 @@ class TemplateType
 
     const OUR_STORY = 'our_story';
 
+    const MEDIA_COVERAGE = 'media-coverage';    
+
     public static function toArray()
     {
         return [
@@ -76,6 +78,7 @@ class TemplateType
             self::PRESS_RELEASE,
             self::EVENTS,
             self::OUR_STORY,
+            self::MEDIA_COVERAGE,
         ];
     }
 
@@ -107,6 +110,7 @@ class TemplateType
         $keyValuePairs['Press Release'] = self::PRESS_RELEASE;
         $keyValuePairs['Events'] = self::EVENTS;
         $keyValuePairs['Our Story'] = self::OUR_STORY;
+        $keyValuePairs['Media Coverage'] = self::MEDIA_COVERAGE;
 
 
         // Extract 'Default' and sort the remaining keys

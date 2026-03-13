@@ -62,33 +62,212 @@
 
                     {{-- Our Vision --}}
                     <hr>
+                   
+
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="our_vision" class="form-label">Our Vision Title</label>
-                            <input type="text" class="form-control" id="our_vision" name="our_vision"
-                                value="{{ isset($metaDatas['our_vision']) ? $metaDatas['our_vision'] : '' }}" />
-                        </div>
+             {{-- Details --}}
+             <div class="mb-3">
+                 <label class="form-label">Mission & Vision</label>
+                 <div class="table-responsive">
+                     <table class="table table-bordered mb-0">
+                         <thead>
+                             <tr>
+                                 <th class="custom-table-sno" style="width:5%">S.No</th>
+                                 <th style="width:20%">Title</th>
+                                 <th style="width:20%">Description</th>
+                                 <th style="width:20%">Upload Image
+                                     <span class="form-text text-muted">
+                                         <small><i>(Recommended image size: 645 by 620 px)</i></small>
+                                     </span>
+                                 </th>
+                                 <th style="width:20%">Upload Icon
+                                     <span class="form-text text-muted">
+                                         <small><i>(Recommended image size: 64 x 64 px)</i></small>
+                                     </span>
+                                 </th>
+                                 <th style="width:10%" class="text-center">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody class="addMoreMissionVision">
+                             @isset($metaDatas['mission_and_vision_details'])
+                                 @php
+                                     $missionAndVisionDetails = unserialize($metaDatas['mission_and_vision_details']);
+                                 @endphp
 
-                        <div class="col-md-6">
-                            <label for="our_vision_descro" class="form-label">Our Vision Description</label>
-                            <textarea class="form-control" id="our_vision_description" name="our_vision_description" rows="3">{{ isset($metaDatas['our_vision_description']) ? $metaDatas['our_vision_description'] : '' }}</textarea>
-                        </div>
-                    </div>
+                                 @foreach ($missionAndVisionDetails as $index => $item)
+                                     {{-- Fixed variable name --}}
+                                     <tr>
+                                         <td class="custom-table-no">{{ $loop->iteration }}</td>
+                                         <td>
+                                             <input type="text"
+                                                 name="mission_and_vision_details[{{ $index }}][title]"
+                                                 class="form-control"
+                                                 value="{{ isset($item['title']) ? $item['title'] : '' }}" />
+                                         </td>
+                                         <td>
+                                             <textarea class="editor" id="content" name="mission_and_vision_details[{{ $index }}][description]"
+                                                 rows="5">{{ isset($item['description']) ? $item['description'] : '' }}</textarea>
+                                         </td>
+                                         <td>
+                                             <div class="media-input image-input">
+                                                 <div class="input-group open-media-manager" data-bs-toggle="modal"
+                                                     data-bs-target="#exampleModal" style="cursor: pointer;"
+                                                     data-field="mission_and_vision_details_{{ $index }}_image"
+                                                     data-select="single">
+                                                     <div class="input-group-prepend">
+                                                         <div
+                                                             class="input-group-text bg-soft-secondary font-weight-medium">
+                                                             Browse
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-control file-amount">Choose File</div>
+                                                 </div>
+                                                 <div class="preview-closer">
+                                                     @if (isset($item['image']) && ($media = \App\Models\Media::where('id', $item['image'])->first()))
+                                                         <input type="hidden"
+                                                             id="mission_and_vision_details_{{ $index }}_image"
+                                                             name="mission_and_vision_details[{{ $index }}][image]"
+                                                             class="selected-files" value="{{ $item['image'] }}" />
+                                                         <div
+                                                             id="mission_and_vision_details_{{ $index }}_image_select">
+                                                             <div class="file-preview box sm">
+                                                                 <div
+                                                                     class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
+                                                                     <div
+                                                                         class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                                                                         <img class="img-fit"
+                                                                             src="{{ asset('storage/' . $media->file_name) }}"
+                                                                             alt="">
+                                                                     </div>
+                                                                     <div class="col body">
+                                                                         <h6 class="d-flex">
+                                                                             <span
+                                                                                 class="text-truncate title">{{ $media->file_original_name }}</span>
+                                                                             <span
+                                                                                 class="flex-shrink-0 ext">.{{ $media->extension }}</span>
+                                                                         </h6>
+                                                                         <p>{{ MediaHelper::getKBorMB($media->file_size) }}
+                                                                         </p>
+                                                                     </div>
+                                                                     <div class="remove">
+                                                                         <button data-id="{{ $item['image'] }}"
+                                                                             data-slug="mission_and_vision_details_{{ $index }}_image"
+                                                                             class="btn btn-sm btn-link remove-attachment"
+                                                                             type="button">
+                                                                             <i class="bi bi-x-circle"></i>
+                                                                         </button>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     @else
+                                                         <input type="hidden"
+                                                             id="mission_and_vision_details_{{ $index }}_image"
+                                                             name="mission_and_vision_details[{{ $index }}][image]"
+                                                             class="selected-files" value="" />
+                                                         <div
+                                                             id="mission_and_vision_details_{{ $index }}_image_select">
+                                                         </div>
+                                                     @endif
+                                                 </div>
+                                             </div>
+                                         </td>
 
-                    {{-- Our Mission --}}
-                    <hr>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="our_mission" class="form-label">Our Mission Title</label>
-                            <input type="text" class="form-control" id="our_mission" name="our_mission"
-                                value="{{ isset($metaDatas['our_mission']) ? $metaDatas['our_mission'] : '' }}" />
-                        </div>
+                                         <td>
+                                             <div class="media-input image-input">
+                                                 <div class="input-group open-media-manager" data-bs-toggle="modal"
+                                                     data-bs-target="#exampleModal" style="cursor: pointer;"
+                                                     data-field="mission_and_vision_details_{{ $index }}_icon"
+                                                     data-select="single">
+                                                     <div class="input-group-prepend">
+                                                         <div
+                                                             class="input-group-text bg-soft-secondary font-weight-medium">
+                                                             Browse
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-control file-amount">Choose File</div>
+                                                 </div>
+                                                 <div class="preview-closer">
+                                                        @if (isset($item['icon']) && ($media = \App\Models\Media::where('id', $item['icon'])->first()))
+                                                         <input type="hidden"
+                                                             id="mission_and_vision_details_{{ $index }}_icon"
+                                                             name="mission_and_vision_details[{{ $index }}][icon]"
+                                                             class="selected-files" value="{{ $item['icon'] }}" />
+                                                         <div
+                                                             id="mission_and_vision_details_{{ $index }}_icon_select">
+                                                             <div class="file-preview box sm">
+                                                                 <div
+                                                                     class="d-flex justify-content-between align-items-center mt-2 file-preview-item">
+                                                                     <div
+                                                                         class="align-items-center align-self-stretch d-flex justify-content-center thumb">
+                                                                         <img class="img-fit"
+                                                                             src="{{ asset('storage/' . $media->file_name) }}"
+                                                                             alt="">
+                                                                     </div>
+                                                                     <div class="col body">
+                                                                         <h6 class="d-flex">
+                                                                             <span
+                                                                                 class="text-truncate title">{{ $media->file_original_name }}</span>
+                                                                             <span
+                                                                                 class="flex-shrink-0 ext">.{{ $media->extension }}</span>
+                                                                         </h6>
+                                                                         <p>{{ MediaHelper::getKBorMB($media->file_size) }}
+                                                                         </p>
+                                                                     </div>
+                                                                     <div class="remove">
+                                                                         <button data-id="{{ $item['icon'] }}"
+                                                                             data-slug="mission_and_vision_details_{{ $index }}_icon"
+                                                                             class="btn btn-sm btn-link remove-attachment"
+                                                                             type="button">
+                                                                             <i class="bi bi-x-circle"></i>
+                                                                         </button>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     @else
+                                                         <input type="hidden"
+                                                             id="mission_and_vision_details_{{ $index }}_icon"
+                                                             name="mission_and_vision_details[{{ $index }}][icon]"
+                                                             class="selected-files" value="" />
+                                                         <div
+                                                             id="mission_and_vision_details_{{ $index }}_icon_select">
+                                                         </div>
+                                                     @endif
+                                                 </div>
+                                             </div>
+                                         </td>
 
-                        <div class="col-md-6">
-                            <label for="our_mission_description" class="form-label">Our Mission Description</label>
-                            <textarea class="form-control" id="our_mission_description" name="our_mission_description" rows="3">{{ isset($metaDatas['our_mission_description']) ? $metaDatas['our_mission_description'] : '' }}</textarea>
-                        </div>
-                    </div>
+                                         <td class="text-center">
+                                             <a href="javascript:void(0);"
+                                                 class="text-success fs-16 px-1 add_more_mission_vision">
+                                                 <i class="bi bi-plus-circle"></i>
+                                             </a>
+                                             <a href="javascript:void(0);"
+                                                 class="text-danger fs-16 px-1 remove_mission_vision">
+                                                 <i class="bi bi-x-circle"></i>
+                                             </a>
+                                             <hr>
+                                             <a href="javascript:void(0);" class="text-primary fs-16 px-1 mv-move-up"
+                                                 title="Move Up">
+                                                 <i class="bi bi-arrow-up-circle"></i>
+                                             </a>
+                                             <a href="javascript:void(0);" class="text-primary fs-16 px-1 mv-move-down"
+                                                 title="Move Down">
+                                                 <i class="bi bi-arrow-down-circle"></i>
+                                             </a>
+                                         </td>
+                                     </tr>
+                                 @endforeach
+                             @endisset
+                         </tbody>
+                     </table>
+                     <div class="text-end mt-2">
+                         <button type="button" class="btn btn-primary btn-sm add_mission_vision">Add Detail</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
 
 
                 </div>
@@ -330,4 +509,7 @@
         </div>
     </div>
 </div>
+
+@include('backend.mission-repeater.mission_and_vision_repeater')
+
 @include('backend.templates-pages.home.banner-scripts')

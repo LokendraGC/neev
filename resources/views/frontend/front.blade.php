@@ -138,69 +138,56 @@ $about_page = PostHelper::getModel()
         </div>
         <div class="section-title-area ">
 
-
             @php
-            $our_vision = $postMeta['our_vision'] ?? '';
-            $our_mission = $postMeta['our_mission'] ?? '';
-
-            $our_vision_description = $postMeta['our_vision_description'] ?? '';
-            $our_mission_description = $postMeta['our_mission_description'] ?? '';
+            $missionAndVisionDetails = unserialize($postMeta['mission_and_vision_details']);
             @endphp
 
-            @if (
-            (!empty($our_vision) && !empty($our_mission)) ||
-            (!empty($our_vision_description) && !empty($our_mission_description)))
+            @if (!empty($missionAndVisionDetails) && count($missionAndVisionDetails) > 0)
             <div class="about-counter-wrapper">
                 <div class="row g-4">
 
+                    @foreach ($missionAndVisionDetails as $index => $item)
 
-                    @if (!empty($our_vision))
+                    @php 
+                    $icon_image = $item['icon'];
+                    $media = MediaHelper::getImageById($icon_image);
+
+                    if (!empty($media) && !empty($media->file_name)) {
+                        $image_url = asset('storage/' . $media->file_name);
+                    } else {
+                        $image_url = asset('assets/img/vision.svg');
+                    }
+                    @endphp
                     <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                         <div class="about-counter-item">
 
-                            @isset($our_vision)
+                            @if ($image_url)
+                        <div class="mission-home">
+                                    <img src="{{ $image_url }}" alt="{{ $item['title'] ?? '' }}">
+                                </div>
+                            @endif
+
+                            @if (!empty($item['title']))
                             <h2>
-                                <span>{{ $our_vision }}</span>
+                                <span>{{ $item['title'] ?? '' }}</span>
                             </h2>
-                            @endisset
 
+                            @endif
 
-                            @isset($our_vision_description)
-                            <p>
-                                {{ $our_vision_description }}
-                            </p>
-                            @endisset
+                            @if (!empty($item['description']))
+                           
+                                {!! $item['description'] ?? '' !!}
+                            
+                            @endif
 
                         </div>
                     </div>
-                    @endif
-
-                    @if (!empty($our_mission))
-                    <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                        <div class="about-counter-item">
-
-
-                            @isset($our_mission)
-                            <h2>
-                                <span>{{ $our_mission }}</span>
-                            </h2>
-                            @endisset
-
-
-                            @isset($our_mission_description)
-                            <p>
-                                {{ $our_mission_description }}
-                            </p>
-                            @endisset
-
-
-                        </div>
-                    </div>
-                    @endif
+                    @endforeach
 
                 </div>
             </div>
             @endif
+        </div>
 </section>
 
 

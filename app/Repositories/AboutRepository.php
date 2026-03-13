@@ -12,7 +12,6 @@ class AboutRepository
 
         $data = [];
         $data['about_title'] = isset($request->about_title) ? $request->about_title : NULL;
-        $data['mission_and_vision_details'] = isset($request->mission_and_vision_details) ? serialize($request->mission_and_vision_details) : NULL;
         $data['location_details'] = isset($request->location_details) ? $request->location_details : NULL;
         $data['location_image'] = isset($request->location_image) ? $request->location_image : NULL;
         $data['location_subtitle'] = isset($request->location_subtitle) ? $request->location_subtitle : NULL;

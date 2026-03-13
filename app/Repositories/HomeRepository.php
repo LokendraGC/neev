@@ -13,10 +13,7 @@ class HomeRepository
         $data = [];
         $data['about_subtitle'] = isset($request->about_subtitle) ? $request->about_subtitle : NULL;
         $data['about_title'] = isset($request->about_title) ? $request->about_title : NULL;
-        $data['our_vision'] = isset($request->our_vision) ? $request->our_vision : NULL;
-        $data['our_vision_description'] = isset($request->our_vision_description) ? $request->our_vision_description : NULL;
-        $data['our_mission'] = isset($request->our_mission) ? $request->our_mission : NULL;
-        $data['our_mission_description'] = isset($request->our_mission_description) ? $request->our_mission_description : NULL;
+        $data['mission_and_vision_details'] = isset($request->mission_and_vision_details) ? serialize($request->mission_and_vision_details) : NULL;
         $data['media_main_title'] = isset($request->media_main_title) ? $request->media_main_title : NULL;
         $data['banners'] = isset($request->banners) ? serialize($request->banners) : NULL;
         $data['business_subtitle'] = isset($request->business_subtitle) ? $request->business_subtitle : NULL;
