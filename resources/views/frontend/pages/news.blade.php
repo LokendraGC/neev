@@ -12,6 +12,10 @@
     @if (!empty($posts) && count($posts) > 0)
         <section class="news-section section-padding">
             <div class="container">
+
+            <h2 class="section-title">{{{$post->post_title}}}</h2>
+
+            
                 <div class="row g-4">
 
                     @foreach ($posts as $post)

@@ -30,7 +30,7 @@
                     <img src=" {{ asset('assets/img/home-1/star.svg') }}" alt="img"> get in touch
                 </h6>
                 <h2 class="text-anim">
-                    Our Contact Information
+                    {{ $post->post_title }}
                 </h2>
             </div>
             <div class="row">
