@@ -85,9 +85,9 @@ $sustainability_details = isset($metaData['sustainability_details'])
                     @endisset
 
                     @isset($item['description'])
-                    <p>
-                        {{ $item['description'] }}
-                    </p>
+                    
+                        {!! $item['description'] !!}
+                    
                     @endisset
 
                 </div>
