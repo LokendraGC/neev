@@ -1,8 +1,12 @@
-<div class="row mb-3">
-
-    {{-- Details --}}
-    <div class="mb-3">
-        <label class="form-label">Sustainability Details</label>
+<div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div
+                                                            class="mb-2 d-flex align-content-center border-1 border-bottom">
+                                                            <h4 class="header-title">Sector Details</h4>
+                                                        </div>
         <div class="table-responsive">
             <table class="table table-bordered mb-0">
                 <thead>
@@ -35,7 +39,7 @@
                                         class="form-control" value="{{ isset($item['title']) ? $item['title'] : '' }}" />
                                 </td>
                                 <td>
-                                    <textarea class="form-control" name="sustainability_details[{{ $index }}][description]" rows="5">{{ isset($item['description']) ? $item['description'] : '' }}</textarea>
+                                <textarea class="editor sustainability-editor" id="sustainability_editor_{{ $index }}" name="sustainability_details[{{ $index }}][description]">{{ isset($item['description']) ? $item['description'] : '' }}</textarea>
                                 </td>
                                 <td>
                                     <div class="media-input image-input">
@@ -123,7 +127,10 @@
             </div>
         </div>
     </div>
-
-
 </div>
+</div>
+</div>
+</div>
+
+
 @include('backend.templates-pages.sustainability.sustainability-repeater')

@@ -21,6 +21,11 @@ class CategoryRepository
         return true;
     }
 
+    public function findCategory($id)
+    {
+        return Category::findOrFail($id);
+    }
+
     public function getCategoryByType($type)
     {
         return Category::where('type', $type)->get();

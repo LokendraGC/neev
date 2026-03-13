@@ -61,7 +61,7 @@
             <input type="text" name="sustainability_details[${numberOfRow}][title]" class="form-control" value="" />
         </td>
         <td>
-            <textarea class="form-control" name="sustainability_details[${numberOfRow}][description]" rows="5"></textarea>
+                <textarea class="editor sustainability-editor" id="sustainability_editor_${numberOfRow}" name="sustainability_details[${numberOfRow}][description]"></textarea>
         </td>
         <td>
             <div class="media-input image-input">
@@ -124,15 +124,15 @@
                     $element.attr('name', newName);
                 }
 
-                // Update IDs for image and PDF fields
+                // Update IDs for image, PDF, and editor fields
                 let currentId = $element.attr('id');
-                if (currentId && currentId.includes('sustainability_details')) {
-                    if (currentId.includes('_image')) {
-                        let newId = currentId.replace(/sustainability_details_\d+_image/, `sustainability_details_${index}_image`);
-                        $element.attr('id', newId);
-                    } else if (currentId.includes('_pdf')) {
-                        let newId = currentId.replace(/sustainability_details_\d+_pdf/, `sustainability_details_${index}_pdf`);
-                        $element.attr('id', newId);
+                if (currentId) {
+                    if (currentId.includes('sustainability_details_') && currentId.includes('_image')) {
+                        $element.attr('id', `sustainability_details_${index}_image`);
+                    } else if (currentId.includes('sustainability_details_') && currentId.includes('_pdf')) {
+                        $element.attr('id', `sustainability_details_${index}_pdf`);
+                    } else if (currentId.includes('sustainability_editor_')) {
+                        $element.attr('id', `sustainability_editor_${index}`);
                     }
                 }
             });
@@ -161,17 +161,14 @@
         });
     }
 
-    // Initialize Summernote editor on new textareas - Download section (not needed for resources, but kept for compatibility)
+    // Initialize Summernote editor on sustainability repeater textareas
     function initializeSummernote() {
-        // No textarea editors in resources page
-        return;
-        $('.addMoreSustainability textarea.editor').each(function () {
+        $('.addMoreSustainability textarea.sustainability-editor').each(function () {
             let $textarea = $(this);
-            // Check if Summernote is already initialized on this textarea
             if (!$textarea.next('.note-editor').length && !$textarea.data('summernote')) {
                 $textarea.summernote({
                     tabsize: 2,
-                    height: 400,
+                    height: 200,
                     toolbar: [
                         ['style', ['style']],
                         ['font', ['bold', 'underline', 'clear']],
@@ -188,7 +185,9 @@
                     callbacks: {
                         onImageUpload: function (files) {
                             const editor = $(this);
-                            uploadImage(files[0], editor);
+                            if (typeof uploadImage === 'function') {
+                                uploadImage(files[0], editor);
+                            }
                         }
                     }
                 });

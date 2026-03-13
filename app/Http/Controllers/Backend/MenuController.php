@@ -63,7 +63,8 @@ class MenuController extends Controller
             $type = isset($request->type) ? $this->categoryRepository->decodeType($request->type) : 'NOT FOUND';
             $this->categoryRepository->checkCategoryTypeExists($type);
 
-            $this->categoryRepository->updateCategory($id, $request, $this->categoryType);
+            $category = $this->categoryRepository->findCategory($id);
+            $this->categoryRepository->updateCategory($request, $category, $this->categoryType);
 
             session()->flash('success', 'Menu Updated Successfully.');
             return redirect()->route('backend.menu');
